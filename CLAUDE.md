@@ -9,3 +9,6 @@
   `voice/volodymyr.md` (his style of speech). At session start, process new files in
   `voice/inbox/`. At session end, add what you learned about his speech from the session
   itself to `voice/volodymyr.md`.
+- When Volodymyr shares beekeeping stories or thoughts in chat, process them as
+  `bible/README.md` describes (verbatim story file, calendar, characters, ideas, voice).
+  Episodes follow the beekeeper's calendar (`bible/apiary-calendar.md`).
