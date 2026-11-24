@@ -1,0 +1,72 @@
+# Episode 002: Медунко в сплячці / Medunko im Winterschlaf
+# Draft v1, 2026-11-24. Season: winter (bears hibernate, the apiary is closed).
+id: "002"
+slug: medunko-v-splyachtsi
+season: winter
+target_length: 35-40 s
+title:
+  ua: "Медунко в сплячці"
+  de: "Medunko im Winterschlaf"
+
+# Shots are hints for the animation; the voice lines drive the timing.
+scenes:
+  hut: "Pylyp's hut at night, snow outside the window, laptop glowing, phone on the table"
+  den: "Bear's den under snow, Medunko asleep in his nightcap, sucking one paw, phone in the other"
+
+lines:
+  - shot: {scene: hut, camera: phone close-up, at: hook}
+    onscreen: {ua: "03:12  Медунко: Добрий день 🐻", de: "03:12  Medunko: Guten Tag 🐻"}
+    sfx: phone-buzz
+    action: "Phone lights up and buzzes across the table. Hook: works without sound."
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "jolts up from the pillow, monocle askew"}
+    ua: "Медунку, ти [бзз] знаєш, котра година? Ти ж у сплячці!"
+    de: "Medunko, weißt du [bzz], wie spät es ist? Du hältst Winterschlaf!"
+    note: "[бзз] = Бзинька's bleep over a swear word, the only one in the episode"
+
+  - who: medunko
+    shot: {scene: den, camera: slow push-in, action: "asleep, typing on the phone with the free paw"}
+    ua: "Добрий день… А медку не буде? Я тільки ложечку…"
+    de: "Guten Tag… Gibt es vielleicht Honig? Nur einen Löffel…"
+
+  - shot: {scene: hut, camera: phone close-up, action: "three messages pop in fast, one buzz each"}
+    onscreen:
+      ua: ["ложечку", "пів ложечки", "хоч понюхати"]
+      de: ["einen Löffel", "einen halben", "nur mal riechen"]
+    sfx: phone-buzz x3
+
+  - who: pylyp
+    shot: {scene: hut, camera: close-up, action: "deadpan to camera"}
+    ua: "Сплячка до квітня. Він мені так пів року писатиме."
+    de: "Winterschlaf bis April. So schreibt er mir ein halbes Jahr."
+
+  - who: bzynka
+    shot: {scene: hut, camera: monitor, action: "pops up on the laptop screen in her visor"}
+    ua: "Автоматизуй."
+    de: "Automatisier das."
+
+  - who: pylyp
+    shot: {scene: hut, camera: over-the-shoulder, action: "fast typing montage, code lines fly, a green deploy tick"}
+    ua: "Автоматизую."
+    de: "Wird automatisiert."
+    sfx: keyboard
+
+  - shot: {scene: den, camera: phone close-up, action: "bot reply arrives in Medunko's phone"}
+    onscreen:
+      ua: "Дякуємо за інтерес до нашого меду. Ми зберегли ваш запит для майбутніх сезонів."
+      de: "Vielen Dank für Ihr Interesse an unserem Honig. Wir haben Ihre Anfrage für zukünftige Saisons gespeichert."
+
+  - who: medunko
+    shot: {scene: den, camera: close-up, action: "smiles in his sleep, hugs the phone"}
+    ua: "О… Як з Джобцентру. Значить, шанс є."
+    de: "Oh… Wie vom Jobcenter. Dann gibt es noch Hoffnung."
+
+  - who: pylyp
+    shot: {scene: hut, camera: slow push-in, action: "stares at the screen, realization"}
+    ua: "Тепер я розумію, чому мені всі так відповідають. Це не відмова. Це автоматизація."
+    de: "Jetzt verstehe ich, warum mir alle so antworten. Das ist keine Absage. Das ist Automatisierung."
+
+end_card:
+  ua: "Цей мультик зібрав мій власний пайплайн: Python · TTS · Remotion. Шукаю роботу в IT-автоматизації."
+  de: "Diesen Cartoon hat meine eigene Pipeline gebaut: Python · TTS · Remotion. Ich suche eine Stelle in der IT-Automatisierung."
