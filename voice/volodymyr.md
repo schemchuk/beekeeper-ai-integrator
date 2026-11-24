@@ -29,6 +29,13 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Self-irony about age and AI: "без AI я ніхуя не вартий".
 - Practical, results first: "я поробив усе", "все пройшло ок", "які мої подальші дії?"
 
+## Phrases collected
+
+- "пізділінкання" (his own coinage: idle chatting, LinkedIn-style talking)
+- "сосе лапу у барлозі", "клянчить мед", "старий та хитрий вовчара"
+- "зв'язок з бджолами по вай-фаю"
+- "автоматизатор-сисадмін завжди пристосується"
+
 ## Rules for writing Pylyp
 
 - UA first, his register: short sentences, concrete village images, deadpan.
