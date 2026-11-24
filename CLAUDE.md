@@ -5,3 +5,7 @@
 - Lightweight experimental project: no spec/ADR gates, but small commits (Conventional Commits)
   and ask before publishing anything, creating a GitHub repo, or spending money.
 - Prefer Python for the pipeline (zsh is the user's shell; avoid bash-only tricks in docs).
+- Project memory lives in the repo: `bible/` (characters, gags, episode log) and
+  `voice/volodymyr.md` (his style of speech). At session start, process new files in
+  `voice/inbox/`. At session end, add what you learned about his speech from the session
+  itself to `voice/volodymyr.md`.

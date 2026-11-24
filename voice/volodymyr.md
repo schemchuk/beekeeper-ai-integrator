@@ -32,7 +32,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 ## Rules for writing Pylyp
 
 - UA first, his register: short sentences, concrete village images, deadpan.
-- Mat: allowed in spirit (Podervianskyi), but LinkedIn is the main channel. Default: bleeped
-  or replaced by a bee "bzzz" sound; decide per episode with Volodymyr.
+- Mat (agreed 2026-11-24): allowed, "as long as I don't get beaten for it". Use it sparingly
+  as a punchline, at most one or two per episode, never wall-to-wall bleeping. A bleep is
+  Бзинька's "bzzz" and is itself part of the joke.
 - DE version is not a literal translation: keep the joke working for Germans
   (Behörden, Jobcenter, Anschreiben, "Wir haben Ihr Profil gespeichert").
