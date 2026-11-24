@@ -8,7 +8,7 @@ delivered his mail and the bear said "Good day". Now he is an IT admin in German
 
 | Character | UA | DE | Role (draft) |
 | --- | --- | --- | --- |
-| Pylyp | Пилип | Philipp | Beekeeper, 57, retrained as sysadmin/automation engineer in Germany. Volodymyr's alter ego. |
+| Pylyp | Пилип | Philipp | Beekeeper, 57, retrained as sysadmin/automation engineer in Germany. Volodymyr's alter ego. Back in Ukraine a well-known beekeeper: honey and bee products, honey drinks, fairs (selling his wife's handmade too), queen rearing and selection, instrumental insemination of queens. |
 | Bee | Бзинька | Bsinka | His sidekick and toughest code reviewer. Original look, nothing like other famous cartoon bees. |
 | Bear | Медунко | (open) | Polite neighbour, always begs Pylyp for honey; says "Добрий день". Introduced from the start. Winter: asleep in his den, sucking his paw. |
 | Wolf | Сірий | (open) | Old, cunning wolf ("старий та хитрий вовчара"). The forest postman, now brings rejection letters. Visits Pylyp on quiet evenings. |
@@ -31,8 +31,10 @@ Files: `characters/*.svg`, model sheet via `python3 tools/model_sheet.py` → `o
 Every SVG has groups `eyes-open/eyes-closed`, `mouth-closed/-open/-wide`, `brows`, `head`,
 `arm-front/-back`, `legs` so Remotion can animate them.
 
-- Pylyp: straw hat with pink band, translucent cyan veil, pink cyber monocle, grey brows and
-  moustache, indigo hoodie with honeycomb print.
+- Pylyp (v2, from Volodymyr's photo): round face, bald on top, short grey hair on the sides,
+  clean-shaven, light brows, calm stern look; grey sweater with a dark knitted front panel
+  over a light collared shirt; straw hat with a red-black band, translucent cyan veil, pink
+  cyber monocle.
 - Бзинька: round honey bee with a pink visor, cyan LED antennae, headset mic (the reviewer).
 - Медунко: big brown bear, winter nightcap with pompom, cyan scarf, paw raised for "Добрий день".
 - Сірий: lean old wolf, postman cap with an envelope badge, mailbag with a letter, notched ear,

@@ -13,3 +13,5 @@ Source column points to `stories/`.
 | 6 | Вікно обслуговування / Wartungsfenster | winter | Winter equipment repair as a maintenance window; frames in the workshop like servers in a rack. | 2026-11-24-winter-apiary | seed |
 | 7 | Звідки все почалось / Wie alles anfing | any, good as a pilot or pinned reel | The premise: so remote the wolf brought the mail and the bear said "Good day". Then the letters started coming from Germany. | 2026-11-24-hedgehog-and-premise | seed |
 | 8 | Санітар / Der Sanitäter | spring/summer | Колючка guards the apiary from rodents like a firewall; comes out only for Pylyp and his drone-brood treat. | 2026-11-24-hedgehog-and-premise | seed |
+| 9 | Матка за ТЗ / Königin nach Lastenheft | spring | Queen rearing and selection as a spec-driven release: Pylyp breeds queens to requirements, the hive files bug reports. Instrumental insemination = deployment with tweezers. | 2026-11-24-dossier | seed |
+| 10 | Ярмарок / Wochenmarkt | summer/autumn | Pylyp at a fair with honey drinks and his wife's handmade; the German market wants a Lebenslauf for the mead. | 2026-11-24-dossier | seed |

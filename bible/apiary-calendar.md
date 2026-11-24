@@ -33,6 +33,10 @@ IT parallels (for jokes):
 (to be filled from Volodymyr's stories)
 
 Known so far:
+- Spring and summer: most of Pylyp's season used to be queen rearing (матківництво),
+  selection and instrumental insemination of queens. Strong IT parallel: breeding and
+  selection = A/B testing, CI for genetics; insemination = very precise manual deployment.
+- Fairs: honey, bee products, honey drinks and his wife's handmade.
 - Drone brood cutting (вирізання трутневого розплоду): a biological method against varroa
   mites, done while the colony raises drones (spring and early summer). By-product: drone
   homogenate (трутневий гомогенат). The cut brood is Колючка's treat.
