@@ -9,6 +9,9 @@ import torch
 def run(render, lines, ref: Path) -> None:
     from chatterbox.mtl_tts import ChatterboxMultilingualTTS
 
+    # Checkpoints were saved on CUDA; Chatterbox calls torch.load without map_location.
+    _load = torch.load
+    torch.load = lambda *a, **k: _load(*a, **{**k, "map_location": torch.device("cpu")})
     model = ChatterboxMultilingualTTS.from_pretrained(device=torch.device("cpu"))
 
     def say(text: str, dst: Path, prompt: Path, exaggeration: float) -> None:
