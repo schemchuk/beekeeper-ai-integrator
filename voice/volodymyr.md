@@ -1,0 +1,38 @@
+# Volodymyr's voice
+
+Living notes on how Volodymyr talks and jokes, so Pylyp's lines sound like him and less like
+a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), notes in English.
+
+## Taste
+
+- Loves Les Podervianskyi, Ilf & Petrov, Ostap Vyshnia.
+  - Podervianskyi: absurd dialogue, deadpan, swearing as rhythm, high and low register mixed.
+  - Ilf & Petrov: satire of bureaucracy, quotable one-liners, the hero as a charming schemer.
+  - Ostap Vyshnia: warm village humour, nature, hunting/fishing tales, gentle self-irony.
+- Series premise in his words: "я жив так далеко і уособлено, що вовк мені почту носив,
+  а ведмідь казав «Добрий день»".
+
+## How he talks (from his messages to Claude, 2026-10/11)
+
+- Short, direct, no politeness padding: "роби зміну", "давай команди по порядку",
+  "дай просто відповідь, нічого не пиши", "не спіши".
+- Numbered answers in one line: "1. ставимо 2. відео для рілсів 3. ..."
+- Hyperbole about the audience reaction, his signature:
+  - "щоб читачі впісялись від змилування, а роботодавці вишикувались у черзі"
+  - "щоб роботодавець впісявся від змилування, а колеги повсиралися від захвату"
+  - "щоб мультик дивилися всі і пісяли від змилування і щастя"
+  - "давай зробимо бомбу"
+- Colloquial and slang: "роздуплиться", "профілонити", "заєбень", "танцювати з бубном",
+  "наробдена хуйня", surzhyk like "слідуючого", "поробив".
+- Swears freely when angry at tools, passwords, bureaucracy ("мене заєбали паролі").
+  The anger is at systems, never at people he cares about. Good fuel for Pylyp vs. bureaucracy.
+- Self-irony about age and AI: "без AI я ніхуя не вартий".
+- Practical, results first: "я поробив усе", "все пройшло ок", "які мої подальші дії?"
+
+## Rules for writing Pylyp
+
+- UA first, his register: short sentences, concrete village images, deadpan.
+- Mat: allowed in spirit (Podervianskyi), but LinkedIn is the main channel. Default: bleeped
+  or replaced by a bee "bzzz" sound; decide per episode with Volodymyr.
+- DE version is not a literal translation: keep the joke working for Germans
+  (Behörden, Jobcenter, Anschreiben, "Wir haben Ihr Profil gespeichert").
