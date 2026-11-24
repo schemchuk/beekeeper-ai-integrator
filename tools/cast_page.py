@@ -21,7 +21,7 @@ CHOSEN = {
     "bzynka": ("ua-holos-mix-high23-bee", "de-piper-kerstin-bee"),
     "medunko": ("ua-holos-mix-low01-bear", "de-piper-karlsson-bear"),
     "siryi": ("ua-holos-mix-low45-wolf", "de-piper-pavoque-wolf"),
-    "koliuchka": ("ua-holos-mix-low67-hedgehog", "de-piper-pavoque-hedgehog"),
+    "koliuchka": ("ua-holos-mix-low67-hedgehog", "de-piper-thorsten-disgusted-hedgehog"),
 }
 
 CSS = """

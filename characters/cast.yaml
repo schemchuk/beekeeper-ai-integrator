@@ -16,4 +16,4 @@ siryi:
   de: {engine: piper, model: de_DE-pavoque-low, fx: [0.88, 0.95]}
 koliuchka:
   ua: {engine: holos, voice: [Speaker_69, Speaker_1], speed: 1.1, fx: [1.12, 1.05]}
-  de: {engine: piper, model: de_DE-pavoque-low, fx: [1.12, 1.05]}
+  de: {engine: piper, model: de_DE-thorsten_emotional-medium, speaker: disgusted, fx: [1.12, 1.05]}
