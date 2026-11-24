@@ -11,3 +11,5 @@ Source column points to `stories/`.
 | 4 | Вечір з Сірим / Abend mit dem Wolf | winter | Old cunning wolf drops by; Pylyp does the season retrospective in a spreadsheet, the wolf kept statistics with notches on a tree and still wins the argument. | 2026-11-24-winter-apiary | seed |
 | 5 | Кліщ без changelog | late autumn | Varroa treatment as security patching: "the mite doesn't write release notes either". | 2026-11-24-winter-apiary | seed |
 | 6 | Вікно обслуговування / Wartungsfenster | winter | Winter equipment repair as a maintenance window; frames in the workshop like servers in a rack. | 2026-11-24-winter-apiary | seed |
+| 7 | Звідки все почалось / Wie alles anfing | any, good as a pilot or pinned reel | The premise: so remote the wolf brought the mail and the bear said "Good day". Then the letters started coming from Germany. | 2026-11-24-hedgehog-and-premise | seed |
+| 8 | Санітар / Der Sanitäter | spring/summer | Колючка guards the apiary from rodents like a firewall; comes out only for Pylyp and his drone-brood treat. | 2026-11-24-hedgehog-and-premise | seed |

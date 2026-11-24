@@ -31,3 +31,12 @@ IT parallels (for jokes):
 ## Spring, summer, early autumn
 
 (to be filled from Volodymyr's stories)
+
+Known so far:
+- Drone brood cutting (вирізання трутневого розплоду): a biological method against varroa
+  mites, done while the colony raises drones (spring and early summer). By-product: drone
+  homogenate (трутневий гомогенат). The cut brood is Колючка's treat.
+- Колючка shows up whenever Pylyp works at the apiary (warm season).
+
+IT parallels: cutting drone brood = removing the part of the system where the bug
+reproduces; one fix, two outputs (mite control + homogenate) = a pipeline with a by-product.

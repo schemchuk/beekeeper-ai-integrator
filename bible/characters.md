@@ -2,8 +2,9 @@
 
 Draft, agreed with Volodymyr on 2026-11-24. Looks are not final.
 
-Premise: Pylyp lived so far out in the forest that the wolf delivered his mail and the bear
-said "Good day". Now he is an IT admin in Germany, and the forest friends drop by.
+Premise (Volodymyr's words, keep them): "я жив так далеко і уособлено, що вовк мені почту
+носив, а ведмідь казав «Добрий день»". Pylyp lived so far out in the forest that the wolf
+delivered his mail and the bear said "Good day". Now he is an IT admin in Germany, and the forest friends drop by.
 
 | Character | UA | DE | Role (draft) |
 | --- | --- | --- | --- |
@@ -11,7 +12,7 @@ said "Good day". Now he is an IT admin in Germany, and the forest friends drop b
 | Bee | Бзинька | Bsinka | His sidekick and toughest code reviewer. Original look, nothing like other famous cartoon bees. |
 | Bear | Медунко | (open) | Polite neighbour, always begs Pylyp for honey; says "Добрий день". Introduced from the start. Winter: asleep in his den, sucking his paw. |
 | Wolf | Сірий | (open) | Old, cunning wolf ("старий та хитрий вовчара"). The forest postman, now brings rejection letters. Visits Pylyp on quiet evenings. |
-| Hedgehog | Колючка | (open) | Comes later. Winter: asleep. |
+| Hedgehog | Колючка | (open) | The apiary's sanitary officer, guards it from rodents too. Unsociable, but always comes out when Pylyp works at the apiary. Pylyp treats him to cut-out drone brood. Winter: asleep. |
 | Host | Ведуча | Moderatorin | Interviewer from episode 001. |
 
 The bee was first going to be "Майя"; renamed to Бзинька on 2026-11-24 to avoid any link
