@@ -1,0 +1,12 @@
+V|Philipp, Sie sind Imker. Warum sitzen Sie nachts vor dem Code?
+P|Bienen liefern wenigstens Honig für ihre Arbeit. Ein Bash-Skript liefert nur „command not found“.
+V|Wie sind Sie in der IT gelandet?
+P|Das Leben sagte: „Zeit für einen Berufswechsel.“ Ich sagte: „Muss das sein?“ Das Leben hörte nicht zu.
+V|Und die Jobsuche in Deutschland?
+P|Ich habe so viele Bewerbungen verschickt, dass sie schon ihren eigenen Honig haben. Die Antwort ist immer gleich: „Wir haben Ihr Profil für zukünftige Stellen gespeichert.“
+V|Was ist die größte Schwierigkeit?
+P|Alle wollen „relevante Berufserfahrung in Deutschland“. Ich habe jahrelang die Honigernte automatisiert. Da gibt es Deadlines, schwierige Nutzer, und wenn etwas kaputtgeht, sticht es zu.
+P|Mir wird geantwortet: „Danke, aber wir brauchen Kubernetes.“
+V|Was gibt Ihnen Halt?
+P|Kaffee, ein Heimserver und eine Biene auf dem Monitor, die meine Fehler ansieht, als hätte sie schon Schlimmeres gesehen.
+P|Lernt Linux. Schreibt Skripte. Honig wird nie schlecht, Lebensläufe leider schon.

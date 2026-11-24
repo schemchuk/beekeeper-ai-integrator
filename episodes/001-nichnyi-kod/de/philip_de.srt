@@ -1,0 +1,47 @@
+1
+00:00:00,600 --> 00:00:04,260
+Moderatorin: Philipp, Sie sind Imker. Warum sitzen Sie nachts vor dem Code?
+
+2
+00:00:04,410 --> 00:00:09,888
+Philipp: Bienen liefern wenigstens Honig für ihre Arbeit. Ein Bash-Skript liefert nur „command not found“.
+
+3
+00:00:10,038 --> 00:00:12,130
+Moderatorin: Wie sind Sie in der IT gelandet?
+
+4
+00:00:12,280 --> 00:00:18,815
+Philipp: Das Leben sagte: „Zeit für einen Berufswechsel.“ Ich sagte: „Muss das sein?“ Das Leben hörte nicht zu.
+
+5
+00:00:18,965 --> 00:00:21,169
+Moderatorin: Und die Jobsuche in Deutschland?
+
+6
+00:00:21,319 --> 00:00:29,862
+Philipp: Ich habe so viele Bewerbungen verschickt, dass sie schon ihren eigenen Honig haben. Die Antwort ist immer gleich: „Wir haben Ihr Profil für zukünftige Stellen gespeichert.“
+
+7
+00:00:30,012 --> 00:00:32,456
+Moderatorin: Was ist die größte Schwierigkeit?
+
+8
+00:00:32,606 --> 00:00:42,635
+Philipp: Alle wollen „relevante Berufserfahrung in Deutschland“. Ich habe jahrelang die Honigernte automatisiert. Da gibt es Deadlines, schwierige Nutzer, und wenn etwas kaputtgeht, sticht es zu.
+
+9
+00:00:42,785 --> 00:00:46,208
+Philipp: Mir wird geantwortet: „Danke, aber wir brauchen Kubernetes.“
+
+10
+00:00:46,358 --> 00:00:48,034
+Moderatorin: Was gibt Ihnen Halt?
+
+11
+00:00:48,184 --> 00:00:54,208
+Philipp: Kaffee, ein Heimserver und eine Biene auf dem Monitor, die meine Fehler ansieht, als hätte sie schon Schlimmeres gesehen.
+
+12
+00:00:54,358 --> 00:00:59,487
+Philipp: Lernt Linux. Schreibt Skripte. Honig wird nie schlecht, Lebensläufe leider schon.

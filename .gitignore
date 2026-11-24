@@ -1,0 +1,7 @@
+out/
+work/
+*.wav
+*.onnx
+*.onnx.json
+.venv/
+__pycache__/
