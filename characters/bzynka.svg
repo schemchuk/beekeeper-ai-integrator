@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" id="bzynka">
+<title>Bzynka</title>
+<ellipse cx="150" cy="388" rx="50" ry="6" fill="#000" opacity=".25"/>
+<g id="wings" opacity=".75">
+  <ellipse cx="118" cy="150" rx="30" ry="48" fill="#e9f6ff" transform="rotate(-25 118 150)"/>
+  <ellipse cx="160" cy="146" rx="30" ry="50" fill="#f4fbff" transform="rotate(15 160 146)"/>
+</g>
+<g id="body">
+  <ellipse cx="128" cy="240" rx="58" ry="46" fill="#ffc44d"/>
+  <path d="M104 198 Q96 240 104 282" stroke="#1f1a33" stroke-width="14" fill="none"/>
+  <path d="M134 194 Q126 240 134 286" stroke="#1f1a33" stroke-width="14" fill="none"/>
+  <path d="M72 236 L58 246 L72 250 Z" fill="#1f1a33"/>
+  <path d="M120 284 Q114 310 106 322" stroke="#1f1a33" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M146 282 Q150 310 146 324" stroke="#1f1a33" stroke-width="4" fill="none" stroke-linecap="round"/>
+</g>
+<g id="head">
+  <circle cx="196" cy="196" r="44" fill="#ffd56e"/>
+  <path d="M182 156 Q172 120 160 108" stroke="#1f1a33" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M210 155 Q222 120 238 110" stroke="#1f1a33" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <circle cx="160" cy="107" r="5" fill="#36e3d0"/>
+  <circle cx="238" cy="109" r="5" fill="#36e3d0"/>
+  <g id="eyes-open">
+    <ellipse cx="190" cy="190" rx="11" ry="13" fill="#fff"/>
+    <ellipse cx="218" cy="190" rx="10" ry="12" fill="#fff"/>
+    <circle cx="193" cy="192" r="5.5" fill="#1f1a33"/>
+    <circle cx="220" cy="192" r="5" fill="#1f1a33"/>
+    <circle cx="195" cy="189" r="1.8" fill="#fff"/>
+    <circle cx="222" cy="189" r="1.6" fill="#fff"/>
+  </g>
+  <g id="eyes-closed" style="display:none">
+    <path d="M180 192 Q190 197 200 192" stroke="#1f1a33" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M209 192 Q218 197 227 192" stroke="#1f1a33" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <rect x="174" y="176" width="60" height="26" rx="10" fill="#ff4fa3" fill-opacity=".28" stroke="#ff4fa3" stroke-width="2.5"/>
+  <path d="M174 186 L160 182" stroke="#ff4fa3" stroke-width="2.5" stroke-linecap="round"/>
+  <g id="brows" stroke="#1f1a33" stroke-width="3.5" stroke-linecap="round">
+    <path d="M180 168 L198 172"/><path d="M210 172 L228 166"/>
+  </g>
+  <path d="M158 206 Q160 226 182 228" stroke="#2b2b3d" stroke-width="2.5" fill="none"/>
+  <circle cx="184" cy="228" r="4" fill="#2b2b3d"/>
+  <g id="mouth-closed"><path d="M198 220 Q206 226 214 218" stroke="#7a2e3e" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+  <g id="mouth-open" style="display:none"><ellipse cx="206" cy="222" rx="7" ry="5" fill="#5a1f2e"/></g>
+  <g id="mouth-wide" style="display:none"><ellipse cx="206" cy="223" rx="9" ry="8" fill="#5a1f2e"/><ellipse cx="206" cy="227" rx="5" ry="2.5" fill="#e0708a"/></g>
+</g>
+<g id="arm-front">
+  <path d="M160 238 Q182 248 194 240" stroke="#1f1a33" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <circle cx="196" cy="239" r="5" fill="#1f1a33"/>
+</g>
+</svg>

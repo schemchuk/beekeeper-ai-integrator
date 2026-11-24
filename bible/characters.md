@@ -24,3 +24,18 @@ look, voice and lines; no quotes, songs or designs from that film.
 
 Recurring villains: the letter "Wir haben Ihr Profil für zukünftige Stellen gespeichert",
 the Jobcenter, "relevante Berufserfahrung in Deutschland", Kubernetes.
+
+## Looks, sketch v1 (2026-11-24)
+
+Files: `characters/*.svg`, model sheet via `python3 tools/model_sheet.py` → `out/model_sheet.png`.
+Every SVG has groups `eyes-open/eyes-closed`, `mouth-closed/-open/-wide`, `brows`, `head`,
+`arm-front/-back`, `legs` so Remotion can animate them.
+
+- Pylyp: straw hat with pink band, translucent cyan veil, pink cyber monocle, grey brows and
+  moustache, indigo hoodie with honeycomb print.
+- Бзинька: round honey bee with a pink visor, cyan LED antennae, headset mic (the reviewer).
+- Медунко: big brown bear, winter nightcap with pompom, cyan scarf, paw raised for "Добрий день".
+- Сірий: lean old wolf, postman cap with an envelope badge, mailbag with a letter, notched ear,
+  grey bushy brow, sly half-closed eye.
+- Колючка: hedgehog with honey-tipped spines, cyan honeycomb-cross badge (not a red cross),
+  holds a piece of drone brood comb.

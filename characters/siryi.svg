@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" id="siryi">
+<title>Siryi</title>
+<ellipse cx="150" cy="388" rx="78" ry="8" fill="#000" opacity=".35"/>
+<g id="tail">
+  <path d="M96 290 Q40 300 30 250 Q60 262 84 258 Q60 240 66 214 Q86 250 108 262 Z" fill="#6c7186"/>
+  <path d="M30 250 Q46 258 60 256" stroke="#c3c8d4" stroke-width="6" fill="none" stroke-linecap="round"/>
+</g>
+<g id="legs">
+  <path d="M120 290 L112 372" stroke="#5c6176" stroke-width="22" stroke-linecap="round"/>
+  <path d="M172 290 L180 372" stroke="#5c6176" stroke-width="22" stroke-linecap="round"/>
+  <ellipse cx="108" cy="380" rx="20" ry="8" fill="#43475a"/>
+  <ellipse cx="186" cy="380" rx="20" ry="8" fill="#43475a"/>
+</g>
+<g id="arm-back">
+  <path d="M112 184 Q92 230 100 270" stroke="#5c6176" stroke-width="20" stroke-linecap="round" fill="none"/>
+</g>
+<g id="body">
+  <path d="M110 176 Q148 160 186 176 L196 296 Q148 310 100 296 Z" fill="#7d8397"/>
+  <path d="M130 186 Q148 240 140 296 L160 296 Q170 240 164 186 Z" fill="#b9bfcc"/>
+  <path d="M112 182 L198 280" stroke="#5a3a24" stroke-width="7"/>
+  <rect x="176" y="262" width="56" height="42" rx="6" fill="#6e4a2c"/>
+  <path d="M176 272 L232 272" stroke="#5a3a24" stroke-width="3"/>
+  <rect x="190" y="248" width="32" height="20" fill="#f2f0f7" transform="rotate(-10 206 258)"/>
+  <path d="M192 250 L206 260 L220 246" stroke="#ff4fa3" stroke-width="1.5" fill="none" transform="rotate(-10 206 258)"/>
+</g>
+<g id="head">
+  <path d="M112 90 L118 42 L138 78 Z" fill="#6c7186"/>
+  <path d="M118 52 L130 76 L122 78 Z" fill="#c3a0a8"/>
+  <path d="M154 78 L172 36 L182 62 L176 60 L182 86 Z" fill="#6c7186"/>
+  <path d="M110 120 Q106 78 150 76 Q186 78 192 104 L238 120 Q246 130 236 138 L188 148 Q170 170 140 168 Q112 162 110 120 Z" fill="#7d8397"/>
+  <path d="M188 128 L238 122 Q246 130 236 138 L190 148 Z" fill="#b9bfcc"/>
+  <ellipse cx="240" cy="126" rx="8" ry="6" fill="#1e1e2a"/>
+  <path d="M112 142 L100 150 L116 152 L104 162 L122 158" fill="#b9bfcc"/>
+  <g id="eyes-open">
+    <ellipse cx="170" cy="108" rx="9" ry="6" fill="#ffd56e"/>
+    <circle cx="173" cy="108" r="3" fill="#1e1e2a"/>
+    <path d="M160 105 Q170 100 180 105 L180 104 Q170 98 160 104 Z" fill="#7d8397"/>
+    <path d="M160 104 L181 104" stroke="#43475a" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <g id="eyes-closed" style="display:none">
+    <path d="M161 109 Q170 112 179 109" stroke="#1e1e2a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <g id="brows" stroke="#d9dde6" stroke-width="5" stroke-linecap="round">
+    <path d="M158 94 Q170 86 184 92"/>
+  </g>
+  <g id="mouth-closed"><path d="M196 146 Q214 150 230 140" stroke="#2a2a38" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M226 141 L228 147 L231 140" fill="#fff"/></g>
+  <g id="mouth-open" style="display:none"><path d="M194 144 L234 140 Q226 158 200 156 Z" fill="#3a1a24"/><path d="M226 141 L228 147 L231 140" fill="#fff"/></g>
+  <g id="mouth-wide" style="display:none"><path d="M192 144 L236 138 Q230 166 198 164 Z" fill="#3a1a24"/><ellipse cx="214" cy="158" rx="9" ry="3.5" fill="#d0607a"/><path d="M226 140 L228 147 L231 139" fill="#fff"/></g>
+</g>
+<g id="hat">
+  <path d="M120 84 Q124 56 156 56 Q186 58 186 84 Z" fill="#2e2558"/>
+  <path d="M182 82 Q204 80 214 88 Q196 92 180 90 Z" fill="#1f1a40"/>
+  <rect x="120" y="78" width="66" height="8" fill="#1f1a40"/>
+  <rect x="146" y="62" width="16" height="12" rx="2" fill="#ffc44d"/>
+  <path d="M146 63 L154 69 L162 63" stroke="#2e2558" stroke-width="1.5" fill="none"/>
+</g>
+<g id="arm-front">
+  <path d="M182 186 Q210 226 200 262" stroke="#7d8397" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <circle cx="199" cy="266" r="10" fill="#6c7186"/>
+</g>
+</svg>

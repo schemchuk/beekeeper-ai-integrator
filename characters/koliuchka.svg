@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" id="koliuchka">
+<title>Koliuchka</title>
+<ellipse cx="150" cy="388" rx="90" ry="7" fill="#000" opacity=".35"/>
+<g id="legs">
+  <ellipse cx="110" cy="376" rx="16" ry="9" fill="#5a4030"/>
+  <ellipse cx="176" cy="376" rx="16" ry="9" fill="#5a4030"/>
+</g>
+<g id="body">
+  <path d="M18.9 267.5 L51.0 269.6 L28.3 252.5 L59.4 258.7 L40.9 238.9 L70.1 249.1 L56.5 227.2 L82.9 241.0 L74.6 217.7 L97.4 234.7 L94.7 210.7 L113.2 230.5 L116.0 206.4 L129.6 228.3 L138.0 205.0 L146.4 228.3 L160.0 206.4 L162.8 230.5 L181.3 210.7 L178.6 234.7 L201.4 217.7 L193.1 241.0 L219.5 227.2 L205.9 249.1 L235.1 238.9 L216.6 258.7 L247.7 252.5 L168 340 Z" fill="#4a3426"/>
+  <path d="M18.9 267.5 L51.0 269.6 L28.3 252.5 L59.4 258.7 L40.9 238.9 L70.1 249.1 L56.5 227.2 L82.9 241.0 L74.6 217.7 L97.4 234.7 L94.7 210.7 L113.2 230.5 L116.0 206.4 L129.6 228.3 L138.0 205.0 L146.4 228.3 L160.0 206.4 L162.8 230.5 L181.3 210.7 L178.6 234.7 L201.4 217.7 L193.1 241.0 L219.5 227.2 L205.9 249.1 L235.1 238.9 L216.6 258.7 L247.7 252.5 L168 340 Z" fill="none" stroke="#2e2018" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="18.9" cy="267.5" r="3" fill="#ffc44d"/><circle cx="40.9" cy="238.9" r="3" fill="#ffc44d"/><circle cx="74.6" cy="217.7" r="3" fill="#ffc44d"/><circle cx="116.0" cy="206.4" r="3" fill="#ffc44d"/><circle cx="160.0" cy="206.4" r="3" fill="#ffc44d"/><circle cx="201.4" cy="217.7" r="3" fill="#ffc44d"/><circle cx="235.1" cy="238.9" r="3" fill="#ffc44d"/>
+  <ellipse cx="150" cy="318" rx="78" ry="58" fill="#7a5a44"/>
+  <ellipse cx="168" cy="330" rx="48" ry="40" fill="#d9bf9c"/>
+  <g transform="translate(118 300)">
+    <circle r="13" fill="#36e3d0"/>
+    <path d="M-6 0 L6 0 M0 -6 L0 6" stroke="#0f0b24" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+</g>
+<g id="head">
+  <path d="M182 262 Q236 270 262 300 Q266 308 256 310 Q226 316 196 330 Q176 312 182 262 Z" fill="#d9bf9c"/>
+  <circle cx="262" cy="303" r="7" fill="#1e1410"/>
+  <circle cx="200" cy="262" r="9" fill="#b89a78"/>
+  <g id="eyes-open">
+    <circle cx="222" cy="284" r="5" fill="#1e1410"/>
+    <circle cx="223.5" cy="282.5" r="1.5" fill="#fff"/>
+  </g>
+  <g id="eyes-closed" style="display:none">
+    <path d="M216 285 Q222 288 228 285" stroke="#1e1410" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  </g>
+  <g id="brows" stroke="#3a281e" stroke-width="4" stroke-linecap="round">
+    <path d="M212 272 L232 278"/>
+  </g>
+  <g id="mouth-closed"><path d="M234 310 Q244 314 252 310" stroke="#5a2e2a" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>
+  <g id="mouth-open" style="display:none"><ellipse cx="243" cy="312" rx="7" ry="4" fill="#4a1f1e"/></g>
+  <g id="mouth-wide" style="display:none"><ellipse cx="243" cy="313" rx="9" ry="6" fill="#4a1f1e"/></g>
+</g>
+<g id="arm-front">
+  <path d="M190 340 Q212 350 224 340" stroke="#7a5a44" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <g transform="translate(228 334)">
+    <rect x="-4" y="-14" width="30" height="22" rx="3" fill="#e8d49a"/>
+    <g fill="none" stroke="#c9a85c" stroke-width="1.3">
+      <polygon points="3,-8 0,-3 -3,-8 0,-13" transform="translate(4 0)"/>
+      <circle cx="8" cy="-3" r="3.2"/><circle cx="15" cy="-3" r="3.2"/><circle cx="22" cy="-3" r="3.2"/>
+      <circle cx="11.5" cy="3" r="3.2"/><circle cx="18.5" cy="3" r="3.2"/>
+    </g>
+  </g>
+</g>
+</svg>
