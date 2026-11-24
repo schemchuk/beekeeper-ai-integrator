@@ -1,0 +1,19 @@
+# Voice cast, chosen by Volodymyr on 2026-11-24 from out/audition/.
+# fx = [pitch ratio, tempo ratio] applied with ffmpeg rubberband after synthesis.
+# Holos "mix" = mean of two anonymous preset voices (ranked by pitch, see tools/holos_engine.py).
+
+pylyp:
+  ua: {engine: holos, voice: clone, ref: voice/samples/volodymyr_2.wav}
+  de: {engine: chatterbox, ref: voice/samples/volodymyr_2.wav, exaggeration: 0.5}
+bzynka:
+  ua: {engine: holos, voice: [Speaker_37, Speaker_26], speed: 1.1, fx: [1.35, 1.1]}
+  de: {engine: piper, model: de_DE-kerstin-low, fx: [1.35, 1.1]}
+medunko:
+  ua: {engine: holos, voice: [Speaker_36, Speaker_53], speed: 0.9, fx: [0.78, 0.9]}
+  de: {engine: piper, model: de_DE-karlsson-low, fx: [0.78, 0.9]}
+siryi:
+  ua: {engine: holos, voice: [Speaker_34, Speaker_11], speed: 1.0, fx: [0.88, 0.95]}
+  de: {engine: piper, model: de_DE-pavoque-low, fx: [0.88, 0.95]}
+koliuchka:
+  ua: {engine: holos, voice: [Speaker_69, Speaker_1], speed: 1.1, fx: [1.12, 1.05]}
+  de: {engine: piper, model: de_DE-pavoque-low, fx: [1.12, 1.05]}
