@@ -21,7 +21,7 @@ goes to postpilot by hand with `/work ai`.
 | T06 ✅ | Characters as components from `characters/*.svg`: idle, talking (mouth/pose switch while their line plays), simple entrance | Pylyp and Medunko move and talk in 002 |
 | T07 ✅ | Scenes for 002: hut (night, snow, laptop, phone) and den; phone close-up with message pop-ins and buzz sfx | both scenes look like the script |
 | T08 ✅ | `render` + `check` steps (ADR 002): Python calls Remotion per language, then checks the output contract (H.264 yuv420p, 1080x1920, 30 fps, AAC 48 kHz, 3-90 s, < 20 MB) | `beekeeper build` makes both reels and passes `check` |
-| T09 | Script finished: Volodymyr's edits to 002 (Pylyp's lines in his words, final punchline) | he approves the text |
+| T09 ✅ | Script finished: Volodymyr's edits to 002 (Pylyp's lines in his words, final punchline) | he approves the text |
 | T10 | First real reel: build 002, Volodymyr watches, fixes, then `/work ai` the DE reel | the reel is published by postpilot |
 
 Order: T01-T04, then T05-T08, T09 can run in parallel any time before T10.
