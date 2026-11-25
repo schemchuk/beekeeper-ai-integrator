@@ -38,8 +38,14 @@ Roadmap, small steps:
 
 ## Agreed with Volodymyr
 
-- Folder `~/VS_Code_projects/pasichnyk`, git initialised locally, no GitHub remote yet
-  (ask before creating one).
+- Folder `~/VS_Code_projects/beekeeper-ai-integrator` (renamed from `pasichnyk` on 2026-11-25).
+  Private GitHub repo `schemchuk/beekeeper-ai-integrator`; it goes public with the first
+  finished reel (ask before that step).
+- Portfolio-grade: English README, MIT for code, CC BY-NC 4.0 for characters and episodes.
+  Nothing paid (no patents, no paid services).
+- The spirit (Volodymyr, 2026-11-25): the project must never make him blush in front of
+  readers and viewers; it should make him square his shoulders and walk through life with
+  a light step and an ironic smile.
 - Lightweight experimental project: no spec/ADR/task gates like postpilot. Still small
   commits, Conventional Commits, and ask before anything that publishes or costs money.
 - Everything free and local where possible (Piper TTS, ffmpeg, headless Chromium).
