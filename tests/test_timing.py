@@ -1,4 +1,7 @@
 import json
+import math
+import wave
+from array import array
 from pathlib import Path
 
 import pytest
@@ -14,6 +17,7 @@ from beekeeper.timing import (
     check_clips,
     frames,
     load_clips,
+    mouth_levels,
     parse_sfx,
     target_range,
 )
@@ -162,3 +166,43 @@ def test_cli_timing_without_voices_fails_readably(tmp_path, capsys):
     )
     assert code == 1
     assert "run `beekeeper voices` first" in capsys.readouterr().err
+
+
+def write_wav(path, seconds_and_amp, rate=48000):
+    """Sine tone in segments: [(seconds, amplitude 0..1), ...], 16-bit mono."""
+    samples = array("h")
+    for seconds, amp in seconds_and_amp:
+        for n in range(int(seconds * rate)):
+            samples.append(int(amp * 30000 * math.sin(2 * math.pi * 220 * n / rate)))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(rate)
+        w.writeframes(samples.tobytes())
+
+
+def test_mouth_follows_loudness_and_closes_after_the_wav(tmp_path):
+    wav = tmp_path / "a.wav"
+    write_wav(wav, [(0.2, 0.0), (0.2, 0.3), (0.2, 1.0)])  # silence, quiet, loud
+    levels = mouth_levels(wav, frames(0.6) + 3)
+    assert levels == "0" * 6 + "1" * 6 + "2" * 6 + "000"
+
+
+def test_silent_wav_keeps_the_mouth_closed(tmp_path):
+    wav = tmp_path / "s.wav"
+    write_wav(wav, [(0.1, 0.0)])
+    assert mouth_levels(wav, 3) == "000"
+
+
+def test_timeline_speech_gets_one_mouth_digit_per_frame(episode, tmp_path):
+    write_wav(tmp_path / "ua/01-pylyp-k1.wav", [(0.5, 0.0), (0.5, 1.0)])
+    write_wav(tmp_path / "ua/03-bee-k3.wav", [(0.5, 1.0)])
+    tl = build_timeline(episode, clips(), "ua", voices_dir=tmp_path)
+    for line in tl["lines"]:
+        speech = line["speech"]
+        if speech:
+            assert len(speech["mouth"]) == speech["end"] - speech["start"]
+    pylyp = tl["lines"][1]["speech"]["mouth"]
+    assert set(pylyp[:15]) == {"0"} and "2" in pylyp[15:]
+    assert "mouth" not in build_timeline(episode, clips(), "ua")["lines"][1]["speech"]

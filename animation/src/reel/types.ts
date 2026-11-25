@@ -7,6 +7,7 @@ export type Speech = {
   audio: string;
   start: number;
   end: number;
+  mouth?: string; // one digit per frame: 0 closed, 1 open, 2 wide (from the wav loudness)
 };
 
 export type OnscreenItem = {

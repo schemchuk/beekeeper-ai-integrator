@@ -132,3 +132,12 @@ def test_cli_validate_fails(tmp_path, capsys):
 def test_cli_missing_cast(tmp_path, capsys):
     assert main(["validate", str(write(tmp_path, GOOD)), "--cast", str(tmp_path / "no.yaml")]) == 1
     assert "file not found" in capsys.readouterr().err
+
+
+def test_shot_eyes_must_be_open_or_closed(tmp_path):
+    ep = load_episode(
+        write(tmp_path, GOOD.replace("{scene: hut}", "{scene: hut, eyes: closed}")), CAST
+    )
+    assert ep.lines[0].shot["eyes"] == "closed"
+    [p] = problems(tmp_path, GOOD.replace("{scene: hut}", "{scene: hut, eyes: sleepy}"))
+    assert p.endswith("lines[0].shot.eyes: must be open or closed")

@@ -84,7 +84,7 @@ def cmd_timing(episode: Path, cast: Path, langs: list[str] | None, out: Path) ->
             print("\n".join(e.problems), file=sys.stderr)
             status = 1
             continue
-        tl = timing.build_timeline(ep, clips, lang)
+        tl = timing.build_timeline(ep, clips, lang, voices_dir=ep_dir / "voices")
         path = timing.write_timeline(tl, ep_dir)
         seconds = tl["duration"] / tl["fps"]
         note = ""

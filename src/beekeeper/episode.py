@@ -21,7 +21,8 @@ TOP_KEYS = {
     "end_card",
 }
 LINE_KEYS = {"who", "ua", "de", "shot", "onscreen", "sfx", "action", "note", "pause"}
-SHOT_KEYS = {"scene", "camera", "action", "at"}
+SHOT_KEYS = {"scene", "camera", "action", "at", "eyes"}
+EYES = {"open", "closed"}  # shot.eyes: everyone on screen (closed = asleep)
 
 
 @dataclass(frozen=True)
@@ -172,6 +173,8 @@ class _Checker:
         scene = shot.get("scene")
         if scene is not None and scenes and scene not in scenes:
             self.err(shot, f"{where}.shot.scene", f"'{scene}' is not in scenes")
+        if shot.get("eyes", "open") not in EYES:
+            self.err(shot, f"{where}.shot.eyes", "must be open or closed")
 
         pause = raw.get("pause", 0)
         if isinstance(pause, bool) or not isinstance(pause, int | float) or pause < 0:

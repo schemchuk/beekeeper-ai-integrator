@@ -26,7 +26,7 @@ lines:
     note: "[бзз] = Бзинька's bleep over a swear word, the only one in the episode"
 
   - who: medunko
-    shot: {scene: den, camera: slow push-in, action: "asleep, typing on the phone with the free paw"}
+    shot: {scene: den, eyes: closed, camera: slow push-in, action: "asleep, typing on the phone with the free paw"}
     ua: "Добрий день… А медку не буде? Я тільки ложечку…"
     de: "Guten Tag… Gibt es vielleicht Honig? Nur einen Löffel…"
 
@@ -52,13 +52,13 @@ lines:
     de: "Wird automatisiert."
     sfx: keyboard
 
-  - shot: {scene: den, camera: phone close-up, action: "bot reply arrives in Medunko's phone"}
+  - shot: {scene: den, eyes: closed, camera: phone close-up, action: "bot reply arrives in Medunko's phone"}
     onscreen:
       ua: "Дякуємо за інтерес до нашого меду. Ми зберегли ваш запит для майбутніх сезонів."
       de: "Vielen Dank für Ihr Interesse an unserem Honig. Wir haben Ihre Anfrage für zukünftige Saisons gespeichert."
 
   - who: medunko
-    shot: {scene: den, camera: close-up, action: "smiles in his sleep, hugs the phone"}
+    shot: {scene: den, eyes: closed, camera: close-up, action: "smiles in his sleep, hugs the phone"}
     ua: "О… Як з Джобцентру. Значить, шанс є."
     de: "Oh… Wie vom Jobcenter. Dann gibt es noch Hoffnung."
 

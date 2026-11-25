@@ -9,6 +9,8 @@ Silent shots (no `who`) last as long as it takes to read their on-screen text.
 import json
 import math
 import re
+import wave
+from array import array
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -24,6 +26,8 @@ MIN_HOLD = 1.5  # shortest time any on-screen text stays up, seconds
 STAGGER = 0.6  # delay between items of an on-screen list ("ложечку", "пів ложечки", ...)
 END_CARD_MIN = 3.0
 SFX_COUNT = re.compile(r"^(?P<name>.+?)\s+x(?P<n>\d+)$")  # "phone-buzz x3"
+MOUTH_OPEN = 0.18  # frame loudness (share of the clip's loud level) that opens the mouth
+MOUTH_WIDE = 0.85  # ... and that opens it wide
 TARGET = re.compile(r"^\s*(?P<lo>\d+(?:\.\d+)?)\s*-\s*(?P<hi>\d+(?:\.\d+)?)\s*s?\s*$")
 
 
@@ -61,6 +65,32 @@ def target_range(value: object) -> tuple[float, float] | None:
     """`target_length: 35-40 s` -> (35.0, 40.0); anything else -> None."""
     m = TARGET.match(str(value)) if value is not None else None
     return (float(m["lo"]), float(m["hi"])) if m else None
+
+
+def mouth_levels(wav: Path, length: int) -> str:
+    """One digit per frame for lip flaps: 0 closed, 1 open, 2 wide, from the wav's loudness.
+
+    The loud level is the 90th percentile of the frame RMS, so one shout does not shut the
+    mouth for the rest of the line. Frames past the end of the wav stay closed.
+    """
+    with wave.open(str(wav), "rb") as w:
+        if w.getsampwidth() != 2:
+            raise TimingError([f"{wav}: expected 16-bit PCM"])
+        channels, rate = w.getnchannels(), w.getframerate()
+        samples = array("h", w.readframes(w.getnframes()))
+    if channels > 1:
+        samples = samples[::channels]
+    step = rate / FPS
+    rms = []
+    for k in range(length):
+        chunk = samples[int(k * step) : int((k + 1) * step)]
+        rms.append(math.sqrt(sum(x * x for x in chunk) / len(chunk)) if chunk else 0.0)
+    loud = sorted(rms)[int(0.9 * (len(rms) - 1))] if rms else 0.0
+    if loud <= 0:
+        return "0" * length
+    return "".join(
+        "2" if r >= MOUTH_WIDE * loud else "1" if r >= MOUTH_OPEN * loud else "0" for r in rms
+    )
 
 
 def load_clips(voices_dir: Path, lang: str) -> dict[int, ClipInfo]:
@@ -104,13 +134,24 @@ def check_clips(
 
 
 def build_timeline(
-    episode: Episode, clips: dict[int, ClipInfo], lang: str, audio_prefix: str = "voices"
+    episode: Episode,
+    clips: dict[int, ClipInfo],
+    lang: str,
+    audio_prefix: str = "voices",
+    voices_dir: Path | None = None,
 ) -> dict:
-    """Lay out every line on the frame grid; return the JSON-ready timeline for one language."""
+    """Lay out every line on the frame grid; return the JSON-ready timeline for one language.
+
+    With `voices_dir`, every speech also gets `mouth` (see `mouth_levels`) for the lip flaps.
+    """
     cursor = 0
     lines = []
     for i, line in enumerate(episode.lines):
         entry = _line(i, line, clips.get(i), lang, cursor, audio_prefix)
+        if voices_dir is not None and entry["speech"]:
+            speech = entry["speech"]
+            wav = voices_dir / clips[i].file
+            speech["mouth"] = mouth_levels(wav, speech["end"] - speech["start"])
         lines.append(entry)
         cursor = entry["end"] + frames(GAP + line.pause)
 
