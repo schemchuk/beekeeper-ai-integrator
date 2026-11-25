@@ -1,6 +1,6 @@
 # 004. Animation and assembly with Remotion
 
-Status: PROPOSED (2026-11-25); Remotion was agreed with Volodymyr on 2026-11-24.
+Status: ACCEPTED (Volodymyr, 2026-11-25); Remotion was agreed with Volodymyr on 2026-11-24.
 
 ## Context
 

@@ -1,6 +1,6 @@
 # 003. Voices: HolosTTS (UA), Chatterbox + Piper (DE)
 
-Status: PROPOSED (2026-11-25); the cast itself was chosen by Volodymyr on 2026-11-24.
+Status: ACCEPTED (Volodymyr, 2026-11-25); the cast itself was chosen by Volodymyr on 2026-11-24.
 
 ## Context
 

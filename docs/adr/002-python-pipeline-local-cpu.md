@@ -1,6 +1,6 @@
 # 002. Python pipeline, run locally on CPU
 
-Status: PROPOSED (2026-11-25)
+Status: ACCEPTED (Volodymyr, 2026-11-25)
 
 ## Context
 

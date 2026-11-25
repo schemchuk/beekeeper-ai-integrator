@@ -1,6 +1,6 @@
 # 005. Automatic handoff of reels to postpilot
 
-Status: PROPOSED (2026-11-25). Needs a matching ADR in postpilot (its own process).
+Status: ACCEPTED (Volodymyr, 2026-11-25). Needs a matching ADR in postpilot (its own process).
 
 ## Context
 
@@ -22,7 +22,7 @@ Facts on the postpilot side (2026-11-25):
 | C. Factory uploads the reel to Telegram, then calls a postpilot workflow with the `file_id` | reuses ADR 019 storage and channels; postpilot owns its DB; one small contract | needs a new postpilot workflow and two secrets on the laptop |
 | D. File host / GitHub release + webhook | no Telegram limit | new host, new secrets, more parts |
 
-## Decision (proposed: C)
+## Decision: C
 
 1. After `check` passes (ADR 002), the factory sends the DE reel with the postpilot bot's
    `sendVideo` to Volodymyr's chat. That message is also his "reel ready" notice. The
@@ -38,14 +38,15 @@ Facts on the postpilot side (2026-11-25):
 5. The UA reel is not sent; it stays in `out/` and is archived.
 6. Secrets on the laptop (in `.env`, never committed): the postpilot bot token and a
    fine-grained PAT limited to the postpilot repo, Actions write.
-7. If either call fails, the factory retries, then tells Volodymyr in Telegram; the manual
+7. No veto step between handoff and release: no Stop button (Volodymyr, 2026-11-25). The
+   script approval is the last say.
+8. If either call fails, the factory retries, then tells Volodymyr in Telegram; the manual
    `/work ai` stays the fallback.
 
 ## For postpilot to decide (its ADR)
 
 - New source (S4 "factory") or S3 with a flag; scheduled publish at `release_at`
   (S3 publishes right after approval today).
-- A last-chance veto for Volodymyr between handoff and release (e.g. a Stop button), or none.
 - Statistics for factory items (`docs/product.md` §7).
 
 ## Consequences

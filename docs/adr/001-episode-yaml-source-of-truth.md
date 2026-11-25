@@ -1,6 +1,6 @@
 # 001. `episode.yaml` is the single source of an episode
 
-Status: PROPOSED (2026-11-25)
+Status: ACCEPTED (Volodymyr, 2026-11-25)
 
 ## Context
 
