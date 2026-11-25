@@ -42,11 +42,12 @@ Roadmap, small steps:
   Private GitHub repo `schemchuk/beekeeper-ai-integrator`; it goes public with the first
   finished reel (ask before that step).
 - Portfolio-grade: English README, MIT for code, CC BY-NC 4.0 for characters and episodes.
-  Nothing paid (no patents, no paid services).
+  Nothing paid except a small budget for a Claude subscription and API (2026-11-25).
 - The spirit (Volodymyr, 2026-11-25): the project must never make him blush in front of
   readers and viewers; it should make him square his shoulders and walk through life with
   a light step and an ironic smile.
-- Lightweight experimental project: no spec/ADR/task gates like postpilot. Still small
+- Process (changed 2026-11-25 at Volodymyr's request): a conventional development flow,
+  interview (`docs/interview/`) -> product description -> ADRs -> roadmap -> code. Small
   commits, Conventional Commits, and ask before anything that publishes or costs money.
 - Everything free and local where possible (Piper TTS, ffmpeg, headless Chromium).
 - Content is original (own characters, own jokes), no recreation of existing shows.
