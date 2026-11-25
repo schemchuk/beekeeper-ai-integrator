@@ -5,44 +5,35 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { framing, residents, spanAt, spans } from "../reel/shots";
 import type { Timeline, TimelineLine } from "../reel/types";
 import { Character, Mouth, Pose, hasRig } from "./Character";
 import { RIG } from "./rig";
-import { DEFAULT_SLOT, GUEST_SLOT, STAGE, Slot } from "./stage-layout";
+import {
+  DEFAULT_SLOT,
+  GUEST_SLOT,
+  MONITOR_SLOT,
+  STAGE,
+  Slot,
+} from "./stage-layout";
 
-// Who stands where, line by line, decided from the timeline alone (ADR 004: an episode is data):
-// - a scene's resident is the first character who speaks in it (hut: Pylyp, den: Medunko);
-// - a guest (Bzynka in the hut) is on screen only for their own lines;
-// - a phone close-up shows the phone, not the characters (T07 draws the phone);
+// Who stands where, line by line (framings: reel/shots.ts):
+// - in a scene: its resident (first speaker there) plus whoever speaks this line;
+// - on the monitor: only the speaker, inside the laptop screen (Bzynka);
+// - phone close-up and over-the-shoulder code: nobody;
 // - `shot.eyes: closed` closes everyone's eyes (Medunko asleep), otherwise they blink.
 
 const BLINK_EVERY = 100; // frames between blinks, ~3.3 s
 const BLINK_LENGTH = 4;
 const ENTRANCE = 18; // frames for the first entrance
 
-type Span = { line: TimelineLine; from: number; to: number };
-
-const spans = (t: Timeline): Span[] =>
-  t.lines.map((line, i) => ({
-    line,
-    from: line.start,
-    to: t.lines[i + 1]?.start ?? t.end_card?.start ?? t.duration,
-  }));
-
-const residents = (t: Timeline) => {
-  const map: Record<string, string> = {};
-  for (const line of t.lines) {
-    const scene = line.shot.scene;
-    if (scene && hasRig(line.who) && !(scene in map)) map[scene] = line.who;
-  }
-  return map;
-};
-
 const onStage = (
   line: TimelineLine,
   resident: Record<string, string>,
 ): string[] => {
-  if ((line.shot.camera ?? "").includes("phone")) return [];
+  const kind = framing(line);
+  if (kind === "phone" || kind === "code") return [];
+  if (kind === "monitor") return hasRig(line.who) ? [line.who] : [];
   const cast = new Set<string>();
   const home = line.shot.scene ? resident[line.shot.scene] : undefined;
   if (home) cast.add(home);
@@ -50,12 +41,17 @@ const onStage = (
   return [...cast];
 };
 
-const slotFor = (
-  scene: string | undefined,
+export const slotFor = (
+  line: TimelineLine | undefined,
   name: string,
   isResident: boolean,
-): Slot =>
-  (scene && STAGE[scene]?.[name]) || (isResident ? DEFAULT_SLOT : GUEST_SLOT);
+): Slot => {
+  if (line && framing(line) === "monitor") return MONITOR_SLOT;
+  const scene = line?.shot.scene;
+  return (
+    (scene && STAGE[scene]?.[name]) || (isResident ? DEFAULT_SLOT : GUEST_SLOT)
+  );
+};
 
 // Lip flaps at 15 fps (every second frame) look like a cartoon, not like a flicker.
 const mouthAt = (line: TimelineLine, frame: number): Mouth => {
@@ -72,8 +68,8 @@ export const Stage: React.FC<{ timeline: Timeline }> = ({ timeline }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const all = spans(timeline);
-  const resident = residents(timeline);
-  const current = all.find((s) => frame >= s.from && frame < s.to);
+  const resident = residents(timeline, hasRig);
+  const current = spanAt(all, frame);
   const visible = current ? onStage(current.line, resident) : [];
 
   // Everyone in the episode stays mounted (each SVG loads once); off-stage ones are hidden.
@@ -92,7 +88,7 @@ export const Stage: React.FC<{ timeline: Timeline }> = ({ timeline }) => {
         const line = current?.line;
         const scene = line?.shot.scene;
         const slot = slotFor(
-          scene,
+          line,
           name,
           scene !== undefined && resident[scene] === name,
         );

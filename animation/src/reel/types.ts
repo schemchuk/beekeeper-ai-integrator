@@ -19,6 +19,7 @@ export type OnscreenItem = {
 export type SfxEvent = {
   name: string;
   start: number;
+  audio?: string; // e.g. "sfx/phone-buzz.wav", synthesized by `beekeeper timing`
 };
 
 export type TimelineLine = {

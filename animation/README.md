@@ -21,12 +21,21 @@ npm run lint
 
 `beekeeper build` will call the render for both languages (T08).
 
-- `src/reel/Reel.tsx`: scenes, speech audio, subtitles, on-screen messages, end card.
+- `src/reel/Reel.tsx`: layers of the reel: camera (scene + characters), phone, speech audio
+  and subtitles, sfx, end card.
+- `src/reel/shots.ts`: what `shot.camera` means: `phone ...` = phone close-up, `monitor` =
+  the laptop screen with the speaker in it, `over-the-shoulder` = code typed on the laptop,
+  `close-up` / `push-in` = zoom on the scene's resident, anything else = the whole scene.
+- `src/scenes/`: scene library (T07). `index.tsx` maps `shot.scene` to a drawing (`hut`,
+  `den`), each with a back layer and a front layer around the characters; `Phone.tsx` and
+  `Laptop.tsx` are the device close-ups. A new scene = a new file + one line in `SCENES`.
 - `src/characters/`: characters from `characters/*.svg` (T06). `rig.ts` says where each
   head and arm pivots; `Stage.tsx` decides who is on screen per line (scene resident + the
   speaker, nobody in a phone close-up), blinks, breathing, first entrance, and lip flaps from
   `speech.mouth` in the timeline; `stage-layout.ts` holds the positions per scene. A new
   character needs an SVG with the usual part ids and one line in `rig.ts`.
 - `src/reel/types.ts`: the timeline format (keep in step with `src/beekeeper/timing.py`).
-- `src/reel/theme.ts`: placeholder scene colours and speaker names until T06-T07.
+- `src/reel/theme.ts`: speaker names and colours, fallback background.
+- Sound effects (`phone-buzz`, `keyboard`) are synthesized by `beekeeper timing` into the
+  episode's `sfx/` folder (`src/beekeeper/sfx.py`), no downloaded samples.
 - Inter is bundled from `@fontsource/inter`, so renders work offline.

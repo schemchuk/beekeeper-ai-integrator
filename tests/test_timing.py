@@ -206,3 +206,10 @@ def test_timeline_speech_gets_one_mouth_digit_per_frame(episode, tmp_path):
     pylyp = tl["lines"][1]["speech"]["mouth"]
     assert set(pylyp[:15]) == {"0"} and "2" in pylyp[15:]
     assert "mouth" not in build_timeline(episode, clips(), "ua")["lines"][1]["speech"]
+
+
+def test_sfx_events_point_at_their_wav(episode):
+    assert timing.sfx_names(episode) == {"phone-buzz"}
+    tl = build_timeline(episode, clips(), "ua", sfx_audio={"phone-buzz": "sfx/phone-buzz.wav"})
+    events = [e for line in tl["lines"] for e in line["sfx"]]
+    assert len(events) == 4 and all(e["audio"] == "sfx/phone-buzz.wav" for e in events)
