@@ -15,3 +15,4 @@ Source column points to `stories/`.
 | 8 | Санітар / Der Sanitäter | spring/summer | Колючка guards the apiary from rodents like a firewall; comes out only for Pylyp and his drone-brood treat. | 2026-11-24-hedgehog-and-premise | seed |
 | 9 | Матка за ТЗ / Königin nach Lastenheft | spring | Queen rearing and selection as a spec-driven release: Pylyp breeds queens to requirements, the hive files bug reports. Instrumental insemination = deployment with tweezers. | 2026-11-24-dossier | seed |
 | 10 | Ярмарок / Wochenmarkt | summer/autumn | Pylyp at a fair with honey drinks and his wife's handmade; the German market wants a Lebenslauf for the mead. | 2026-11-24-dossier | seed |
+| 11 | Гусак на мотузочку / Die Gans an der Leine | any | The Jobcenter leads Pylyp around like a goose on a string: appointment, form, "Maßnahme", appointment again. Pylyp automates the string; in the end the goose holds the rope. | chat 2026-11-25 | seed |

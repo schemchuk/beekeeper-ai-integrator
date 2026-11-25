@@ -39,6 +39,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - "джентельмен в пошуках десятки"
 - "я беру рутинну роботу на себе, а їм залишаю квітуче поле для польоту їхньої фантазії"
 - "повна бадя з якоюсь субстанцією замість меду" (about a bad name)
+- "водити як гусака на мотузочку": to strip someone of their will, impose and make them do yours (2026-11-25). DE near-equivalent: "an der kurzen Leine halten" (control), not "an der Nase herumführen" (that means to fool).
 
 ## Rules for writing Pylyp
 
