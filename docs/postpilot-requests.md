@@ -7,7 +7,7 @@ A copy lives in postpilot's Claude memory (`project-beekeeper-requests`).
 
 | Date | Request | Status |
 |------|---------|--------|
-| 2026-11-25 | Focus on German: German audience first, Ukrainian only as a 2029 fallback. | open |
+| 2026-11-25 | Focus on German: German audience first, Ukrainian only as a 2029 fallback. | partly done: UA LinkedIn posts paused (postpilot ADR 020, T22, 2026-11-25) |
 | 2026-11-25 | Keep the cross-network reach (LinkedIn, Threads, Instagram, Facebook Reels). | as is |
 | 2026-11-25 | Telegram bot as the factory's control channel: ideas and tall tales in, scripts and monthly plan for review/edit/approval, chat with Volodymyr. | open |
 | 2026-11-25 | He edits Ukrainian; edits must flow to the German production text (postpilot follow-up 4: Edit on own_video preview only edits DE). | open |
