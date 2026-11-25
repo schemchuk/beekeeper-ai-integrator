@@ -9,6 +9,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { Stage } from "../characters/Stage";
 import { fontFamily } from "./fonts";
 import { DEFAULT_BG, SAFE_X, SCENE_BG, SPEAKER } from "./theme";
 import type { OnscreenItem, Speech, Timeline, TimelineLine } from "./types";
@@ -33,9 +34,16 @@ export const Reel: React.FC<Timeline> = (timeline) => {
       {sceneSpans(timeline).map(({ line, from, duration }) => (
         <Sequence key={line.index} from={from} durationInFrames={duration} name={`line ${line.index}`}>
           <SceneBackground scene={line.shot.scene} />
-          {line.onscreen.length > 0 ? <Messages line={line} /> : null}
         </Sequence>
       ))}
+      <Stage timeline={timeline} />
+      {sceneSpans(timeline)
+        .filter(({ line }) => line.onscreen.length > 0)
+        .map(({ line, from, duration }) => (
+          <Sequence key={`messages-${line.index}`} from={from} durationInFrames={duration} name={`messages ${line.index}`}>
+            <Messages line={line} />
+          </Sequence>
+        ))}
       {timeline.lines
         .filter((line): line is TimelineLine & { speech: Speech } => line.speech !== null)
         .map(({ index, who, speech }) => (
