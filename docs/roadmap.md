@@ -14,7 +14,7 @@ goes to postpilot by hand with `/work ai`.
 | # | Task | Done when |
 |---|------|-----------|
 | T01 ✅ | Python package skeleton: `pyproject.toml`, `src/beekeeper/`, CLI `beekeeper`, pytest, ruff, CI on GitHub Actions | `beekeeper --help` runs, CI green |
-| T02 | Episode schema (ADR 001): load and validate `episode.yaml` (lines, `who`, `ua`/`de`, optional `shot`, `onscreen`, `sfx`, `pause`), clear errors with line numbers | 002 validates; broken samples fail with a readable message |
+| T02 ✅ | Episode schema (ADR 001): load and validate `episode.yaml` (lines, `who`, `ua`/`de`, optional `shot`, `onscreen`, `sfx`, `pause`), clear errors with line numbers | 002 validates; broken samples fail with a readable message |
 | T03 | Voice step (ADR 003): one `synthesize()` interface over the existing `tools/holos_engine.py`, `chatterbox_engine.py` and Piper, settings from `cast.yaml`, `fx` with rubberband, loudness, 48 kHz; per-line cache by hash | 002 voiced in UA and DE; a one-line edit re-voices one line |
 | T04 | Timing step: durations from wav + pauses -> `timeline.json` per language (lines, on-screen texts, sfx, start/end in frames at 30 fps) | timeline matches the wav lengths; unit tests |
 | T05 | Remotion project (ADR 004): composition 1080x1920 30 fps reading `timeline.json`, audio track, subtitles in Inter, scenes as plain backgrounds | a render of 002 plays with correct sync |

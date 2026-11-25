@@ -13,8 +13,9 @@ Volodymyr edits Ukrainian; the German production text must follow (§5).
 
 1. Each episode lives in `episodes/NNN-slug/episode.yaml`: id, title (UA, DE), release date,
    calendar month, seed (link to `bible/`), scene, and an ordered list of lines.
-2. A line has `speaker` (a key of `characters/cast.yaml`), `ua`, `de`, optional `action`
-   (what the speaker does on screen) and optional `pause` after it.
+2. A line has `who` (a key of `characters/cast.yaml`), `ua`, `de`, optional `action`
+   (what the speaker does on screen), `shot`, `onscreen` (text shown on screen), `sfx`, `note`
+   and `pause` after it. A line without `who` is a silent shot with `onscreen` text.
 3. German is adapted, not translated word for word; both texts sit side by side in the
    same line, so an edit to UA shows exactly which DE line must change.
 4. Everything else (wav files, timings, subtitles, frames, MP4) is generated into
