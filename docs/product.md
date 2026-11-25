@@ -53,7 +53,7 @@ All through the postpilot Telegram bot; he never handles files.
 | Ideas | He sends tall tales, ideas, facts (text or voice) any time. The factory sorts them into `bible/`. | none |
 | Monthly plan | The factory proposes next month's episodes (title, seed, release dates). | Sent on the 20th. If no edits by the 24th, a warning: "no edits by tomorrow morning, the plan is accepted". Accepted on the 25th morning. |
 | Script | Each script arrives in Ukrainian with the German production text side by side. He edits the Ukrainian; the German is updated and shown with the changed words marked, so he learns German along the way. | Sent 3 days before release. Accepted automatically on the morning of the day before release, no warning. |
-| Reel | Rendered DE (published) and UA (archived). | Goes to postpilot with the AI label. |
+| Reel | Rendered DE (published) and UA (archived). | Handed to postpilot automatically with the AI label; postpilot distributes it by its own rules. His manual intake in postpilot stays. |
 | Stats | Overview in Telegram. | Monthly, plus on request. |
 
 His time: up to 15 h/week at first, going down to 7 h/week.
@@ -93,5 +93,5 @@ statistics, automatic idea sorting from Telegram. These need postpilot changes
 ## 10. Open questions
 
 - Music: none yet, undecided.
-- How the factory and postpilot exchange scripts and reels (API, shared database, files):
-  decided in an ADR together with postpilot.
+- Handoff to postpilot is automatic (decided 2026-11-25); the mechanism (API, shared
+  database, queue) is decided in an ADR together with postpilot.
