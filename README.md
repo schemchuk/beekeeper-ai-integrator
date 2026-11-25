@@ -42,6 +42,15 @@ flowchart LR
 | `tools/` | Python tools: voice auditions, cast page, model sheet |
 | `docs/` | Research notes (TTS engines and choices) |
 
+## Development
+
+```sh
+uv venv --python 3.11            # or reuse the existing .venv with the TTS engines
+uv pip install -e ".[dev]"
+.venv/bin/beekeeper --help
+.venv/bin/ruff check . && .venv/bin/pytest -q
+```
+
 ## Principles
 
 - Free and local tools wherever possible; no paid APIs in the render path.

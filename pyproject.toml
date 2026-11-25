@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "beekeeper"
+version = "0.1.0"
+description = "Episode factory for short cartoons about Pylyp, a beekeeper turned IT integrator"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Volodymyr Shemchuk" }]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+beekeeper = "beekeeper.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/beekeeper"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+# tools/ holds the audition prototypes; T03 moves what is reused into src/.
+extend-exclude = ["tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
