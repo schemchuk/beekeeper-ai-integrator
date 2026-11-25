@@ -19,7 +19,9 @@ npx remotion render Reel $EP/reel_de.mp4 --props=$EP/timeline-de.json --public-d
 npm run lint
 ```
 
-`beekeeper build` will call the render for both languages (T08).
+Usually you do not call Remotion by hand: `beekeeper render` (or the whole
+`beekeeper build`) runs the same render for both languages and skips it when the timeline,
+its audio files and `animation/src` did not change (fingerprint in `reel_<lang>.mp4.hash`).
 
 - `src/reel/Reel.tsx`: layers of the reel: camera (scene + characters), phone, speech audio
   and subtitles, sfx, end card.
