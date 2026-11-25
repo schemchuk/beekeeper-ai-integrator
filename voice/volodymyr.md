@@ -50,3 +50,11 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   Бзинька's "bzzz" and is itself part of the joke.
 - DE version is not a literal translation: keep the joke working for Germans
   (Behörden, Jobcenter, Anschreiben, "Wir haben Ihr Profil gespeichert").
+
+## Session 2026-11-25
+
+- Pride and dignity: "я тобі не Медунко", "джентельмен в пошуках десятки", "старі пейси не
+  червоніли", "розправити плечі і йти по життю легким кроком з іронічною посмішкою".
+- Vivid put-downs from the household: a bad name is "повна бадя з якоюсь субстанцією замість меду".
+- Dictates by voice, so expect typos ("пасісник", "АШ" for ШІ/AI); meaning over spelling.
+- Agrees in one line: "давай так і зробимо".
