@@ -69,7 +69,8 @@ Format: an interview, speakers "Ведуча"/"Moderatorin" (host) and "Пили
 The SVG (680x420 viewBox) is a tired cyberpunk beekeeper with a veiled hat and a cyber
 monocle at a buggy monitor at night, rain outside, a bee nearby. It already has CSS
 animations (typing code lines, blinking cursor, nodding head, coffee steam, bee wings,
-pulsing errors), but the old reels used a static PNG of it. Rendering real animated
+pulsing errors), but the old reels used a static PNG of it. If it is reused, the coffee
+becomes herbal tea (house rule, `bible/characters.md`). Rendering real animated
 frames (headless Chromium/Playwright screenshots or a recorded page) is an easy win.
 
 ## How the voices were made (Volodymyr's notes, still valid)

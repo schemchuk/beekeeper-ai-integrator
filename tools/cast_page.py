@@ -12,8 +12,8 @@ NAMES = {
     "pylyp": ("Пилип", "Philipp"),
     "bzynka": ("Бзинька", "Bsinka"),
     "medunko": ("Медунко", "Medunko"),
-    "siryi": ("Сірий", "Siryi"),
-    "koliuchka": ("Колючка", "Koliuchka"),
+    "siryi": ("Сірий", "Isegrim"),
+    "koliuchka": ("Колючка", "Pieks"),
 }
 # Audition files that won the casting (see characters/cast.yaml).
 CHOSEN = {

@@ -2,7 +2,7 @@
 
 Copyright (c) 2026 Volodymyr Shemchuk
 
-The characters (Pylyp/Philipp, Bzynka/Bsinka, Medunko, Siryi, Koliuchka), their designs,
+The characters (Pylyp/Philipp, Bzynka/Bsinka, Medunko, Siryi/Isegrim, Koliuchka/Pieks), their designs,
 the episodes, scripts, rendered videos and the series bible (`characters/`, `episodes/`,
 `bible/`, `voice/`) are licensed under the
 [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/)
