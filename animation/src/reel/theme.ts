@@ -1,10 +1,7 @@
-// Placeholder look until the scene library (T07): one gradient per scene, one colour
-// per speaker for the subtitle name tag. DE names: bible/characters.md (open ones transliterated).
+// Colours shared by the reel: the fallback background for scenes not in the library
+// (scenes/index.tsx) and one colour per speaker for the subtitle name tag.
+// DE names: bible/characters.md (open ones transliterated).
 
-export const SCENE_BG: Record<string, [string, string]> = {
-  hut: ["#0f1b3d", "#2a3b6e"], // night, laptop glow
-  den: ["#1d1630", "#4a3f66"], // snowy den
-};
 export const DEFAULT_BG: [string, string] = ["#1b1b1f", "#3a3a44"];
 
 export const SPEAKER: Record<string, { name: Record<"de" | "ua", string>; color: string }> = {

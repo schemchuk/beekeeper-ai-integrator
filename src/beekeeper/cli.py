@@ -65,6 +65,7 @@ def cmd_voices(episode: Path, cast: Path, langs: list[str] | None, out: Path) ->
 
 def cmd_timing(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> int:
     from beekeeper import timing
+    from beekeeper.sfx import write_sfx
     from beekeeper.voices.cast import load_voices
 
     try:
@@ -75,6 +76,11 @@ def cmd_timing(episode: Path, cast: Path, langs: list[str] | None, out: Path) ->
     ep_dir = out / f"{ep.id}-{ep.slug}"
     voices = load_voices(cast)
     target = timing.target_range(ep.extra.get("target_length"))
+    try:
+        sfx_audio = write_sfx(timing.sfx_names(ep), ep_dir)
+    except KeyError as e:
+        print(f"{episode}: {e.args[0]}", file=sys.stderr)
+        return 1
     status = 0
     for lang in langs or ["de", "ua"]:
         try:
@@ -84,7 +90,9 @@ def cmd_timing(episode: Path, cast: Path, langs: list[str] | None, out: Path) ->
             print("\n".join(e.problems), file=sys.stderr)
             status = 1
             continue
-        tl = timing.build_timeline(ep, clips, lang, voices_dir=ep_dir / "voices")
+        tl = timing.build_timeline(
+            ep, clips, lang, voices_dir=ep_dir / "voices", sfx_audio=sfx_audio
+        )
         path = timing.write_timeline(tl, ep_dir)
         seconds = tl["duration"] / tl["fps"]
         note = ""

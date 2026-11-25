@@ -93,6 +93,10 @@ def mouth_levels(wav: Path, length: int) -> str:
     )
 
 
+def sfx_names(episode: Episode) -> set[str]:
+    return {parse_sfx(line.sfx)[0] for line in episode.lines if line.sfx}
+
+
 def load_clips(voices_dir: Path, lang: str) -> dict[int, ClipInfo]:
     """Read voices.json written by the voice step; keep one language."""
     path = voices_dir / "voices.json"
@@ -139,10 +143,12 @@ def build_timeline(
     lang: str,
     audio_prefix: str = "voices",
     voices_dir: Path | None = None,
+    sfx_audio: dict[str, str] | None = None,
 ) -> dict:
     """Lay out every line on the frame grid; return the JSON-ready timeline for one language.
 
     With `voices_dir`, every speech also gets `mouth` (see `mouth_levels`) for the lip flaps.
+    With `sfx_audio` (name -> wav path, see `beekeeper.sfx`), every sfx event gets `audio`.
     """
     cursor = 0
     lines = []
@@ -152,6 +158,9 @@ def build_timeline(
             speech = entry["speech"]
             wav = voices_dir / clips[i].file
             speech["mouth"] = mouth_levels(wav, speech["end"] - speech["start"])
+        for event in entry["sfx"]:
+            if sfx_audio and event["name"] in sfx_audio:
+                event["audio"] = sfx_audio[event["name"]]
         lines.append(entry)
         cursor = entry["end"] + frames(GAP + line.pause)
 

@@ -10,8 +10,11 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Stage } from "../characters/Stage";
+import { Camera, ShotLayer } from "../scenes";
+import { PhoneCloseUp } from "../scenes/Phone";
 import { fontFamily } from "./fonts";
-import { DEFAULT_BG, SAFE_X, SCENE_BG, SPEAKER } from "./theme";
+import { Span, framing, spans } from "./shots";
+import { DEFAULT_BG, SAFE_X, SPEAKER } from "./theme";
 import type { OnscreenItem, Speech, Timeline, TimelineLine } from "./types";
 
 export const calculateReelMetadata: CalculateMetadataFunction<Timeline> = ({ props }) => ({
@@ -20,30 +23,30 @@ export const calculateReelMetadata: CalculateMetadataFunction<Timeline> = ({ pro
   defaultOutName: `reel_${props.lang}`,
 });
 
-// The scene stays up until the next line starts, so the breath between lines is not black.
-const sceneSpans = (t: Timeline) =>
-  t.lines.map((line, i) => {
-    const next = t.lines[i + 1]?.start ?? t.end_card?.start ?? t.duration;
-    return { line, from: line.start, duration: Math.max(1, next - line.start) };
-  });
-
 export const Reel: React.FC<Timeline> = (timeline) => {
   const { lang } = timeline;
+  const all = spans(timeline);
+  const seq = (span: Span, key: string, child: React.ReactNode) => (
+    <Sequence key={key} from={span.from} durationInFrames={span.to - span.from} name={key}>
+      {child}
+    </Sequence>
+  );
   return (
     <AbsoluteFill style={{ fontFamily, backgroundColor: DEFAULT_BG[0] }}>
-      {sceneSpans(timeline).map(({ line, from, duration }) => (
-        <Sequence key={line.index} from={from} durationInFrames={duration} name={`line ${line.index}`}>
-          <SceneBackground scene={line.shot.scene} />
-        </Sequence>
-      ))}
-      <Stage timeline={timeline} />
-      {sceneSpans(timeline)
+      <Camera timeline={timeline}>
+        {all.map((span) => seq(span, `scene ${span.line.index}`, <ShotLayer span={span} layer="back" />))}
+        <Stage timeline={timeline} />
+        {all.map((span) => seq(span, `front ${span.line.index}`, <ShotLayer span={span} layer="front" />))}
+      </Camera>
+      {all
         .filter(({ line }) => line.onscreen.length > 0)
-        .map(({ line, from, duration }) => (
-          <Sequence key={`messages-${line.index}`} from={from} durationInFrames={duration} name={`messages ${line.index}`}>
-            <Messages line={line} />
-          </Sequence>
-        ))}
+        .map((span) =>
+          seq(
+            span,
+            `onscreen ${span.line.index}`,
+            framing(span.line) === "phone" ? <PhoneCloseUp line={span.line} /> : <Messages line={span.line} />,
+          ),
+        )}
       {timeline.lines
         .filter((line): line is TimelineLine & { speech: Speech } => line.speech !== null)
         .map(({ index, who, speech }) => (
@@ -57,6 +60,15 @@ export const Reel: React.FC<Timeline> = (timeline) => {
             <Subtitle who={who ?? ""} text={speech.text} lang={lang} />
           </Sequence>
         ))}
+      {timeline.lines.flatMap((line) =>
+        line.sfx
+          .filter((event) => event.audio)
+          .map((event, k) => (
+            <Sequence key={`sfx-${line.index}-${k}`} from={event.start} name={`sfx ${event.name}`} layout="none">
+              <Audio src={staticFile(event.audio!)} />
+            </Sequence>
+          )),
+      )}
       {timeline.end_card ? (
         <Sequence
           from={timeline.end_card.start}
@@ -68,11 +80,6 @@ export const Reel: React.FC<Timeline> = (timeline) => {
       ) : null}
     </AbsoluteFill>
   );
-};
-
-const SceneBackground: React.FC<{ scene?: string }> = ({ scene }) => {
-  const [top, bottom] = (scene && SCENE_BG[scene]) || DEFAULT_BG;
-  return <AbsoluteFill style={{ background: `linear-gradient(180deg, ${top}, ${bottom})` }} />;
 };
 
 // "[бзз]" in a line is Bsinka's bleep: shown as a highlighted marker, not as plain text.
