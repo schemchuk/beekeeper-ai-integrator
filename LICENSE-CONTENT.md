@@ -1,6 +1,6 @@
 # Content license
 
-Copyright (c) 2026 schemchuk
+Copyright (c) 2026 Volodymyr Shemchuk
 
 The characters (Pylyp/Philipp, Bzynka/Bsinka, Medunko, Siryi, Koliuchka), their designs,
 the episodes, scripts, rendered videos and the series bible (`characters/`, `episodes/`,
