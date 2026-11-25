@@ -15,3 +15,4 @@ A copy lives in postpilot's Claude memory (`project-beekeeper-requests`).
 | 2026-11-25 | Statistics for the cartoons roughly like postpilot's. | open |
 | 2026-11-25 | Manual intake stays: AI-generated (`/work ai`) and original content added by hand, as in the live run 2026-11-24. | as is |
 | 2026-11-25 | The factory hands its reels to postpilot automatically; postpilot then distributes them by its own rules. Proposed mechanism: `docs/adr/005-handoff-to-postpilot.md` (Telegram `file_id` + `workflow_dispatch` of a new `factory-intake` workflow); postpilot decides in its own ADR. ADR 005 accepted 2026-11-25; no Stop button before release. | open |
+| 2026-11-25 | Rework the manual intake in the bot (AI and original videos alike): a clear command set, a hint at every step saying what to do next, the shortest possible path, and visible feedback on every button press. Live-run findings and the stuck 002 reel: `docs/runs/2026-11-25-002-first-reel.md`. | open |
