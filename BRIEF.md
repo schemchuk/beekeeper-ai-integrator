@@ -49,6 +49,12 @@ Roadmap, small steps:
 - Process (changed 2026-11-25 at Volodymyr's request): a conventional development flow,
   interview (`docs/interview/`) -> product description -> ADRs -> roadmap -> code. Small
   commits, Conventional Commits, and ask before anything that publishes or costs money.
+- Interview 2026-11-25 (`docs/interview/`): German audience first, LinkedIn main channel,
+  UA rendered and archived for a possible 2029 switch. 2 episodes per week from the start.
+  Telegram (postpilot bot) is the channel for ideas, reviews, approvals and talk. He edits
+  UA, edits flow to DE. Pylyp is him by implication only, never said outright; deep
+  beekeeping knowledge everywhere. Satire on systems and types, never on real people.
+  YouTube Shorts: remind him after 8 weeks of LinkedIn episodes.
 - Everything free and local where possible (Piper TTS, ffmpeg, headless Chromium).
 - Content is original (own characters, own jokes), no recreation of existing shows.
 

@@ -58,3 +58,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Vivid put-downs from the household: a bad name is "повна бадя з якоюсь субстанцією замість меду".
 - Dictates by voice, so expect typos ("пасісник", "АШ" for ШІ/AI); meaning over spelling.
 - Agrees in one line: "давай так і зробимо".
+- Hyperbole for success: the owner should want "знайти мене і розцілувати", and after reading
+  about him "принести баночку меду та брецелів" (UA honey meets German pretzels).
+- Gentle mockery of the hosts: beekeeping since childhood "добє ніжні душі німецьких бюргерів".
+- Overrules a cautious plan with energy: "давай зарядимо зразу два".
+- Euphemism with quotes for hard outcomes: мене лагідно "попросять" з Німеччини.
+- Modest about himself: "я показав і так забагато талантів".
