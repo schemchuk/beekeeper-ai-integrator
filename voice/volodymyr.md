@@ -49,6 +49,13 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Mat (agreed 2026-11-24): allowed, "as long as I don't get beaten for it". Use it sparingly
   as a punchline, at most one or two per episode, never wall-to-wall bleeping. A bleep is
   Бзинька's "bzzz" and is itself part of the joke.
+- Never a bare "Автоматизую." (2026-11-25): the circumstances themselves must call for
+  automation, Pylyp only answers the call. His lines for that, reuse across episodes:
+  - "Провидіння саме підказує, що робити. Беруся за автоматизацію." (used in 002)
+  - "І що б я робив, якби не вмів автоматизовувати процеси?"
+  - "Слава Богу, все можна автоматизувати."
+  - "Якщо дідько придумав рутину, Бог дав нам вихід в автоматизаціях."
+  He calls this register "дуже стильно": lofty, almost biblical words about plain routine.
 - DE version is not a literal translation: keep the joke working for Germans
   (Behörden, Jobcenter, Anschreiben, "Wir haben Ihr Profil gespeichert").
 
