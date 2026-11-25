@@ -32,6 +32,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="only this language (repeatable); default both",
     )
     voices.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    timing = sub.add_parser("timing", help="lay out lines in frames: timeline-<lang>.json")
+    timing.add_argument("episode", type=Path)
+    timing.add_argument("--cast", type=Path, default=DEFAULT_CAST)
+    timing.add_argument(
+        "--lang",
+        choices=["de", "ua"],
+        action="append",
+        help="only this language (repeatable); default both",
+    )
+    timing.add_argument("--out", type=Path, default=DEFAULT_OUT)
     return parser
 
 
@@ -51,6 +61,37 @@ def cmd_voices(episode: Path, cast: Path, langs: list[str] | None, out: Path) ->
     new = sum(1 for c in clips if not c.cached)
     print(f"ok: {len(clips)} clips ({new} new, {len(clips) - new} cached) in {out_dir}")
     return 0
+
+
+def cmd_timing(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> int:
+    from beekeeper import timing
+    from beekeeper.voices.cast import load_voices
+
+    try:
+        ep = load_episode(episode, load_cast(cast))
+    except EpisodeError as e:
+        print("\n".join(e.problems), file=sys.stderr)
+        return 1
+    ep_dir = out / f"{ep.id}-{ep.slug}"
+    voices = load_voices(cast)
+    target = timing.target_range(ep.extra.get("target_length"))
+    status = 0
+    for lang in langs or ["de", "ua"]:
+        try:
+            clips = timing.load_clips(ep_dir / "voices", lang)
+            timing.check_clips(ep, clips, lang, ep_dir / "voices", voices, Path.cwd())
+        except timing.TimingError as e:
+            print("\n".join(e.problems), file=sys.stderr)
+            status = 1
+            continue
+        tl = timing.build_timeline(ep, clips, lang)
+        path = timing.write_timeline(tl, ep_dir)
+        seconds = tl["duration"] / tl["fps"]
+        note = ""
+        if target and not target[0] <= seconds <= target[1]:
+            note = f"  (target {target[0]:g}-{target[1]:g} s)"
+        print(f"ok: {lang} {seconds:.1f} s, {tl['duration']} frames -> {path}{note}")
+    return status
 
 
 def cmd_validate(episode: Path, cast: Path) -> int:
@@ -76,6 +117,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return cmd_validate(args.episode, args.cast)
     if args.command == "voices":
         return cmd_voices(args.episode, args.cast, args.lang, args.out)
+    if args.command == "timing":
+        return cmd_timing(args.episode, args.cast, args.lang, args.out)
     parser.print_help()
     return 0
 
