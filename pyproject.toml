@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 authors = [{ name = "Volodymyr Shemchuk" }]
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["pyyaml>=6"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
