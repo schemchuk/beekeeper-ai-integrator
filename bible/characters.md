@@ -10,10 +10,16 @@ delivered his mail and the bear said "Good day". Now he is an IT admin in German
 | --- | --- | --- | --- |
 | Pylyp | Пилип | Philipp | Beekeeper, 57, retrained as sysadmin/automation engineer in Germany. Volodymyr's alter ego. Back in Ukraine a well-known beekeeper: honey and bee products, honey drinks, fairs (selling his wife's handmade too), queen rearing and selection, instrumental insemination of queens. Never begs for work: a gentleman looking for the right match, who may agree to automate a client's routine and leave them the blooming field (2026-11-25). |
 | Bee | Бзинька | Bsinka | His sidekick and toughest code reviewer. Original look, nothing like other famous cartoon bees. |
-| Bear | Медунко | (open) | Polite neighbour, always begs Pylyp for honey; says "Добрий день". Introduced from the start. Winter: asleep in his den, sucking his paw. |
-| Wolf | Сірий | (open) | Old, cunning wolf ("старий та хитрий вовчара"). The forest postman, now brings rejection letters. Visits Pylyp on quiet evenings. |
-| Hedgehog | Колючка | (open) | The apiary's sanitary officer, guards it from rodents too. Unsociable, but always comes out when Pylyp works at the apiary. Pylyp treats him to cut-out drone brood. Winter: asleep. |
+| Bear | Медунко | Medunko | Polite neighbour, always begs Pylyp for honey, and in German also for Met (mead): the name already says it; says "Добрий день". Introduced from the start. Winter: asleep in his den, sucking his paw. |
+| Wolf | Сірий | Isegrim | Old, cunning wolf ("старий та хитрий вовчара"). The forest postman, now brings rejection letters. Visits Pylyp on quiet evenings. |
+| Hedgehog | Колючка | Pieks | The apiary's sanitary officer, guards it from rodents too. Unsociable, but always comes out when Pylyp works at the apiary. Pylyp treats him to cut-out drone brood. Winter: asleep. |
 | Host | Ведуча | Moderatorin | Interviewer from episode 001. |
+
+German names follow the old German beast fable (Reineke Fuchs), so they carry meaning
+for a German the way Сірий or Колючка do for a Ukrainian (Volodymyr, 2026-11-25):
+Isegrim is the classic sly old wolf of the fables (medieval, public domain); Pieks
+("prick, poke") is the prickly, unsociable hedgehog. The bee stays Bsinka. "Sumsi" was
+rejected: it is the bee mascot of the Austrian Raiffeisen bank.
 
 The bee was first going to be "Майя"; renamed to Бзинька on 2026-11-24 to avoid any link
 to the German "Die Biene Maja".
@@ -24,6 +30,15 @@ look, voice and lines; no quotes, songs or designs from that film.
 
 Recurring villains: the letter "Wir haben Ihr Profil für zukünftige Stellen gespeichert",
 the Jobcenter, "relevante Berufserfahrung in Deutschland", Kubernetes.
+
+## House rules of the world
+
+- **Herbal tea, never coffee** (Volodymyr, 2026-11-25, stressed: "травяний, підкреслюю").
+  Beekeepers and their friends always drink herbal tea: teapot, cups, a strainer, a bunch of
+  dried herbs, honey with a honey dipper. No coffee anywhere on screen, not even steam from a
+  mug. Who drinks coffee in this world is never shown or named, so nobody takes offence.
+- Medunko keeps his Ukrainian name in German too: Germans hear "Met" in it. Isegrim and
+  Pieks are the German fable names (see the note above the looks).
 
 ## Looks, sketch v1 (2026-11-24)
 

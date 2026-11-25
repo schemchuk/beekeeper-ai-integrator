@@ -8,8 +8,8 @@ export const SPEAKER: Record<string, { name: Record<"de" | "ua", string>; color:
   pylyp: { name: { ua: "Пилип", de: "Philipp" }, color: "#f2b632" },
   bzynka: { name: { ua: "Бзинька", de: "Bsinka" }, color: "#ffd84d" },
   medunko: { name: { ua: "Медунко", de: "Medunko" }, color: "#c98a4b" },
-  siryi: { name: { ua: "Сірий", de: "Siryi" }, color: "#9aa5b1" },
-  koliuchka: { name: { ua: "Колючка", de: "Koliuchka" }, color: "#8fbf6a" },
+  siryi: { name: { ua: "Сірий", de: "Isegrim" }, color: "#9aa5b1" },
+  koliuchka: { name: { ua: "Колючка", de: "Pieks" }, color: "#8fbf6a" },
 };
 
 export const SAFE_X = 80;
