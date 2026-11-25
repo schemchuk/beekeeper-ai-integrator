@@ -1,9 +1,15 @@
-# pasichnyk: brief
+# Beekeeper AI Integrator: brief
+
+(Working name until 2026-11-25: pasichnyk.)
 
 An experimental episode factory for short AI cartoons about Pylyp (DE: Philipp), a beekeeper
 who was pushed by life into retraining as an IT administrator in Germany. Pylyp is
 Volodymyr's alter ego: Volodymyr really is a beekeeper, 57, retrained in IT in Germany.
 The series is the story of "how I ended up living like this", told with humour.
+
+Positioning (2026-11-25, Volodymyr): not a job seeker begging for work. A gentleman looking
+for the right match, who may agree to help a specific person or company automate their
+business processes: he takes the routine, they keep the blooming field for their ideas.
 
 Written 2026-11-24 at the end of a postpilot session, so a new session can start here.
 

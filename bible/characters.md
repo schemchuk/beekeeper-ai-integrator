@@ -8,7 +8,7 @@ delivered his mail and the bear said "Good day". Now he is an IT admin in German
 
 | Character | UA | DE | Role (draft) |
 | --- | --- | --- | --- |
-| Pylyp | Пилип | Philipp | Beekeeper, 57, retrained as sysadmin/automation engineer in Germany. Volodymyr's alter ego. Back in Ukraine a well-known beekeeper: honey and bee products, honey drinks, fairs (selling his wife's handmade too), queen rearing and selection, instrumental insemination of queens. |
+| Pylyp | Пилип | Philipp | Beekeeper, 57, retrained as sysadmin/automation engineer in Germany. Volodymyr's alter ego. Back in Ukraine a well-known beekeeper: honey and bee products, honey drinks, fairs (selling his wife's handmade too), queen rearing and selection, instrumental insemination of queens. Never begs for work: a gentleman looking for the right match, who may agree to automate a client's routine and leave them the blooming field (2026-11-25). |
 | Bee | Бзинька | Bsinka | His sidekick and toughest code reviewer. Original look, nothing like other famous cartoon bees. |
 | Bear | Медунко | (open) | Polite neighbour, always begs Pylyp for honey; says "Добрий день". Introduced from the start. Winter: asleep in his den, sucking his paw. |
 | Wolf | Сірий | (open) | Old, cunning wolf ("старий та хитрий вовчара"). The forest postman, now brings rejection letters. Visits Pylyp on quiet evenings. |

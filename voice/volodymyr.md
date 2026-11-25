@@ -35,9 +35,15 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - "сосе лапу у барлозі", "клянчить мед", "старий та хитрий вовчара"
 - "зв'язок з бджолами по вай-фаю"
 - "автоматизатор-сисадмін завжди пристосується"
+- "я тобі не Медунко і я не говинен у плащі клянчити роботу" (2026-11-25)
+- "джентельмен в пошуках десятки"
+- "я беру рутинну роботу на себе, а їм залишаю квітуче поле для польоту їхньої фантазії"
+- "повна бадя з якоюсь субстанцією замість меду" (about a bad name)
 
 ## Rules for writing Pylyp
 
+- Dignity first (2026-11-25): Pylyp never begs, never pleads for a job. He is a gentleman
+  choosing whom to help. Self-irony yes, self-pity no. See `bible/stories/2026-11-25-positioning.md`.
 - UA first, his register: short sentences, concrete village images, deadpan.
 - Mat (agreed 2026-11-24): allowed, "as long as I don't get beaten for it". Use it sparingly
   as a punchline, at most one or two per episode, never wall-to-wall bleeping. A bleep is

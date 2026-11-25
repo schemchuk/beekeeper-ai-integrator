@@ -1,4 +1,4 @@
-# pasichnyk
+# Beekeeper AI Integrator (repo folder still `pasichnyk`)
 
 - Talk to Volodymyr in Ukrainian. Code, comments, commits and docs in English.
 - Start by reading BRIEF.md: goal, agreed decisions, TTS and video notes, output requirements.
