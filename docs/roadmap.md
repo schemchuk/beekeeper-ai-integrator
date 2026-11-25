@@ -1,6 +1,6 @@
 # Roadmap
 
-Status: DRAFT for review by Volodymyr (2026-11-25).
+Status: ACCEPTED (Volodymyr, 2026-11-25).
 Sources: `docs/product.md`, `docs/adr/001-005`. One task = one small PR-sized step with tests.
 Tasks marked **postpilot** are requests (`docs/postpilot-requests.md`), built in postpilot's
 own process, not here.
