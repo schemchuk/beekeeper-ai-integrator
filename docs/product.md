@@ -76,6 +76,8 @@ What counts most: profile visits, messages, contacts, interview invitations.
   Ask before any spending.
 - Tools agreed so far: Remotion (animation), HolosTTS (UA voices), Chatterbox and Piper
   (DE voices), Python for script, voices and timing. Rationale goes to `docs/adr/`.
+- Voice cast chosen 2026-11-24 (`characters/cast.yaml`): Pylyp is cloned from Volodymyr's
+  recording `voice/samples/volodymyr_2.wav`, HolosTTS for UA, Chatterbox for DE.
 - Reel output: MP4 H.264 yuv420p, 1080x1920, 30 fps, AAC 48 kHz, 3-90 s, under 20 MB.
 - Licenses: MIT for code, CC BY-NC 4.0 for characters and episodes.
 
@@ -91,6 +93,5 @@ statistics, automatic idea sorting from Telegram. These need postpilot changes
 ## 10. Open questions
 
 - Music: none yet, undecided.
-- Pylyp's German voice: clone of Volodymyr's voice (needs a recording from him).
 - How the factory and postpilot exchange scripts and reels (API, shared database, files):
   decided in an ADR together with postpilot.
