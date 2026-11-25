@@ -1,5 +1,5 @@
 # Episode 002: Медунко в сплячці / Medunko im Winterschlaf
-# Draft v1, 2026-11-24. Season: winter (bears hibernate, the apiary is closed).
+# Draft v2, 2026-11-25 (Volodymyr's edits, T09). v1 2026-11-24. Season: winter (bears hibernate, the apiary is closed).
 id: "002"
 slug: medunko-v-splyachtsi
 season: winter
@@ -28,7 +28,7 @@ lines:
   - who: medunko
     shot: {scene: den, eyes: closed, camera: slow push-in, action: "asleep, typing on the phone with the free paw"}
     ua: "Добрий день… А медку не буде? Я тільки ложечку…"
-    de: "Guten Tag… Gibt es vielleicht Honig? Nur einen Löffel…"
+    de: "Guten Tag… Gibt es vielleicht Honig? Oder ein Schlückchen Met? Nur einen Löffel…"
 
   - shot: {scene: hut, camera: phone close-up, action: "three messages pop in fast, one buzz each"}
     onscreen:
@@ -48,8 +48,9 @@ lines:
 
   - who: pylyp
     shot: {scene: hut, camera: over-the-shoulder, action: "fast typing montage, code lines fly, a green deploy tick"}
-    ua: "Автоматизую."
-    de: "Wird automatisiert."
+    ua: "Провидіння саме підказує, що робити. Беруся за автоматизацію."
+    de: "Die Vorsehung zeigt mir selbst den Weg. Ich mache mich an die Automatisierung."
+    note: "Never a bare \"I'll automate\": the situation itself calls for automation (Volodymyr, 2026-11-25)"
     sfx: keyboard
 
   - shot: {scene: den, eyes: closed, camera: phone close-up, action: "bot reply arrives in Medunko's phone"}
@@ -63,10 +64,10 @@ lines:
     de: "Oh… Wie vom Jobcenter. Dann gibt es noch Hoffnung."
 
   - who: pylyp
-    shot: {scene: hut, camera: slow push-in, action: "stares at the screen, realization"}
-    ua: "Тепер я розумію, чому мені всі так відповідають. Це не відмова. Це автоматизація."
-    de: "Jetzt verstehe ich, warum mir alle so antworten. Das ist keine Absage. Das ist Automatisierung."
+    shot: {scene: hut, camera: medium, action: "lies back on the pillow, closes the laptop with one finger, pulls up the blanket"}
+    ua: "Пів року листування за п'ять хвилин. Рутину — ботові, мені — сон."
+    de: "Ein halbes Jahr Briefwechsel in fünf Minuten. Die Routine dem Bot, mir den Schlaf."
 
 end_card:
-  ua: "Цей мультик зібрав мій власний пайплайн: Python · TTS · Remotion. Шукаю роботу в IT-автоматизації."
-  de: "Diesen Cartoon hat meine eigene Pipeline gebaut: Python · TTS · Remotion. Ich suche eine Stelle in der IT-Automatisierung."
+  ua: "Цей мультик зібрав мій власний пайплайн: Python · TTS · Remotion. Рутину беру на себе, вам лишаю квітуче поле."
+  de: "Diesen Cartoon hat meine eigene Pipeline gebaut: Python · TTS · Remotion. Die Routine übernehme ich, Ihnen bleibt das blühende Feld."
