@@ -49,7 +49,19 @@ uv venv --python 3.11            # or reuse the existing .venv with the TTS engi
 uv pip install -e ".[dev]"
 .venv/bin/beekeeper --help
 .venv/bin/ruff check . && .venv/bin/pytest -q
+(cd animation && npm ci)          # once, for the render step
 ```
+
+One episode, both languages, in one go (`voices -> timing -> render -> check`; each step
+also runs alone, and unchanged work is skipped):
+
+```sh
+.venv/bin/beekeeper build episodes/002-medunko-v-splyachtsi
+# -> out/002-medunko-v-splyachtsi/reel_de.mp4, reel_ua.mp4
+```
+
+`check` holds the reels to the output contract: MP4, H.264 yuv420p, 1080x1920, 30 fps,
+AAC 48 kHz, 3-90 s, under 20 MB. Needs `ffmpeg`/`ffprobe` on the PATH.
 
 ## Principles
 
