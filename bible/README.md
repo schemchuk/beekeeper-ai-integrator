@@ -8,6 +8,7 @@ Project memory for the series. Look here before writing an episode.
 | `apiary-calendar.md` | The beekeeper's year: what happens in each season, IT parallels |
 | `ideas.md` | Episode seeds with status and source |
 | `stories/` | Volodymyr's stories verbatim, one file per telling, dated |
+| `lore/` | Sourced folklore, spells, proverbs, laws, history (UA + DE), YAML, see `lore/README.md` |
 | `../voice/volodymyr.md` | How he talks and jokes |
 | `../voice/inbox/` | Unsorted drops, processed at session start |
 | `../docs/voices.md` | TTS research and voice choices |

@@ -1,0 +1,158 @@
+# German bee and beekeeper lore. Format: see README.md.
+# Main source: Bayerische Landesanstalt für Weinbau und Gartenbau (LWG),
+# "Bienen im Deutschunterricht", 2011:
+# https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf
+# The proverbs, the Lorsch blessing, Eulenspiegel and Grimm are public domain; the LWG
+# collection is our finding aid.
+
+- id: de-lorsch-bee-blessing
+  kind: spell
+  lang: de
+  text: "Kirst, die Imme ist herausen! Nun flieg her, mein Tier! … Sitze, sitze, Biene! … Urlaub nicht hast du, zum Wald nicht flieg' du!"
+  gist: "Lorsch bee blessing, 10th century, one of the oldest German texts: a charm to make a swarm settle. Manuscript in the Vatican."
+  season: spring (swarming, May-June)
+  source: {title: "LWG, Bienen im Deutschunterricht", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "'Urlaub nicht hast du': the first documented holiday ban in German HR history."
+  gag_seed: "Bzynka asks for a day off; Pylyp reads her the Lorscher Bienensegen. DE audience will get it."
+  characters: [bzynka, pylyp]
+  status: raw
+
+- id: de-proverb-bear-guards
+  kind: proverb
+  lang: de
+  text: "Es ist um den Honig geschehen, wenn der Bär ihn hütet."
+  gist: "The honey is done for when the bear guards it."
+  season: any
+  source: {title: "LWG, Bienen im Deutschunterricht", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Never give admin rights to the user who wants the data most."
+  gag_seed: "Medunko volunteers as 'security for the honey storage'. Pylyp quotes the proverb. See lit-hlibov-bear-beekeeper."
+  characters: [medunko, pylyp]
+  status: raw
+
+- id: de-proverb-run-from-bees
+  kind: proverb
+  lang: de
+  text: "Wer vor den Bienen läuft, den verfolgen sie."
+  gist: "Whoever runs from the bees gets chased."
+  season: summer
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Running from a bug report makes it follow you to production."
+  gag_seed: "Pylyp stays calm at a sting-storm; the panicking Jobcenter clerk is the one chased."
+  characters: [pylyp]
+  status: raw
+
+- id: de-proverb-sticky-fingers
+  kind: proverb
+  lang: de
+  text: "Wer mit Honig umgeht, dem bleibt auch etwas an den Fingern hängen."
+  gist: "Whoever handles honey gets some stuck on his fingers (also in Goethe's Reineke Fuchs)."
+  season: any
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Whoever handles data keeps logs. GDPR joke."
+  gag_seed: "Medunko's paws on the keyboard: every key is sticky."
+  characters: [medunko]
+  status: raw
+
+- id: de-proverb-flies-come
+  kind: proverb
+  lang: de
+  text: "Ist nur Honig da, die Fliegen kommen von selber."
+  gist: "If there is honey, the flies come by themselves."
+  season: any
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Good product, no ads needed. Fits the gentleman positioning: clients come to good honey."
+  gag_seed: "Possible DE end-card: Pylyp does not chase clients, the honey works."
+  characters: [pylyp]
+  status: raw
+
+- id: de-proverb-four-things
+  kind: proverb
+  lang: de
+  text: "Vier Dinge muss der Imker haben, will er Erfolge schauen: Geduld, Verstand, treue Liebe und Selbstvertrauen."
+  gist: "A beekeeper needs four things for success: patience, sense, faithful love and self-confidence."
+  season: any
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "The same list is the job ad for an automation engineer."
+  gag_seed: "Pylyp reads a Stellenanzeige, then the Imker rhyme: 'Same skills, fewer stings.'"
+  characters: [pylyp]
+  status: raw
+
+- id: de-proverb-money-flies
+  kind: proverb
+  lang: de
+  text: "Wer sein Geld will sehen fliegen, halte sich Tauben und Bienen."
+  gist: "If you want to see your money fly, keep pigeons and bees."
+  season: any
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "…or run an unmonitored cloud account."
+  gag_seed: "Pylyp shows a cloud bill: 'Tauben, Bienen und AWS.'"
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: de-proverb-one-bee
+  kind: proverb
+  lang: de
+  text: "Eine einzige Biene ist mehr wert als hundert Fliegen."
+  gist: "One bee is worth more than a hundred flies."
+  season: any
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "One good script beats a hundred meetings."
+  gag_seed: "Bzynka's catchphrase."
+  characters: [bzynka]
+  status: raw
+
+- id: de-tale-eulenspiegel-hive
+  kind: tale
+  lang: de
+  gist: "Drunk Till Eulenspiegel sleeps in an empty hive; two thieves steal the heaviest hive (him), he pulls their hair in the dark until they fight each other and run off."
+  season: summer
+  source: {title: "LWG (Eulenspiegel, 1510/1515)", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Thieves' heuristic 'the heaviest is the best' = picking the biggest file to exfiltrate. Honeypot, literally."
+  gag_seed: "Pylyp builds a honeypot: an empty hive with Сірий inside."
+  characters: [siryi, pylyp]
+  status: raw
+
+- id: de-law-bgb-swarm
+  kind: law
+  lang: de
+  gist: "BGB §§ 961-964 (in force since 1900): a swarm becomes ownerless unless the owner pursues it at once; the owner may enter other people's land in pursuit and break open a foreign empty hive (paying damages); merged swarms become co-owned in proportion; a swarm that moves into an occupied foreign hive belongs to that hive's owner."
+  season: spring (swarming)
+  source: {title: "Bürgerliches Gesetzbuch § 961-964", url: "https://www.gesetze-im-internet.de/bgb/__961.html"}
+  rights: public-domain
+  it_parallel: "German law has a merge-conflict resolution policy for bees. § 963 is a git merge."
+  gag_seed: "Pylyp chases a swarm across a German neighbour's garden shouting '§ 962 BGB!' Perfect for the DE audience."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: de-zeidler-privileges
+  kind: fact
+  lang: de
+  gist: "Zeidler, forest beekeepers of the Nuremberg Reichswald ('the bee garden of the Holy Roman Empire'). Charles IV's charter of 1 June 1350 gave them their own court and the right to carry a crossbow; they wore green with a long pointed cap. Zeidelgericht in Feucht from 1296, last session 1779. Their honey fed Nuremberg Lebkuchen."
+  season: "any (Christmas fits, Lebkuchen)"
+  source: {title: "de.wikipedia: Zeidlerei", url: "https://de.wikipedia.org/wiki/Zeidlerei"}
+  rights: paraphrase-only
+  it_parallel: "Beekeepers with their own court and weapons: the first privileged admin role."
+  gag_seed: "Pylyp asks the Jobcenter for Zeidler status: own court, crossbow, toll-free in all Reich cities."
+  characters: [pylyp]
+  status: raw
+
+- id: de-custom-telling-bees
+  kind: custom
+  lang: de
+  gist: "Telling the bees: in Westphalia newlyweds introduced themselves to the bees, or their marriage would be unhappy. A German saying for a dead beekeeper: 'Little bee, our lord is dead; leave me not in my distress' (German original not yet found)."
+  season: any
+  source: {title: "en.wikipedia: Telling the bees", url: "https://en.wikipedia.org/wiki/Telling_the_bees"}
+  rights: paraphrase-only
+  it_parallel: "Change notification to all stakeholders, including the ones that sting."
+  gag_seed: "Pylyp onboards a new colleague by introducing him to the bees first."
+  characters: [pylyp, bzynka]
+  status: raw

@@ -1,0 +1,260 @@
+# Ukrainian bee and beekeeper folklore. Format: see README.md.
+# Main source: U. Movna, "Пасічницькі замовляння у світоглядній традиції українців",
+# Poznańskie Studia Slawistyczne 3/2012, pp. 113-127. Her article is copyrighted; the spells
+# she quotes come from 19th-century and early 20th-century collections (public domain).
+# Short quotes only, the original collection is in `cite`.
+
+- id: ua-spell-stone-anchor
+  kind: ritual
+  lang: ua
+  text: "Як той камінь не може вийти із моєї землі, так і ви, мої бджоли…"
+  gist: "Founding an apiary, the beekeeper buries a stone in the middle so the bees can never leave."
+  season: spring
+  source: {title: "Movna 2012, p. 115", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "Т. Беленький, Народные заклинания над пчелами, 1880, с. 49 (Київщина)"}
+  rights: public-domain
+  it_parallel: "Pinning a dependency / sticky session: the stone is the config that keeps the hive on this server."
+  gag_seed: "Pylyp buries a Raspberry Pi in the apiary with the same words."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: ua-spell-hutsul-sprint
+  kind: spell
+  lang: ua
+  text: "А ти, старша матко, що ти гадаєш робити? Уже є на дворі літо, треба сі добре обходити, від сегодня до тижня матківники вробити!"
+  gist: "Hutsul spring-release spell ends with a deadline for the queen: queen cells within a week."
+  season: spring
+  source: {title: "Movna 2012, p. 116", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "В. Шухевич, Гуцульщина, ч. 5, 1908, с. 234-235"}
+  rights: public-domain
+  it_parallel: "A 19th-century sprint planning: scope, owner, one-week deadline."
+  gag_seed: "Pylyp reads the Hutsul spell as a Jira ticket; Bzynka asks for story points."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: ua-spell-hutsul-no-stealing
+  kind: spell
+  lang: ua
+  text: "щоби ти так не крала і чужим медом не радувалася… до чужої пасіки тобі не повертати, на кликанє си не дивити"
+  gist: "The bees are told not to rob other apiaries and not to answer anyone else's call."
+  season: spring
+  source: {title: "Movna 2012, p. 116", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "В. Шухевич, Гуцульщина, 1908"}
+  rights: public-domain
+  it_parallel: "Access control and a non-compete clause in one sentence."
+  gag_seed: "Bzynka gets a recruiter's message from another apiary; Pylyp quotes the spell."
+  characters: [bzynka, pylyp]
+  status: raw
+
+- id: ua-spell-pike-head
+  kind: ritual
+  lang: ua
+  text: "як се той щуки боїться всякая риба… так би моїх бджіл чужії лякались"
+  gist: "Chernihiv beekeepers released the bees in spring through a pike's skull so foreign bees would fear them like fish fear a pike."
+  season: spring (Теплого Олекси, 17 March; old calendar 30 March)
+  source: {title: "Movna 2012, p. 123", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "П. Ефименко, Сборник малороссийских заклинаний, 1874, с. 54-55; Б. Гринченко, Из уст народа, 1901"}
+  rights: public-domain
+  it_parallel: "Firewall with a scary banner. Security by intimidation."
+  gag_seed: "Pylyp installs a firewall; Bzynka: 'In my day we used a pike's head and it had better uptime.'"
+  characters: [bzynka, pylyp, koliuchka]
+  status: raw
+
+- id: ua-spell-wolf-mouths
+  kind: spell
+  lang: ua
+  text: "летіть соколовими крилами, беріте вовчими ротами: як у воді щука всім рибам страшна, так би ви мої пчоли страшними були чужим пчолам"
+  gist: "Placing hives, the beekeeper asks the bees to fly with falcon wings and take with wolf mouths."
+  season: spring
+  source: {title: "Movna 2012, p. 117", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "Малороссийские пчеловодные обряды и заговоры (рукопис XIX ст.), Харків 1902, с. 405"}
+  rights: public-domain
+  it_parallel: "A requirements spec for a high-performance team."
+  gag_seed: "Сірий hears 'вовчими ротами' and asks whether wolves are now on the payroll."
+  characters: [siryi, pylyp]
+  status: raw
+
+- id: ua-spell-salt-in-eyes
+  kind: spell
+  lang: ua
+  text: "Сіль тобі в очі, камінь на груди, а печериці в зуби, а моїм бджолам нічого не буде"
+  gist: "Counter-spell against the evil eye on the apiary; still used in the Cherkasy region."
+  season: any
+  source: {title: "Movna 2012, p. 119", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "Архів Інституту народознавства НАН України, ф. 1, оп. 2, спр. 577, арк. 56"}
+  rights: public-domain
+  it_parallel: "Incident response: blocklist the attacker, nothing happens to production."
+  gag_seed: "Pylyp's antivirus pop-up reads 'Сіль тобі в очі' in Bzynka's voice."
+  characters: [bzynka, pylyp]
+  status: raw
+
+- id: ua-spell-split-tongue
+  kind: spell
+  lang: ua
+  text: "Хто сію бджолу урече, так нехай собі надвоє язик пересіче"
+  gist: "Slobozhanshchyna curse on whoever jinxes the bees."
+  season: any
+  source: {title: "Movna 2012, p. 119", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "А. Ветухов, Труды Харьковской комиссии, 1905, с. 295"}
+  rights: public-domain
+  it_parallel: "Code of conduct for people who comment 'this will never work' on a pull request."
+  gag_seed: "Someone writes 'it will crash' under Pylyp's deploy; Bzynka offers the Slobozhanshchyna policy."
+  characters: [bzynka]
+  status: raw
+
+- id: ua-taboo-dont-stare
+  kind: belief
+  lang: ua
+  gist: "Do not stare at bees flying home loaded, and do not count bees or look into the hive (2 July): the look itself can harm them."
+  season: summer
+  source: {title: "Movna 2012, p. 119; TSN folk calendar 2 July", url: "https://tsn.ua/ukrayina/narodni-prikmeti-obryadi-i-zvichayi-2-lipnya-1816417.html"}
+  rights: paraphrase-only
+  it_parallel: "Observer effect: the dashboard slows the system. 'Don't watch the deploy, it gets nervous.'"
+  gag_seed: "Pylyp refreshes the hive dashboard every minute; Bzynka covers his monocle."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: ua-ritual-holy-supper-honey
+  kind: ritual
+  lang: ua
+  text: "Як в цей Святий вечір збираються до вечері великі, малі, багаті, бідні, ситі, голодні, п'яні, тверезі, так, щоб у моїй пасіці всі бджоли збирались"
+  gist: "On Christmas Eve diluted honey was buried in a pot under the bench so the bees would gather like guests at supper."
+  season: winter (Святвечір, 24 December; old calendar 6 January)
+  source: {title: "Movna 2012, p. 120", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "В. Подольский, Пчеловодные поверья, 1882, с. 195"}
+  rights: public-domain
+  it_parallel: "Onboarding: everyone, rich or poor, drunk or sober, joins the same channel."
+  gag_seed: "Christmas episode: Medunko shows up 'as a guest' because the spell said 'ситі, голодні'."
+  characters: [medunko, pylyp]
+  status: raw
+
+- id: ua-ritual-jordan-water
+  kind: ritual
+  lang: ua
+  text: "Добрий день, Йордань-водо, Уляно! Благослови сеї води набрати."
+  gist: "On Epiphany eve beekeepers raced to draw the holy water first and greeted it by name, Uliana."
+  season: winter (Водохреща, 6 January; old calendar 19 January)
+  source: {title: "Movna 2012, p. 121-122", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "Т. Беленький, 1880, с. 47"}
+  rights: public-domain
+  it_parallel: "Water with a name and a polite greeting: the first API with a handshake."
+  gag_seed: "Pylyp greets the water like a server: 'Добрий день, Уляно, 200 OK?'"
+  characters: [pylyp]
+  status: raw
+
+- id: ua-ritual-queen-standup
+  kind: ritual
+  lang: ua
+  text: "Добрий день тобі, царице-матко! Хай буде тобі щаслива весна, щасливе літо! Час тобі господарити, лад давати Божим мухам."
+  gist: "On Warm Oleksa's day the beekeeper greets the queen in the hive and briefs her for the season; bees are 'God's flies'."
+  season: spring (Теплого Олекси, 17 March; old calendar 30 March)
+  source: {title: "Movna 2012, p. 122", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "С. Килимник, Український рік у народніх звичаях, кн. II, т. 3, с. 282"}
+  rights: public-domain
+  it_parallel: "Season kick-off meeting with the team lead. The goals list reads like OKRs."
+  gag_seed: "Pylyp holds a kick-off with the queen; the spell's wish list ('щоб рої низько сідали й давалися нам до рук') is his UX spec."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: ua-ritual-easter-knock
+  kind: ritual
+  lang: ua
+  text: "Ци ти, матко, спиш, ци чуєш? Уставай, бо Сус Христос воскрес!"
+  gist: "A Hutsul beekeeper knocks on the hive with blessed Easter bread to wake the queen."
+  season: spring (Великдень)
+  source: {title: "Movna 2012, p. 125", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "Hutsul material (В. Шухевич)"}
+  rights: public-domain
+  it_parallel: "Wake-on-LAN, Carpathian edition."
+  gag_seed: "Pylyp pings the hive: 'Ци ти, матко, спиш?' Ping timeout. Knocks with the paska."
+  characters: [pylyp]
+  status: raw
+
+- id: ua-ritual-proskura-ants
+  kind: ritual
+  lang: ua
+  gist: "Kursk-region (Sloboda) beekeepers fed bees Annunciation bread ground with vodka and ants, so the bees would multiply like ants."
+  season: spring (Благовіщення, 25 March; old calendar 7 April)
+  source: {title: "Movna 2012, p. 124", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "В. Подольский, Труды ВЭО, 1882, с. 198"}
+  rights: public-domain
+  it_parallel: "Copying code from another project and hoping its scaling comes along."
+  gag_seed: "Bzynka reads the recipe: 'Bread, vodka and ants. That's not feeding, that's a team-building.'"
+  characters: [bzynka, pylyp]
+  status: raw
+
+- id: ua-ritual-wax-trinity
+  kind: ritual
+  lang: ua
+  gist: "On the first Sunday of every month the priest was asked for wax with chrism, placed on the first hive so the bees could never live anywhere else."
+  season: any
+  source: {title: "Movna 2012, p. 120", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "E. Rulikowski, Zapiski etnograficzne z Ukrainy, 1879, s. 118"}
+  rights: public-domain
+  it_parallel: "Monthly maintenance job, cron '0 0 1-7 * 0'."
+  gag_seed: "Pylyp writes the monthly ritual as a cron line; the priest asks for an API key."
+  characters: [pylyp]
+  status: raw
+
+- id: ua-ritual-place-choice
+  kind: ritual
+  lang: ua
+  text: "Як св. Ганна, так і я зачинаю святе діло"
+  gist: "Volhynian beekeepers chose the apiary site on St Anna's Conception (9 December): water from a well before sunrise, in a new vessel, sprinkled on the spot."
+  season: winter (9 December)
+  source: {title: "Movna 2012, p. 115", url: "https://pressto.amu.edu.pl/index.php/pss/article/download/1226/1138/2117", cite: "И. Ковалев, Живая летопись волынского пасечничества, 1916, с. 7"}
+  rights: public-domain
+  it_parallel: "Choosing the data-centre location in winter, before sunrise, with a fresh install."
+  gag_seed: "Pylyp picks a cloud region with a bucket of well water."
+  characters: [pylyp]
+  status: raw
+
+- id: ua-sign-sealed-entrance
+  kind: sign
+  lang: ua
+  gist: "If bees seal the hive entrance tightly with wax and propolis in autumn, the winter will be very cold. Bees sitting at home mean rain; early flight means a clear day."
+  season: autumn
+  source: {title: "TSN: Зима близько, яку погоду віщують бджоли", url: "https://tsn.ua/other/zyma-blyzko-iaku-pohodu-vishchuiut-bdzoly-ta-murakhy-narodni-prykmety-3148319.html"}
+  rights: paraphrase-only
+  it_parallel: "Bees as a weather API with no rate limit."
+  gag_seed: "Pylyp compares the bee forecast with three weather apps; the bees win."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: ua-calendar-zosyma-savatii
+  kind: custom
+  lang: ua
+  gist: "Saints Zosyma and Savatii of Solovki are the beekeepers' patrons. Their icon stood at the apiary entrance; no work started without a prayer. Kherson beekeepers took the icon out with the hives. Feast of St Zosyma: 17 April old style (30 April)."
+  season: spring
+  source: {title: "Movna 2012, p. 122-123; OCA, Venerable Zosimas of Solovki", url: "https://www.oca.org/saints/lives/2029/04/17/101130-venerable-zosimas-abbot-of-solovki", cite: "О. Воропай, Звичаї нашого народу, 1991"}
+  rights: paraphrase-only
+  it_parallel: "Every team has a patron saint of production."
+  gag_seed: "Pylyp hangs an icon of Zosyma next to the server rack; Bzynka asks if it's on the on-call rota."
+  characters: [pylyp, bzynka]
+  status: raw
+  note: "ukranews.com names 17 January as 'Зосима-бджільник'; that conflicts with the church calendar. Check before using a date."
+
+- id: ua-calendar-honey-spas
+  kind: custom
+  lang: ua
+  gist: "Honey Saviour (Маковея / Медовий Спас): first honey is taken to church before anyone eats it. Was 14 August, 1 August after the 2023 calendar change."
+  season: summer
+  source: {title: "Ethnographer O. Dol, via ukranews / TSN", url: "https://ukranews.com/ua/news/1128236-narodni-prykmety-ta-zaborony-17-sichnya"}
+  rights: paraphrase-only
+  it_parallel: "First build goes to QA before anyone uses it."
+  gag_seed: "Medunko tries to taste the honey before the blessing: 'I'm the QA.'"
+  characters: [medunko, pylyp]
+  status: raw
+
+- id: ua-proverb-small-bee
+  kind: proverb
+  lang: ua
+  text: "Бджола мала, а й та працює."
+  gist: "The bee is small, and yet it works."
+  season: any
+  source: {title: "Wikiquote: Бджола", url: "https://uk.wikiquote.org/wiki/Бджола", cite: "Мудрість народна, 1962"}
+  rights: public-domain
+  it_parallel: "A small script does the work of a department."
+  gag_seed: "End-card line for a tiny automation that saves hours."
+  characters: [bzynka]
+  status: raw
+
+- id: ua-proverb-bees-flowers
+  kind: proverb
+  lang: ua
+  text: "Бджоли раді цвіту, а люди — літу."
+  gist: "Bees are glad of blossom, people of summer."
+  season: summer
+  source: {title: "Wikiquote: Бджола", url: "https://uk.wikiquote.org/wiki/Бджола"}
+  rights: public-domain
+  it_parallel: "Fits the positioning: Pylyp takes the routine, clients keep the blossoming field."
+  gag_seed: "Possible series motto next to 'квітуче поле для польоту фантазії'."
+  characters: [pylyp]
+  status: raw

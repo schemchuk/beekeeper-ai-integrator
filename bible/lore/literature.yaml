@@ -1,0 +1,65 @@
+# Old public-domain literature with bees and bears. Format: see README.md.
+# Use as references and nods, never retell a work as our episode.
+
+- id: lit-hlibov-bear-beekeeper
+  kind: fable
+  lang: ua
+  text: "Таких Ведмедів на приміті / Ще трохи є у нашому повіті."
+  gist: "Leonid Hlibov, 'Ведмідь-пасічник' (1864-1872): the forest animals make the bear their beekeeper on the fox's advice; he carries all the honey to his den; they put him on trial and sentence him to be locked in his den for the whole winter, where he lies eating the stolen honey. Moral: there are still a few such bears in our district."
+  season: winter
+  source: {title: "osvita.ua, Глібов «Ведмідь-пасічник»", url: "https://osvita.ua/school/literature/g/67544/"}
+  rights: public-domain
+  it_parallel: "Giving admin rights to the biggest honey consumer; the 'punishment' is a paid sabbatical."
+  gag_seed: "Medunko's hibernation is a 150-year-old court sentence he keeps 'appealing'. A nod for Ukrainian viewers; pairs with de-proverb-bear-guards for German ones."
+  characters: [medunko, pylyp]
+  status: raw
+
+- id: lit-skovoroda-bee-hornet
+  kind: fable
+  lang: ua
+  gist: "Hryhorii Skovoroda, 'Бджола та Шершень' (18th c.): the hornet mocks the bee for working for others; the bee answers that working by one's nature is the joy itself. Skovoroda's idea of 'сродна праця' (work that fits your nature)."
+  season: any
+  source: {title: "osvita.ua, Сковорода «Бджола та Шершень»", url: "https://osvita.ua/school/literature/s/63969/"}
+  rights: public-domain
+  it_parallel: "Fits the positioning: Pylyp does the work that fits him, clients keep theirs."
+  gag_seed: "A hornet-recruiter offers Bzynka 'a better package'; she quotes Skovoroda."
+  characters: [bzynka]
+  status: raw
+
+- id: lit-grimm-bee-queen
+  kind: tale
+  lang: de
+  gist: "Brothers Grimm, 'Die Bienenkönigin': the youngest prince protects ants, ducks and bees; later the bee queen finds the right princess by tasting which one ate honey."
+  season: any
+  source: {title: "LWG, Bienen im Deutschunterricht", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "Authentication by taste: the first biometric login."
+  gag_seed: "Bzynka as a 2FA method."
+  characters: [bzynka]
+  status: raw
+
+- id: lit-busch-schnurrdiburr
+  kind: tale
+  lang: de
+  text: "Hans Dralle, der noch immer schlief, / als ihn Eugen so heftig rief, / erwacht aus einem sanften Traum – / da hängt der Schwarm im Apfelbaum!"
+  gist: "Wilhelm Busch, 'Schnurrdiburr oder die Bienen' (1869), comic picture story about beekeeper Dralle. Busch's uncle was a leading beekeeper. English translation 'Buzz a Buzz' on Project Gutenberg #38902 (plot not read yet: site returned 503)."
+  season: spring (swarm)
+  source: {title: "LWG; Project Gutenberg #38902", url: "https://www.gutenberg.org/ebooks/38902"}
+  rights: public-domain
+  it_parallel: "The 3 a.m. alert: 'the swarm is in the apple tree'."
+  gag_seed: "Pylyp's monitoring sends Busch's couplet as an alert text in the DE version."
+  characters: [pylyp]
+  status: raw
+
+- id: lit-storm-abseits
+  kind: fable
+  lang: de
+  text: "Dem Alten fällt die Wimper zu, / Er träumt von seinen Honigernten."
+  gist: "Theodor Storm, 'Abseits': an old cottager on the heath dozes among his bees, dreaming of honey harvests; 'no sound of the agitated time' reaches him."
+  season: summer
+  source: {title: "LWG", url: "https://www.lwg.bayern.de/mam/cms06/bienen/dateien/bienen_im_deutschunterricht.pdf"}
+  rights: public-domain
+  it_parallel: "The dream of a fully automated apiary: the old man sleeps, the system works."
+  gag_seed: "Final shot idea: Pylyp dozing like Storm's Alter while the pipeline runs."
+  characters: [pylyp]
+  status: raw

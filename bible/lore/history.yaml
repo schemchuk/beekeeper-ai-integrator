@@ -1,0 +1,136 @@
+# Verified historical curiosities. Format: see README.md.
+# Wikipedia is paraphrased (CC BY-SA text is never copied).
+
+- id: hist-prokopovych-frame-hive
+  kind: fact
+  lang: en
+  gist: "Petro Prokopovych (1775-1850), Ukrainian, built the world's first frame hive in 1814, so honey could be taken without killing the colony. Before that the usual way was to kill the bees with smoke. He also made an early queen excluder, had 580 hives by 1808 and 6,600 colonies later, and ran a beekeeping school that trained 700+ beekeepers over 53 years. Langstroth's US patent came only in 1852."
+  season: any (pilot or 'Wie alles anfing' fits)
+  source: {title: "en.wikipedia: Petro Prokopovych; Beehive", url: "https://en.wikipedia.org/wiki/Petro_Prokopovych"}
+  rights: paraphrase-only
+  it_parallel: "A Ukrainian beekeeper invented 'non-destructive updates' 38 years before the Americans patented them."
+  gag_seed: "Pylyp to a German recruiter: 'Relevant experience? A Ukrainian beekeeper shipped the frame hive in 1814. We've been doing zero-downtime deploys for 200 years.'"
+  characters: [pylyp]
+  status: raw
+  note: "24tv.ua claims Tsar Nicholas I came to taste his honey and Shevchenko visited in 1843: single popular source, check before use."
+
+- id: hist-skep-sulfur
+  kind: fact
+  lang: en
+  gist: "Straw skeps were used for about 2,000 years; the harvest often killed the colony, sometimes with burning sulfur. As of 1998 most US states banned skeps and other hives that cannot be inspected."
+  season: autumn
+  source: {title: "en.wikipedia: Beehive", url: "https://en.wikipedia.org/wiki/Beehive"}
+  rights: paraphrase-only
+  it_parallel: "Legacy system: works, but every release deletes the database."
+  gag_seed: "Bzynka on legacy code: 'Skep architecture. Every update kills everyone.'"
+  characters: [bzynka]
+  status: raw
+
+- id: hist-egypt-smoke
+  kind: fact
+  lang: en
+  gist: "The sun temple of Nyuserre Ini (5th Dynasty, before 2422 BC) shows workers blowing smoke into hives: beekeeping with smoke is 4,400+ years old."
+  season: any
+  source: {title: "en.wikipedia: Beehive", url: "https://en.wikipedia.org/wiki/Beehive"}
+  rights: paraphrase-only
+  it_parallel: "The smoker is the oldest DevOps tool still in production."
+  gag_seed: "Pylyp's smoker gets a version number: v2422BC."
+  characters: [pylyp]
+  status: raw
+
+- id: hist-mad-honey-xenophon
+  kind: fact
+  lang: en
+  gist: "401 BC, Xenophon's Anabasis: Greek soldiers near Trabzon ate wild honey, vomited, could not stand, and recovered the next day (grayanotoxin 'mad honey' from rhododendron)."
+  season: summer
+  source: {title: "en.wikipedia: Mad honey", url: "https://en.wikipedia.org/wiki/Mad_honey"}
+  rights: paraphrase-only
+  it_parallel: "Untested input from an unknown source takes down the whole army."
+  gag_seed: "Medunko eats 'imported honey', gets mad-honey effects; Pylyp: input validation."
+  characters: [medunko, pylyp]
+  status: raw
+
+- id: hist-mad-honey-mithridates
+  kind: fact
+  lang: en
+  gist: "65 BC, Third Mithridatic War: Mithridates reportedly left mad-honey combs on the Roman army's path; soldiers who ate it were killed (Strabo implies hundreds). Earliest honey trap in the literal sense."
+  season: any
+  source: {title: "en.wikipedia: Mad honey", url: "https://en.wikipedia.org/wiki/Mad_honey"}
+  rights: paraphrase-only
+  it_parallel: "A honeypot as a military security measure."
+  gag_seed: "Koliuchka explains 'honeypot' to a German IT-Sicherheit audience with a Roman legion."
+  characters: [koliuchka]
+  status: raw
+
+- id: hist-olga-honey-946
+  kind: fact
+  lang: en
+  gist: "946: the Wikipedia page says Olga of Kyiv's side reportedly sent fermented honey to her enemies before a massacre, and hedges that it 'may' have been mad honey."
+  season: any
+  source: {title: "en.wikipedia: Mad honey", url: "https://en.wikipedia.org/wiki/Mad_honey"}
+  rights: check
+  it_parallel: "A Ukrainian supply-chain attack."
+  gag_seed: "Too dark for a gag as is; keep as background only."
+  characters: []
+  status: raw
+  note: "Hedged on the source page. Do not use as a fact without a better source."
+
+- id: hist-miel-fou-export
+  kind: fact
+  lang: en
+  gist: "18th century: about 25 tons of mad honey a year went from the Black Sea region to Europe; the French called it 'miel fou' and added it to beer."
+  season: any
+  source: {title: "en.wikipedia: Mad honey", url: "https://en.wikipedia.org/wiki/Mad_honey"}
+  rights: paraphrase-only
+  it_parallel: "Shipping an unstable build to production because customers liked the side effects."
+  gag_seed: "Pylyp's honey drinks at the German market: 'No miel fou, we passed QA.'"
+  characters: [pylyp]
+  status: raw
+
+- id: hist-telling-bees-queen-2022
+  kind: fact
+  lang: en
+  gist: "2022: Queen Elizabeth II's death was announced to the Buckingham Palace bees by the Royal Beekeeper, John Chapple. In Lincolnshire bees got wedding cake and funeral biscuits; in Norfolk a 'sickly' auctioned hive recovered once crepe was tied to it."
+  season: any
+  source: {title: "en.wikipedia: Telling the bees", url: "https://en.wikipedia.org/wiki/Telling_the_bees"}
+  rights: paraphrase-only
+  it_parallel: "Even monarchies keep the bees on the mailing list."
+  gag_seed: "Pylyp sends the team update to the hive first, then to the boss."
+  characters: [pylyp, bzynka]
+  status: raw
+
+- id: hist-dzierzon-bee-space
+  kind: fact
+  lang: en
+  gist: "Jan Dzierżon (1845, 1848) defined the bee space for removable frames; Langstroth's US patent is dated 5 October 1852; Thomas Wildman described sliding frames in 1768-1770."
+  season: any
+  source: {title: "en.wikipedia: Beehive", url: "https://en.wikipedia.org/wiki/Beehive"}
+  rights: paraphrase-only
+  it_parallel: "Standards war over a few millimetres, like tabs vs spaces."
+  gag_seed: "Bzynka and a German bee argue over bee space like tabs vs spaces."
+  characters: [bzynka]
+  status: raw
+
+- id: hist-bears-barc
+  kind: fact
+  lang: en
+  gist: "Polish tree hives (barć) were protected against woodpeckers, bears, pine martens and dormice. Tree beekeeping from Poland and Belarus is UNESCO intangible heritage since 2020."
+  season: any
+  source: {title: "en.wikipedia: Beehive; de.wikipedia: Zeidlerei", url: "https://en.wikipedia.org/wiki/Beehive"}
+  rights: paraphrase-only
+  it_parallel: "Threat model with a bear in it."
+  gag_seed: "Pylyp's threat model slide: woodpeckers, martens, dormice, Medunko."
+  characters: [medunko, pylyp, koliuchka]
+  status: raw
+
+- id: hist-myth-ra-tears
+  kind: fact
+  lang: en
+  gist: "Egyptian myth: bees grew from the tears of the sun god Ra falling on desert sand. Greek myth: Aristaeus lost his bees and got new ones from the carcasses of sacrificed cattle (bugonia)."
+  season: any
+  source: {title: "en.wikipedia: Bees in mythology", url: "https://en.wikipedia.org/wiki/Bees_in_mythology"}
+  rights: paraphrase-only
+  it_parallel: "Disaster recovery, ancient Greek style: restore from a very questionable backup."
+  gag_seed: "Сірий tells Pylyp about bugonia: 'Back in my day, backups smelled.'"
+  characters: [siryi, pylyp]
+  status: raw
