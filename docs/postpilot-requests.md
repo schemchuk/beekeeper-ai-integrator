@@ -49,6 +49,7 @@ These were filed with postpilot on 2026-11-25 and are this project's own scope n
 | 2026-11-25 | Rework the manual intake: clear steps, hints, feedback on every press. | done: ADR 021 webhook, ADR 023 guided `/work` (T25a-b, 2026-11-26) |
 | 2026-11-25 | German first; Ukrainian LinkedIn paused. | done: postpilot ADR 020 |
 | 2026-11-26 | **Publishing rules for factory reels**: R1 post text as written, no AI rewrite; R2 `cover.png` as thumbnail on LinkedIn, IG, FB; R3 publish at the given release time; R4 machine handoff, never twice. Details: interview round 4. Replaces the separate thumbnail request. | done in code 2026-11-26: postpilot ADR 024, T26a-c (PRs #56-58); not verified live |
+| 2026-11-26 | From postpilot (Volodymyr's decision): factory reels also go to **YouTube Shorts** and **TikTok**. See the section below. | proposed: postpilot ADR 026, not built yet |
 
 The Friday GitHub post request (2026-11-26) is about postpilot's own rubric, not the
 cartoons; it stays with postpilot.
@@ -74,3 +75,20 @@ Open points:
   this project's scope (interview round 4); where the numbers come from is for the spec.
 - Our side to build (replaces T12): render, make the release with the four assets, dispatch
   with a fine-grained PAT (postpilot repo, Actions write) kept in `.env`.
+
+## Notice from postpilot: YouTube Shorts and TikTok (2026-11-26)
+
+Volodymyr decided that factory reels go to two more channels. postpilot ADR 026 (PROPOSED,
+`docs/decisions/026-youtube-shorts-and-tiktok.md` in postpilot) covers it. Nothing changes in the
+release contract (ADR 024): same tag, same assets, same dispatch.
+
+| Channel | What postpilot does with a factory reel |
+|---------|------------------------------------------|
+| YouTube Shorts (`shemchuk`) | public Short at `release_at`, category Science & Technology, `containsSyntheticMedia` from `ai`. Title: the first line of `post_de.txt` if it fits 100 chars, else its first sentence, else `Volodymyr Shemchuk · <date>`. Description: `post_de.txt` as written plus the AI label line. Cover: `cover_de.png` via `thumbnails.set`, best effort (needs channel phone verification). |
+| TikTok (`@volodymyr.shemchuk`) | the app is not audited by TikTok yet. Until then the reel goes to Volodymyr's TikTok inbox as a draft at `release_at`; he finishes it in the app with the caption from the Telegram notice. After the audit: direct post at `release_at` if he picks the privacy level in the intake notice in time, otherwise again a draft. `is_aigc` from `ai`, cover = frame 0. Other channels are never held by TikTok. |
+
+What the factory may add (optional, no change needed):
+- `title_de.txt` in the release, at most 100 characters: used as the YouTube title instead of the
+  rule above.
+- Keep `post_de.txt` under 2200 characters if the full text should reach TikTok; longer text skips
+  TikTok with a note.
