@@ -76,7 +76,7 @@ and Claude behind interfaces with fakes, so CI never calls them.
 | T23 ✅ | State (ADR 007): `factory/queue.yaml` and `factory/slots.yaml` load/save; queue ops edit, move, delete, first; release date per item; slot states and transitions | unit tests for every op and transition, invalid transitions refused |
 | T24 ✅ | Telegram client (`telegram.py`): `getUpdates`, `sendMessage`, `sendVideo`, `sendPhoto`, inline buttons, `getFile`; serves only `FACTORY_CHAT_ID`; config from `.env` | tests with a fake HTTP layer; a live smoke test by hand with his bot |
 | T25 ✅ | `beekeeper factory` process: poller, worker (one job at a time), clock every 15 min and on wake; systemd user unit + `loginctl enable-linger` steps in the docs | the service starts, survives a restart, answers `/start` |
-| T26 | Brain (ADR 008): `claude -p` wrapper, one prompt file per job in `prompts/`, JSON answer checked against a schema, auth error -> plain alert | tests with recorded answers |
+| T26 ✅ | Brain (ADR 008): `claude -p` wrapper, one prompt file per job in `prompts/`, JSON answer checked against a schema, auth error -> plain alert | tests with recorded answers |
 | T27 | Idea intake (F1.1-F1.3): text -> brain: story, command or both; story saved verbatim and sorted into `bible/`, becomes a queue item; unsure -> one short question; git sync commits `content: ...` and pushes | a sample tall tale ends up in `bible/` and the queue |
 | T28 | Voice notes (ADR 010): download, local whisper to Ukrainian, "Почув так: ..." back, then T27 | a recorded voice note becomes the right text |
 | T29 | Queue in chat (F2.2-F2.4): `/черга` with position, title, date and buttons (up, first, edit, delete); plain words -> brain -> a queue op | the ops work from buttons and from words |

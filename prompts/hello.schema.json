@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "reply": {"type": "string", "minLength": 1, "maxLength": 300}
+  },
+  "required": ["reply"],
+  "additionalProperties": false
+}
