@@ -104,6 +104,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Division of labour, bluntly: "кожен виконує свою роботу і нема чого заглядати [...]
   другим" (do not meddle in the other project's work).
 - Pushes on with a weather proverb: "вйо бо дощ" (marked "мудрість"): hurry, no more talk.
+- "Гайда!" = "let's go", his own gloss: the German "lass uns". Same family as "вйо".
+- Lets go of old files without regret: "нікуди. хай щезають" (no archive needed).
 - Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
   coins, and say so.
 - Same reproach, a new image: "знов бовтаєшся в строю як клізма в чоботі" (when I ask about

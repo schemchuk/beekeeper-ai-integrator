@@ -223,6 +223,9 @@ def main() -> int:
     from .telegram import load_config
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(threadName)s: %(message)s")
+    # httpx logs every request URL at INFO, and the bot token is part of the URL.
+    for name in ("httpx", "httpcore"):
+        logging.getLogger(name).setLevel(logging.WARNING)
     try:
         config = load_config()
     except TelegramError as e:

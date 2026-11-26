@@ -164,3 +164,16 @@ def test_run_stops_on_request(tmp_path):
     bot.get_updates = poll_then_stop
     factory.run()
     assert bot.sent[0] == GREETING
+
+
+def test_main_keeps_the_token_out_of_the_log(monkeypatch):
+    import logging
+
+    from beekeeper.factory import service
+
+    monkeypatch.setattr(
+        "beekeeper.factory.telegram.load_config",
+        lambda: (_ for _ in ()).throw(TelegramError("FACTORY_BOT_TOKEN is not set")),
+    )
+    assert service.main() == 1
+    assert logging.getLogger("httpx").getEffectiveLevel() >= logging.WARNING
