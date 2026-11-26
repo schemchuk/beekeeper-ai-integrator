@@ -105,6 +105,11 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   другим" (do not meddle in the other project's work).
 - Pushes on with a weather proverb: "вйо бо дощ" (marked "мудрість"): hurry, no more talk.
 - "Гайда!" = "let's go", his own gloss: the German "lass uns". Same family as "вйо".
+  Its most used German twin, by his word, is "Prost!" (the drinking toast doubles as "off we go").
+- Refuses with a vegetable: "редьку я тобі покажу, а не токен" (a fig/radish instead of the
+  thing asked). Secrets never go into the chat; give him a place to put them himself.
+- Wants links at once: "коли посилаєш мене кудись, то зразу давай посилання" (said stronger)
+  (any "go to X" must come with the link or exact path, clickable).
 - Lets go of old files without regret: "нікуди. хай щезають" (no archive needed).
 - Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
   coins, and say so.
