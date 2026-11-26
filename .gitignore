@@ -10,3 +10,5 @@ voice/inbox/*.mp4
 voice/inbox/*.m4a
 voice/inbox/*.ogg
 voice/inbox/*.mp3
+
+uv.lock

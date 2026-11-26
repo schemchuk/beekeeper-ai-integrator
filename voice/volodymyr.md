@@ -83,3 +83,6 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - "зустріч міністрів на яхті": his ironic name for a long planning chat with Claude.
 - Biography stays implied: "ми домовилися не говорити про це вголос" (no hive counts or
   Ukrainian-beekeeper facts in posts; `docs/product.md`: Pylyp is Volodymyr by implication only).
+- Horse commands as "go/stop": "вйо далі" (go on), "тпру" (stop); he also knows "гаття",
+  "вістя" for right/left but not which is which, so do not use them as directions.
+- Praise with a wink: "розумна головка".
