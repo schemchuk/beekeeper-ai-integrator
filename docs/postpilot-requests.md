@@ -1,10 +1,10 @@
 # postpilot and this project
 
 postpilot (`~/VS_Code_projects/postpilot`) is a separate project with its own process and its
-own problems. On 2026-11-26 Volodymyr took back everything that belongs to the cartoons:
-postpilot is only the **publisher** of a finished reel. Everything before that (ideas,
-scripts, plan, approval, talk with Volodymyr) is this project's job. The final split is
-decided in the interview and spec, not here.
+own problems. Decided 2026-11-26 (`docs/interview/2026-11-26-round-4.md`): this project is
+the cartoon factory with its own Telegram bot; postpilot is only the **publisher**, under our
+rules R1-R4. If postpilot declines them or has not shipped them by 2026-12-14, the factory
+publishes by itself.
 
 ## What postpilot does for us today (checked 2026-11-26)
 
@@ -48,8 +48,7 @@ These were filed with postpilot on 2026-11-25 and are this project's own scope n
 | 2026-11-25 | Manual intake stays (`/work`, AI and original videos). | as is |
 | 2026-11-25 | Rework the manual intake: clear steps, hints, feedback on every press. | done: ADR 021 webhook, ADR 023 guided `/work` (T25a-b, 2026-11-26) |
 | 2026-11-25 | German first; Ukrainian LinkedIn paused. | done: postpilot ADR 020 |
-| 2026-11-26 | Upload `cover.png` as the LinkedIn video thumbnail. | open |
-| 2026-11-26 | Post a given description as written (no rewrite) on all channels. | not filed yet: wait for the spec |
+| 2026-11-26 | **Publishing rules for factory reels**, deadline 2026-12-14: R1 post text as written, no AI rewrite; R2 `cover.png` as thumbnail on LinkedIn, IG, FB; R3 publish at the given release time; R4 machine handoff, never twice. Details: interview round 4. Replaces the separate thumbnail request. | open |
 
 The Friday GitHub post request (2026-11-26) is about postpilot's own rubric, not the
 cartoons; it stays with postpilot.
