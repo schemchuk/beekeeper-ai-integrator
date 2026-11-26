@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {"type": "string", "enum": ["story", "command", "both", "unsure"]},
+    "reply": {"type": "string", "maxLength": 600},
+    "question": {"type": ["string", "null"], "maxLength": 300},
+    "story": {
+      "type": ["object", "null"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1, "maxLength": 80}
+      },
+      "required": ["title"],
+      "additionalProperties": false
+    },
+    "command": {
+      "type": ["object", "null"],
+      "properties": {
+        "op": {"type": "string", "enum": ["show", "first", "up", "move", "delete", "rename"]},
+        "idea": {"type": ["integer", "null"]},
+        "position": {"type": ["integer", "null"]},
+        "title": {"type": ["string", "null"], "maxLength": 80}
+      },
+      "required": ["op", "idea", "position", "title"],
+      "additionalProperties": false
+    },
+    "commit": {"type": "string", "minLength": 1, "maxLength": 100}
+  },
+  "required": ["kind", "reply", "question", "story", "command", "commit"],
+  "additionalProperties": false
+}

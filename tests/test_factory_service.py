@@ -190,3 +190,43 @@ def test_logged_out_claude_is_said_plainly(tmp_path):
 
     factory.run_job(Job("script 003", logged_out))
     assert bot.sent == [AUTH_MESSAGE]
+
+
+class FakeIntake:
+    def __init__(self, error=None):
+        self.seen = []
+        self.error = error
+
+    def process(self, body, uid, now):
+        self.seen.append((body, uid))
+        if self.error:
+            raise self.error
+        return "У черзі №1."
+
+
+def test_text_goes_to_intake_and_leaves_the_inbox(tmp_path):
+    from beekeeper.factory.service import TAKEN
+
+    intake = FakeIntake()
+    bot = FakeBot([[text(7, "А було таке...")]])
+    factory = Factory(bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake)
+    factory.poll_once(timeout=0)
+    assert bot.sent == [TAKEN]
+    assert len(list((tmp_path / "voice/inbox").iterdir())) == 1  # safe before sorting
+    drain(factory)
+    assert intake.seen == [("А було таке...", 7)]
+    assert bot.sent == [TAKEN, "У черзі №1."]
+    assert list((tmp_path / "voice/inbox").iterdir()) == []
+
+
+def test_failed_sorting_keeps_the_message(tmp_path):
+    from beekeeper.factory.brain import BrainError
+
+    intake = FakeIntake(BrainError("intake: answer off the schema"))
+    bot = FakeBot([[text(7, "А було таке...")]])
+    factory = Factory(bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake)
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert "voice/inbox" in bot.sent[-1]
+    (kept,) = (tmp_path / "voice/inbox").iterdir()
+    assert "А було таке..." in kept.read_text(encoding="utf-8")

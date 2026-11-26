@@ -1,0 +1,15 @@
+{
+  "type": "result",
+  "subtype": "success",
+  "is_error": false,
+  "result": "",
+  "structured_output": {
+    "kind": "story",
+    "reply": "Гарна побрехенька, ведмідь у вулику ще нікого не підводив.",
+    "question": null,
+    "story": {"title": "Ведмідь у вулику"},
+    "command": null,
+    "commit": "story: the bear asleep in the hive"
+  },
+  "num_turns": 6
+}

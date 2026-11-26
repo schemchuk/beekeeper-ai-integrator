@@ -14,6 +14,7 @@ No shell, network, MCP or git.
 | Job | Task | Writes |
 |-----|------|--------|
 | `hello` | smoke test: `python -m beekeeper.factory.brain` | nothing |
+| `intake` | his message: story, command, both or unsure; sort a story into `bible/` (T27) | `bible/` (not `bible/stories/`) |
 
-The jobs of T27 (story or command, sort into `bible/`), T30 (script) and T31 (edits) add
+The jobs of T30 (script) and T31 (edits) add
 their files here.

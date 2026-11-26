@@ -9,8 +9,9 @@ Three loops in one process, so there is one writer of `factory/*.yaml` and no lo
 - clock (thread): ticks every 15 minutes and right after the laptop wakes up, and queues a
   `tick` job; deadline handlers are registered by the tasks that need them (T30-T33).
 
-Until the router learns to sort ideas (T27), every text and voice note he sends is saved
-verbatim to `voice/inbox/`, so nothing he tells the bot is lost.
+Every text he sends is first saved verbatim to `voice/inbox/`, so nothing he tells the bot
+is lost; then the intake job (T27) sorts it and the file is removed. If sorting fails, the
+file stays for the next Claude session. Voice notes are only saved until T28.
 """
 
 from __future__ import annotations
@@ -25,8 +26,10 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from .brain import BrainAuthError
+from .brain import Brain, BrainAuthError, BrainError
 from .calendar import BERLIN
+from .gitsync import GitSync
+from .intake import Intake
 from .telegram import Telegram, TelegramError, Update
 
 log = logging.getLogger("beekeeper.factory")
@@ -38,10 +41,14 @@ CLOCK_STEP = 30  # seconds between wall-clock checks; a wake-up is noticed withi
 POLL_TIMEOUT = 25  # seconds; keeps a stop request (SIGTERM) answered quickly
 
 GREETING = (
-    "Фабрика на місці. Пиши або наговорюй ідеї й побрехеньки: я все зберігаю дослівно. "
-    "Сценарії, черга і ролики підтягнуться наступними кроками."
+    "Фабрика на місці. Пиши ідеї й побрехеньки: зберігаю дослівно, кладу в біблію і в "
+    "чергу. «Покажи чергу» теж розумію. Голосові поки лише зберігаю."
 )
 SAVED = "Записав дослівно. Розберу в біблію на найближчому сеансі."
+TAKEN = "Записав, розбираю."
+NOT_SORTED = (
+    "Не зміг розібрати: {error}. Повідомлення лежить дослівно в voice/inbox/, нічого не пропало."
+)
 SAVED_VOICE = "Голосове зберіг. Розшифрую на найближчому сеансі."
 
 
@@ -81,8 +88,10 @@ class Factory:
         root: Path = Path("."),
         clock: Callable[[], datetime] = now_berlin,
         wall: Callable[[], float] = time.time,
+        intake: Intake | None = None,
     ) -> None:
         self.bot = bot
+        self.intake = intake
         self.root = root
         self.clock = clock
         self.wall = wall
@@ -99,6 +108,10 @@ class Factory:
         log.info("update %s: %s", update.update_id, update.kind)
         if update.kind == "text" and update.text.strip().split("@")[0] == "/start":
             self.bot.send_message(GREETING)
+        elif update.kind == "text" and self.intake:
+            path = self.save_text(update)
+            self.bot.send_message(TAKEN)
+            self.submit(Job(f"intake {update.update_id}", lambda: self.take_in(update, path)))
         elif update.kind == "text":
             self.save_text(update)
             self.bot.send_message(SAVED)
@@ -118,6 +131,19 @@ class Factory:
         )
         log.info("saved text to %s", path)
         return path
+
+    def take_in(self, update: Update, path: Path) -> None:
+        assert self.intake is not None
+        try:
+            reply = self.intake.process(update.text, update.update_id, self.clock())
+        except BrainAuthError:
+            raise
+        except BrainError as e:
+            log.error("intake %s: %s", update.update_id, e)
+            self.alert(NOT_SORTED.format(error=e))
+            return
+        path.unlink(missing_ok=True)
+        self.bot.send_message(reply)
 
     def save_voice(self, update: Update) -> Path:
         stamp = self.clock().strftime("%Y-%m-%d-%H%M")
@@ -236,8 +262,11 @@ def main() -> int:
     except TelegramError as e:
         log.error("%s", e)
         return 1
+    root = Path(".")
+    git = GitSync(root)
     with Telegram(config) as bot:
-        factory = Factory(bot)
+        factory = Factory(bot, root=root, intake=Intake(Brain(root), root, git))
+        factory.tick_handlers.append(git.retry)
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
         factory.run()
