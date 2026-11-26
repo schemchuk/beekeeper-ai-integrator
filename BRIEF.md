@@ -115,6 +115,11 @@ The reel goes through postpilot to LinkedIn, Threads, Instagram and Facebook Ree
 - AI-generated: send with `/work ai` so the posts carry the AI label.
 - Long interview text does not fit a Telegram caption (1024 chars): send the video with
   `/work ai`, then reply to the bot's "Video received" message with the text.
+- Cover rule (Volodymyr, 2026-11-26): LinkedIn shows the first frame as the thumbnail, so
+  frame 0 of every reel is a bright cover with a glowing **monitor** in it (IT people are
+  drawn to a screen like a magnet), a recognizable character and the episode title.
+  Dark or night hooks come after it, never on frame 0. Applies from episode 003 on; 002
+  stays as published.
 
 ## First steps for the new session
 
