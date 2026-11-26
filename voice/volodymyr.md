@@ -94,3 +94,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Asks for a reason, then a decision on the spot: "дай обгрунтування і виріши це зараз".
 - Practical before agreeing: "я триматиму включеним і мушу щось тицяти?" (wants to know his
   part in clicks). Accepts in two words: "приймаємо 2".
+- Ideas "шикуються у черзі": he lines things up like soldiers. "запасники" for the project's
+  reserves (store-room of ideas).
+- Teases the norm with a question: "ми чимось файніші чи мудріші?" ("файний" = fine,
+  Western-Ukrainian). He marks his own wisdom with "(мудрість)".
