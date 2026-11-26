@@ -22,9 +22,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   - "щоб роботодавець впісявся від змилування, а колеги повсиралися від захвату"
   - "щоб мультик дивилися всі і пісяли від змилування і щастя"
   - "давай зробимо бомбу"
-- Colloquial and slang: "роздуплиться", "профілонити", "заєбень", "танцювати з бубном",
-  "наробдена хуйня", surzhyk like "слідуючого", "поробив".
-- Swears freely when angry at tools, passwords, bureaucracy ("мене заєбали паролі").
+- Colloquial and slang: "роздуплиться", "профілонити", "танцювати з бубном",
+  surzhyk like "слідуючого", "поробив".
+- Rule: his swearing is never recorded or copied (Volodymyr, 2026-11-26).
   The anger is at systems, never at people he cares about. Good fuel for Pylyp vs. bureaucracy.
 - Self-irony about age and AI: "без AI я ніхуя не вартий".
 - Practical, results first: "я поробив усе", "все пройшло ок", "які мої подальші дії?"
@@ -75,12 +75,11 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 
 ## Session 2026-11-26
 
-- Looks forward, not back: "нахуй нам повертатися до цього відео, робим висновки і
-  виправлення на слідуючих". A published episode stays; lessons go to the next one.
+- Looks forward, not back: "робим висновки і виправлення на слідуючих". A published
+  episode stays; lessons go to the next one.
 - Knows his audience: "народ тут специфічний і екран діє на них як магніт".
 - Wants people to come "як гусак на мотузочку чи щурі за Нільсом" (Nils Holgersson's pipe).
 - "позганяти як горобців на тік (там де зерно)": bring people where the useful stuff is.
 - "зустріч міністрів на яхті": his ironic name for a long planning chat with Claude.
 - Biography stays implied: "ми домовилися не говорити про це вголос" (no hive counts or
   Ukrainian-beekeeper facts in posts; `docs/product.md`: Pylyp is Volodymyr by implication only).
-- Rates an idea in one word: "заїбісь" (here: a fixed weekly rubric).
