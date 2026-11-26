@@ -1,7 +1,7 @@
 # Specification: the cartoon factory
 
-Status: DRAFT for Volodymyr's approval (gate 2 of 4: interview -> **spec** -> architecture
--> tasks). Date: 2026-11-26.
+Status: ACCEPTED (Volodymyr, 2026-11-26; gate 2 of 4: interview -> **spec** -> architecture
+-> tasks).
 Sources: `docs/interview/2026-11-26-round-4.md` (decisions win over older docs),
 `docs/product.md` (content rules, audience), `docs/postpilot-requests.md` (R1-R4, ADR 024).
 
@@ -106,9 +106,11 @@ Later: F2.5 reserves, F6 statistics, monthly overview, scene library, music.
 - On average at least 300 LinkedIn impressions per reel (002: 34).
 - At least 3 conversations about automation that started from a cartoon.
 
-## 7. Open points for Volodymyr
+## 7. Decided at the gate (2026-11-26)
 
-- Q1. The monthly plan from `product.md` §5: drop it, because the queue with release dates
-  (F2.2) already is the plan? Proposed: drop.
-- Q2. Deadlines in F2.5 and F3.4: 5 days ahead to ask, 20:00 next day to answer, script 3
-  days ahead, accepted the morning before. Proposed: keep.
+> я згоден з пропозиціями, переходь до архітектури
+
+- Q1. The monthly plan from `product.md` §5 is dropped: the queue with release dates (F2.2)
+  is the plan.
+- Q2. Deadlines kept: ask 5 days ahead, answer by 20:00 the next day, script 3 days ahead,
+  accepted on the morning of the day before release.
