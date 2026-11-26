@@ -161,7 +161,7 @@ F6 starts.
 
 - A1. The repo is already public (checked: `gh repo view` says PUBLIC). Nothing to do.
 - A2. Lid setting: `HandleLidSwitchExternalPower=ignore` in a drop-in
-  `/etc/systemd/logind.conf.d/lid.conf`; needs sudo, Volodymyr runs it once.
+  `/etc/systemd/logind.conf.d/lid.conf`. Done by Volodymyr on 2026-11-26 (file checked).
 - A3. The factory commits content (stories, queue, scripts) to `main` by itself; code goes
   through PRs with CI.
 - Added: F1.4 (his style from all channels) and F7 (scripts also to `~/Desktop/temp/`,
