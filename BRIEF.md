@@ -119,7 +119,9 @@ The reel goes through postpilot to LinkedIn, Threads, Instagram and Facebook Ree
   frame 0 of every reel is a bright cover with a glowing **monitor** in it (IT people are
   drawn to a screen like a magnet), a recognizable character and the episode title.
   Dark or night hooks come after it, never on frame 0. Applies from episode 003 on; 002
-  stays as published.
+  stays as published. Built in: `cover` block in `episode.yaml`, frame 0 held 0.5 s,
+  `cover_<lang>.png` for the thumbnail; `post` block -> `post_<lang>.txt` (hook, grain,
+  question, offer, hashtags; `validate` rejects begging and biography).
 
 ## First steps for the new session
 

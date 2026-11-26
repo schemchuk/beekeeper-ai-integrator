@@ -81,3 +81,10 @@ def test_real_file(tmp_path):
     found, info = check_reel(reel)
     assert found == []
     assert float(info["format"]["duration"]) == pytest.approx(3.5, abs=0.1)
+
+
+def test_missing_cover_fails_the_check(tmp_path):
+    from beekeeper.check import check_cover
+
+    [problem] = check_cover(tmp_path / "cover_de.png")
+    assert "every reel needs its cover" in problem

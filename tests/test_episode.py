@@ -5,14 +5,19 @@ import pytest
 
 from beekeeper.cli import main
 from beekeeper.episode import EpisodeError, load_cast, load_episode
+from blocks import COVER_POST, OFFSET
 
 ROOT = Path(__file__).resolve().parents[1]
 CAST = {"pylyp", "medunko", "bzynka"}
 
-GOOD = """\
+GOOD = (
+    """\
 id: "900"
 slug: test
 title: {ua: "Тест", de: "Test"}
+"""
+    + COVER_POST
+    + """\
 scenes:
   hut: "a hut"
 lines:
@@ -24,6 +29,7 @@ lines:
     de: "Hallo"
     pause: 0.5
 """
+)
 
 
 def write(tmp_path: Path, text: str) -> Path:
@@ -62,13 +68,13 @@ def test_episode_002_is_valid():
 def test_missing_german_reports_its_line(tmp_path):
     text = GOOD.replace('    de: "Hallo"\n', "")
     [p] = problems(tmp_path, text)
-    assert p.endswith(":10: lines[1].de: required text")
+    assert p.endswith(f":{10 + OFFSET}: lines[1].de: required text")
 
 
 def test_unknown_speaker_and_scene(tmp_path):
     text = GOOD.replace("who: pylyp", "who: kolobok").replace("scene: hut", "scene: moon")
     ps = problems(tmp_path, text)
-    assert any(":7: lines[0].shot.scene: 'moon' is not in scenes" in p for p in ps)
+    assert any(f":{7 + OFFSET}: lines[0].shot.scene: 'moon' is not in scenes" in p for p in ps)
     assert any("lines[1].who: 'kolobok' is not in cast.yaml" in p for p in ps)
 
 
@@ -141,3 +147,50 @@ def test_shot_eyes_must_be_open_or_closed(tmp_path):
     assert ep.lines[0].shot["eyes"] == "closed"
     [p] = problems(tmp_path, GOOD.replace("{scene: hut}", "{scene: hut, eyes: sleepy}"))
     assert p.endswith("lines[0].shot.eyes: must be open or closed")
+
+
+def test_cover_and_post_are_loaded(tmp_path):
+    ep = load_episode(write(tmp_path, GOOD), CAST)
+    assert ep.cover.who == ["pylyp"]
+    assert ep.cover.monitor["de"] == "Ihre Anfrage wurde gespeichert."
+    assert ep.post.hashtags == ["Automatisierung", "KI", "Python"]
+    assert ep.post.parts["question"]["de"].endswith("?")
+
+
+def test_cover_and_post_are_required(tmp_path):
+    text = GOOD.replace(COVER_POST, "")
+    ps = problems(tmp_path, text)
+    assert any("cover: required" in p for p in ps)
+    assert any("post: required" in p for p in ps)
+
+
+def test_cover_rules(tmp_path):
+    text = GOOD.replace("who: [pylyp]", "who: [pylyp, kolobok]").replace(
+        "Ihre Anfrage wurde gespeichert.", "x" * 81
+    )
+    ps = problems(tmp_path, text)
+    assert any("cover.who: 'kolobok' is not in cast.yaml" in p for p in ps)
+    assert any("cover.monitor.de: 81 characters, max 80" in p for p in ps)
+
+
+@pytest.mark.parametrize(
+    ("old", "new", "message"),
+    [
+        (
+            "Wie viele Mails könnte ein Bot schreiben?",
+            "Neuer Zeichentrickfilm über den Imker",
+            "post.hook.de: name the reader's pain",
+        ),
+        ("Wie viele Mails könnte ein Bot schreiben?", "x" * 151, "post.hook.de: one line"),
+        ("Was automatisieren Sie zuerst?", "Schreiben Sie mir.", "post.question.de: must be"),
+        ("Рутина в команді? Пишіть.", "Шукаю роботу в IT.", "post.offer.ua: asks for a job"),
+        ("Routine im Team? Schreiben Sie mir.", "Ich suche eine Stelle.", "post.offer.de: asks"),
+        ("Автовідповідь: 20 рядків Python.", "У мене 150 вуликів.", "post.grain.ua: states his"),
+        ("[Automatisierung, KI, Python]", "[KI]", "post.hashtags: required: 3-5"),
+        ("[Automatisierung, KI, Python]", "[KI, '#Python', Mit Leerzeichen]", "one word"),
+    ],
+)
+def test_post_rules(tmp_path, old, new, message):
+    assert old in GOOD
+    ps = problems(tmp_path, GOOD.replace(old, new))
+    assert any(message in p for p in ps), ps

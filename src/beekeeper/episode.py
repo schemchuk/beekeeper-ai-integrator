@@ -1,5 +1,6 @@
 """Episode file (ADR 001): load `episode.yaml`, validate it, return plain dataclasses."""
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -19,10 +20,38 @@ TOP_KEYS = {
     "scenes",
     "lines",
     "end_card",
+    "cover",
+    "post",
 }
 LINE_KEYS = {"who", "ua", "de", "shot", "onscreen", "sfx", "action", "note", "pause"}
 SHOT_KEYS = {"scene", "camera", "action", "at", "eyes"}
 EYES = {"open", "closed"}  # shot.eyes: everyone on screen (closed = asleep)
+
+# Cover (BRIEF cover rule): frame 0 and the thumbnail. A glowing monitor with an IT pain,
+# one to three characters, the title.
+COVER_KEYS = {"who", "monitor"}
+COVER_MAX_WHO = 3
+MONITOR_MAX = 80  # characters per language, readable on a phone-sized thumbnail
+
+# Post text for the feed (roadmap T11). LinkedIn shows about two lines before "mehr".
+POST_PARTS = ("hook", "grain", "question", "offer")
+POST_KEYS = {*POST_PARTS, "hashtags"}
+HOOK_MAX = 150
+HASHTAGS = (3, 5)
+HASHTAG = re.compile(r"^[^\s#]+$")
+# The hook sells the pain, not the format: no "Neuer Zeichentrickfilm".
+HOOK_FORBIDDEN = re.compile(r"zeichentrick|cartoon|мульт", re.IGNORECASE)
+# He offers, never begs (feedback: dignity); his biography stays implied (docs/product.md).
+POST_FORBIDDEN = {
+    "asks for a job (offer help instead)": re.compile(
+        r"шукаю\s+роботу|візьміть\s+мене|найміть|suche\s+(?:eine[n]?\s+)?(?:job|arbeit|stelle)"
+        r"|bewerb|hire\s+me|looking\s+for\s+a\s+job",
+        re.IGNORECASE,
+    ),
+    "states his biography (keep it implied)": re.compile(
+        r"\d+\s*(?:вулик|бджолосім|bienenv[öo]lk|bienenst[öo]ck|hives?\b)", re.IGNORECASE
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -37,6 +66,18 @@ class Line:
 
 
 @dataclass(frozen=True)
+class Cover:
+    who: list[str]
+    monitor: dict[str, str]
+
+
+@dataclass(frozen=True)
+class Post:
+    parts: dict[str, dict[str, str]]  # hook/grain/question/offer -> {ua, de}
+    hashtags: list[str]
+
+
+@dataclass(frozen=True)
 class Episode:
     id: str
     slug: str
@@ -44,6 +85,8 @@ class Episode:
     lines: list[Line]
     scenes: dict[str, str] = field(default_factory=dict)
     end_card: dict[str, str] = field(default_factory=dict)
+    cover: Cover | None = None
+    post: Post | None = None
     extra: dict[str, object] = field(default_factory=dict)  # season, target_length, release, seed
 
 
@@ -102,6 +145,8 @@ class _Checker:
             self.err(data, "scenes", "must map a scene name to a description")
             scenes = {}
         end_card = self.pair(data, "end_card", data.get("end_card"), required=False)
+        cover = self.cover(data)
+        post = self.post(data)
         raw_lines = data.get("lines")
         lines: list[Line] = []
         if not isinstance(raw_lines, list) or not raw_lines:
@@ -121,8 +166,63 @@ class _Checker:
             lines=lines,
             scenes=dict(scenes),
             end_card=end_card,
+            cover=cover,
+            post=post,
             extra=extra,
         )
+
+    def cover(self, data: dict) -> Cover | None:
+        raw = data.get("cover")
+        if not isinstance(raw, dict):
+            self.err(data, "cover", "required: who (characters) and monitor (ua, de)")
+            return None
+        for key in sorted(set(raw) - COVER_KEYS):
+            self.err(raw, f"cover.{key}", "unknown key")
+        who = raw.get("who")
+        who = [who] if isinstance(who, str) else who
+        if not isinstance(who, list) or not 1 <= len(who) <= COVER_MAX_WHO:
+            self.err(raw, "cover.who", f"required: 1-{COVER_MAX_WHO} characters")
+            who = []
+        for name in who:
+            if name not in self.cast:
+                self.err(raw, "cover.who", f"'{name}' is not in cast.yaml")
+        monitor = self.pair(raw, "cover.monitor", raw.get("monitor"), required=True)
+        for lang, text in monitor.items():
+            if len(text) > MONITOR_MAX:
+                self.err(raw, f"cover.monitor.{lang}", f"{len(text)} characters, max {MONITOR_MAX}")
+        return Cover(who=[str(n) for n in who], monitor=monitor)
+
+    def post(self, data: dict) -> Post | None:
+        raw = data.get("post")
+        if not isinstance(raw, dict):
+            self.err(data, "post", f"required: {', '.join(POST_PARTS)}, hashtags")
+            return None
+        for key in sorted(set(raw) - POST_KEYS):
+            self.err(raw, f"post.{key}", "unknown key")
+        parts = {k: self.pair(raw, f"post.{k}", raw.get(k), required=True) for k in POST_PARTS}
+        for lang, hook in parts["hook"].items():
+            where = f"post.hook.{lang}"
+            if len(hook) > HOOK_MAX or "\n" in hook.strip():
+                self.err(raw, where, f"one line, max {HOOK_MAX} characters (shown before 'mehr')")
+            if HOOK_FORBIDDEN.search(hook):
+                self.err(raw, where, "name the reader's pain, not the format (no 'cartoon')")
+        for lang, question in parts["question"].items():
+            if not question.rstrip().endswith("?"):
+                self.err(raw, f"post.question.{lang}", "must be a question (ends with ?)")
+        for part, texts in parts.items():
+            for lang, text in texts.items():
+                for why, pattern in POST_FORBIDDEN.items():
+                    if pattern.search(text):
+                        self.err(raw, f"post.{part}.{lang}", why)
+        tags = raw.get("hashtags")
+        lo, hi = HASHTAGS
+        if not isinstance(tags, list) or not lo <= len(tags) <= hi:
+            self.err(raw, "post.hashtags", f"required: {lo}-{hi} hashtags")
+            tags = []
+        for tag in tags:
+            if not isinstance(tag, str) or not HASHTAG.match(tag):
+                self.err(raw, "post.hashtags", f"'{tag}': one word, without '#'")
+        return Post(parts=parts, hashtags=[str(t) for t in tags])
 
     def pair(self, parent: object, where: str, value: object, required: bool) -> dict[str, str]:
         if value is None and not required:

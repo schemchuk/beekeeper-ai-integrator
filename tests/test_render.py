@@ -90,3 +90,12 @@ def test_failed_render_leaves_no_stamp(setup, monkeypatch):
     with pytest.raises(RenderError, match="exit 1"):
         render(ep_dir, "de", animation=animation)
     assert not (ep_dir / "reel_de.mp4.hash").exists()
+
+
+def test_cover_command_renders_the_cover_still(tmp_path):
+    from beekeeper.render import cover_command, cover_path
+
+    cover = cover_path(tmp_path, "de")
+    assert cover.name == "cover_de.png"
+    cmd = cover_command(tmp_path / "timeline-de.json", tmp_path, cover)
+    assert cmd[:6] == ["npx", "--no-install", "remotion", "still", "Cover", str(cover.resolve())]

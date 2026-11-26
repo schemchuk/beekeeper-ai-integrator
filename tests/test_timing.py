@@ -21,11 +21,16 @@ from beekeeper.timing import (
     parse_sfx,
     target_range,
 )
+from blocks import COVER_POST
 
-EPISODE = """\
+EPISODE = (
+    """\
 id: "900"
 slug: test
 title: {ua: "Тест", de: "Test"}
+"""
+    + COVER_POST
+    + """\
 target_length: 3-5 s
 lines:
   - onscreen: {ua: "03:12", de: "03:12"}
@@ -44,6 +49,7 @@ lines:
     onscreen: {ua: "довгий текст на екрані, який читається довше за репліку", de: "x"}
 end_card: {ua: "Кінець", de: "Ende"}
 """
+)
 
 
 @pytest.fixture
@@ -79,8 +85,14 @@ def test_lines_follow_wav_lengths_gaps_and_pauses(episode):
     l0, l1, l2, l3 = tl["lines"]
     gap = frames(timing.GAP)
 
-    assert l0["start"] == 0
-    assert l0["end"] == frames(timing.MIN_HOLD)  # short on-screen text holds the minimum
+    cover = tl["cover"]
+    assert (cover["start"], cover["end"]) == (0, frames(timing.COVER_SECONDS))
+    assert cover["monitor"] == "Ваш запит збережено."
+    assert cover["title"] == "Тест" and cover["who"] == ["pylyp"]
+    assert l0["start"] == cover["end"]  # the hook comes right after the cover
+    assert l0["end"] == l0["start"] + frames(
+        timing.MIN_HOLD
+    )  # short on-screen text holds the minimum
     assert l1["start"] == l0["end"] + gap
     assert l1["speech"]["start"] == l1["start"]
     assert l1["end"] - l1["start"] == 30  # exactly the 1.0 s wav

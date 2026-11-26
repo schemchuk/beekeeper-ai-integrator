@@ -34,6 +34,15 @@ export type TimelineLine = {
   sfx: SfxEvent[];
 };
 
+// Frame 0 and the thumbnail (BRIEF cover rule): title, glowing monitor, characters.
+export type Cover = {
+  title: string;
+  monitor: string;
+  who: string[];
+  start: number;
+  end: number;
+};
+
 export type Timeline = {
   format: number;
   episode: string;
@@ -43,6 +52,7 @@ export type Timeline = {
   duration: number;
   title: string;
   scenes: Record<string, string>;
+  cover?: Cover | null; // absent in timelines made before the cover rule
   lines: TimelineLine[];
   end_card: { text: string; start: number; end: number } | null;
 };
