@@ -1,6 +1,8 @@
 # 005. Automatic handoff of reels to postpilot
 
-Status: ACCEPTED (Volodymyr, 2026-11-25). Needs a matching ADR in postpilot (its own process).
+Status: SUPERSEDED by ADR 009 (2026-11-26): the factory has its own bot, so Telegram
+`file_id`s cannot be shared; postpilot ADR 024 reads a GitHub release instead.
+Was: ACCEPTED (Volodymyr, 2026-11-25).
 
 ## Context
 
