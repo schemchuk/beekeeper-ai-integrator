@@ -1,0 +1,18 @@
+# systemd user unit for the factory bot (ADR 006, docs/factory.md).
+# Install: see docs/factory.md. %h is the home folder.
+[Unit]
+Description=Beekeeper AI Integrator: cartoon factory bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/VS_Code_projects/beekeeper-ai-integrator
+ExecStart=%h/VS_Code_projects/beekeeper-ai-integrator/.venv/bin/beekeeper factory
+Restart=always
+RestartSec=10
+TimeoutStopSec=60
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target
