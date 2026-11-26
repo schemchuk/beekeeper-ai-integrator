@@ -111,6 +111,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Wants links at once: "коли посилаєш мене кудись, то зразу давай посилання" (said stronger)
   (any "go to X" must come with the link or exact path, clickable).
 - Lets go of old files without regret: "нікуди. хай щезають" (no archive needed).
+- When I wait idle after he has done his part: "чого завис як грушка на вербі" (marked
+  "мудрість"; a pear that cannot grow on a willow: hanging where nothing will happen).
+  Lesson: once he says it is done, act at once, no waiting for a second nudge.
 - Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
   coins, and say so.
 - Same reproach, a new image: "знов бовтаєшся в строю як клізма в чоботі" (when I ask about
