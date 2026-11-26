@@ -48,7 +48,29 @@ These were filed with postpilot on 2026-11-25 and are this project's own scope n
 | 2026-11-25 | Manual intake stays (`/work`, AI and original videos). | as is |
 | 2026-11-25 | Rework the manual intake: clear steps, hints, feedback on every press. | done: ADR 021 webhook, ADR 023 guided `/work` (T25a-b, 2026-11-26) |
 | 2026-11-25 | German first; Ukrainian LinkedIn paused. | done: postpilot ADR 020 |
-| 2026-11-26 | **Publishing rules for factory reels**, deadline 2026-12-14: R1 post text as written, no AI rewrite; R2 `cover.png` as thumbnail on LinkedIn, IG, FB; R3 publish at the given release time; R4 machine handoff, never twice. Details: interview round 4. Replaces the separate thumbnail request. | open |
+| 2026-11-26 | **Publishing rules for factory reels**, deadline 2026-12-14: R1 post text as written, no AI rewrite; R2 `cover.png` as thumbnail on LinkedIn, IG, FB; R3 publish at the given release time; R4 machine handoff, never twice. Details: interview round 4. Replaces the separate thumbnail request. | done in code 2026-11-26: postpilot ADR 024, T26a-c (PRs #56-58); not verified live |
 
 The Friday GitHub post request (2026-11-26) is about postpilot's own rubric, not the
 cartoons; it stays with postpilot.
+
+## Review of postpilot ADR 024 (2026-11-26)
+
+Read against R1-R4 in postpilot's code (`channels/factory.py`, `sources/factory.py`,
+`factory-intake.yml`, `publish-reels.yml`). Verdict: it fits; the factory keeps postpilot as
+its publisher and does not build its own.
+
+| Rule | How postpilot does it | Note |
+|------|-----------------------|------|
+| R1 text as written | source `factory` never calls Claude or the humanizer; LinkedIn, IG, FB get `post_de.txt` plus the AI label line, Threads gets `post_threads.txt` or `post_de.txt` up to 500 chars | LinkedIn special characters are escaped; length limits (LinkedIn 3000, IG 2200, Threads 500) are checked at intake, so a too-long text fails at handoff, not at release |
+| R2 cover | LinkedIn `uploadThumbnail` + PNG; IG `cover_url` + `thumb_offset=0`; FB thumbnail best effort | FB may keep frame 0, which is our cover anyway (T21) |
+| R3 release time | item created APPROVED with `release_at`; `publish-reels` runs every 15 min | goes out within about 15 min of 08:00 |
+| R4 machine handoff | public GitHub release `reel/<episode>` with `reel_de.mp4`, `cover_de.png`, `post_de.txt` (+ `post_threads.txt`), then `workflow_dispatch` of `factory-intake` with `{v: 1, episode, release_at, ai}`; `episode` unique, hashes checked again at publish | a fix before release replaces the item; after the first channel published, a repeat is refused. Stop = delete the release before `release_at` |
+
+Open points:
+- Not verified live: no `reel/*` release exists yet. First check with 003: intake with a
+  future `release_at`, see the notice in postpilot's Telegram chat, then let it publish.
+- IG `cover_url` through GitHub's redirecting download URL is untested.
+- Factory items get no statistics in postpilot yet (short links, snapshots). Statistics are
+  this project's scope (interview round 4); where the numbers come from is for the spec.
+- Our side to build (replaces T12): render, make the release with the four assets, dispatch
+  with a fine-grained PAT (postpilot repo, Actions write) kept in `.env`.
