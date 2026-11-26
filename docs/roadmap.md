@@ -73,7 +73,7 @@ and Claude behind interfaces with fakes, so CI never calls them.
 | # | Task | Done when |
 |---|------|-----------|
 | T22 ✅ | Calendar (`calendar.py`): next release slots Tue/Thu 08:00 Europe/Berlin, every deadline of a slot (T-5d ask, T-4d 20:00, T-3d 02:00 script, 07:00 send, T-1d 07:00 accept) | unit tests with a fake clock, DST in March and October |
-| T23 | State (ADR 007): `factory/queue.yaml` and `factory/slots.yaml` load/save; queue ops edit, move, delete, first; release date per item; slot states and transitions | unit tests for every op and transition, invalid transitions refused |
+| T23 ✅ | State (ADR 007): `factory/queue.yaml` and `factory/slots.yaml` load/save; queue ops edit, move, delete, first; release date per item; slot states and transitions | unit tests for every op and transition, invalid transitions refused |
 | T24 | Telegram client (`telegram.py`): `getUpdates`, `sendMessage`, `sendVideo`, `sendPhoto`, inline buttons, `getFile`; serves only `FACTORY_CHAT_ID`; config from `.env` | tests with a fake HTTP layer; a live smoke test by hand with his bot |
 | T25 | `beekeeper factory` process: poller, worker (one job at a time), clock every 15 min and on wake; systemd user unit + `loginctl enable-linger` steps in the docs | the service starts, survives a restart, answers `/start` |
 | T26 | Brain (ADR 008): `claude -p` wrapper, one prompt file per job in `prompts/`, JSON answer checked against a schema, auth error -> plain alert | tests with recorded answers |
