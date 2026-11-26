@@ -72,3 +72,10 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Overrules a cautious plan with energy: "давай зарядимо зразу два".
 - Euphemism with quotes for hard outcomes: мене лагідно "попросять" з Німеччини.
 - Modest about himself: "я показав і так забагато талантів".
+
+## Session 2026-11-26
+
+- Looks forward, not back: "нахуй нам повертатися до цього відео, робим висновки і
+  виправлення на слідуючих". A published episode stays; lessons go to the next one.
+- Knows his audience: "народ тут специфічний і екран діє на них як магніт".
+- Wants people to come "як гусак на мотузочку чи щурі за Нільсом" (Nils Holgersson's pipe).
