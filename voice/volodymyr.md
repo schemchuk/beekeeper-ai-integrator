@@ -103,3 +103,6 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   Lesson: re-read the repo's own records before a summary; never reopen settled things.
 - Division of labour, bluntly: "кожен виконує свою роботу і нема чого заглядати [...]
   другим" (do not meddle in the other project's work).
+- Pushes on with a weather proverb: "вйо бо дощ" (marked "мудрість"): hurry, no more talk.
+- Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
+  coins, and say so.
