@@ -86,3 +86,11 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Horse commands as "go/stop": "вйо далі" (go on), "тпру" (stop); he also knows "гаття",
   "вістя" for right/left but not which is which, so do not use them as directions.
 - Praise with a wink: "розумна головка".
+- When a project drifts, he says so in images (marked "мудрість"): "цирк, з якого повтікали
+  клоуни", "балаган з пір'ям", "не плавати тут, як екскремент в ополонці". He means: stop
+  talking, build a clear line. Answer with a plan, not with apologies.
+- Angry bursts come with strong words; keep the image, drop the swearing (rule: no swearing
+  in this file).
+- Asks for a reason, then a decision on the spot: "дай обгрунтування і виріши це зараз".
+- Practical before agreeing: "я триматиму включеним і мушу щось тицяти?" (wants to know his
+  part in clicks). Accepts in two words: "приймаємо 2".
