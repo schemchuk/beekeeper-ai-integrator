@@ -1,7 +1,7 @@
 # Roadmap
 
-Status: M1-M2 ACCEPTED (Volodymyr, 2026-11-25). M5 DRAFT (gate 4 of 4: interview -> spec ->
-architecture -> **tasks**, 2026-11-26).
+Status: M1-M2 ACCEPTED (Volodymyr, 2026-11-25). M5 ACCEPTED (Volodymyr, 2026-11-26; gate 4 of 4:
+interview -> spec -> architecture -> **tasks**).
 Sources: `docs/product.md`, `docs/spec.md`, `docs/architecture.md`, `docs/adr/001-010`. One task = one small PR-sized step with tests.
 Tasks marked **postpilot** are requests (`docs/postpilot-requests.md`), built in postpilot's
 own process, not here.
@@ -90,7 +90,7 @@ and Claude behind interfaces with fakes, so CI never calls them.
 | T37 | MVP run: episode 003 end to end, live, published by postpilot from a factory handoff | 003 is on LinkedIn on its slot |
 
 Order: T22-T26 (base), then T27-T29 (ideas), T30-T33 (one slot from script to handoff),
-T34-T36 any time, T37 last. Before T24 and T25 Volodymyr does two things by hand: makes the
-bot with BotFather (token into `.env`) and runs the lid setting (architecture §9 A2).
+T34-T36 any time, T37 last. Before T24 Volodymyr makes the bot with BotFather (token into `.env`).
+The lid setting (architecture §9 A2) is already done.
 
 After the MVP: F2.5 reserves, F6 statistics, then M4 (T17-T20).
