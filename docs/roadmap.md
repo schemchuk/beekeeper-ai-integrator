@@ -32,7 +32,8 @@ After T10: ask Volodymyr about making the repo public (BRIEF: public with the fi
 | # | Task |
 |---|------|
 | **postpilot** | ADR + `factory-intake` workflow: approved item at `release_at`, idempotent by `episode` |
-| T11 | `post` block in `episode.yaml` (DE + UA post text), approved with the script |
+| T11 | `post` block in `episode.yaml` (DE + UA post text), approved with the script. Rules (2026-11-26): the first line is a hook (a pain or a question, not "Neuer Zeichentrickfilm"); a question at the end that invites comments; an offer, never a request ("Wiederkehrende Aufgaben im Team? Schreiben Sie mir."); a "grain" for the reader (tip, script, link to the real code); `beekeeper validate` checks the parts are there |
+| T21 | Cover (BRIEF cover rule): `cover` block in `episode.yaml` (monitor text with a recognizable IT pain, character, title); Remotion still `cover.png` and the same picture as frame 0 of both reels; `check` fails a reel without it |
 | T12 | `handoff` step: `sendVideo` of the DE reel to his chat, then `workflow_dispatch` with the v1 JSON; `.env` secrets; retry + Telegram alert; UA reel archived |
 
 ## M3. Telegram workflow (`docs/product.md` §5)

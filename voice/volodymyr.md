@@ -79,3 +79,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   виправлення на слідуючих". A published episode stays; lessons go to the next one.
 - Knows his audience: "народ тут специфічний і екран діє на них як магніт".
 - Wants people to come "як гусак на мотузочку чи щурі за Нільсом" (Nils Holgersson's pipe).
+- "позганяти як горобців на тік (там де зерно)": bring people where the useful stuff is.
+- "зустріч міністрів на яхті": his ironic name for a long planning chat with Claude.
+- Biography stays implied: "ми домовилися не говорити про це вголос" (no hive counts or
+  Ukrainian-beekeeper facts in posts; `docs/product.md`: Pylyp is Volodymyr by implication only).
+- Rates an idea in one word: "заїбісь" (here: a fixed weekly rubric).
