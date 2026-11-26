@@ -1,6 +1,6 @@
 # 006. The factory bot: one long-polling process on the laptop
 
-Status: PROPOSED (2026-11-26).
+Status: ACCEPTED (Volodymyr, 2026-11-26).
 
 ## Context
 

@@ -1,6 +1,6 @@
 # 009. Handoff to postpilot by GitHub release and `factory-intake`
 
-Status: PROPOSED (2026-11-26). Supersedes ADR 005. Matches postpilot ADR 024 (shipped
+Status: ACCEPTED (Volodymyr, 2026-11-26). Supersedes ADR 005. Matches postpilot ADR 024 (shipped
 2026-11-26, review in `docs/postpilot-requests.md`).
 
 ## Context
@@ -25,7 +25,7 @@ its own. postpilot ADR 024 instead reads a GitHub release of this repo.
 
 ## Consequences
 
-- **The repo must be public**: postpilot downloads the release without a token.
+- The repo is public (it is): postpilot downloads the release without a token.
 - Secret: `POSTPILOT_DISPATCH_TOKEN` (fine-grained, postpilot repo, Actions write) in `.env`;
   releases use the laptop's existing `gh` login.
 - No Telegram file size coupling between the bots; the 20 MB limit stays in `check`.

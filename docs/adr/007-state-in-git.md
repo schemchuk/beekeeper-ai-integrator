@@ -1,6 +1,6 @@
 # 007. Factory state in git: `factory/queue.yaml` and `factory/slots.yaml`
 
-Status: PROPOSED (2026-11-26).
+Status: ACCEPTED (Volodymyr, 2026-11-26).
 
 ## Context
 

@@ -40,6 +40,10 @@ Each project does its own job. postpilot publishes under R1-R4, which it has shi
   (story file, calendar, characters, ideas, voice notes).
 - F1.3 A message that is a story becomes a queue item; a command ("move", "delete", "show")
   acts on the queue. When unsure, the bot asks one short question.
+- F1.4 The bot learns his way of speaking from every channel: this chat, Telegram text and
+  Telegram voice notes. New phrases and images go to `voice/volodymyr.md`, and the bot
+  answers in his style (Ukrainian, short, with his images). He uses Telegram on the laptop
+  and on the phone; nothing depends on which one.
 
 ### F2. Idea queue
 - F2.1 The queue is an ordered list of ideas, each with a short title and its source text.
@@ -57,6 +61,7 @@ Each project does its own job. postpilot publishes under R1-R4, which it has shi
   into `episodes/<nnn>-<slug>/episode.yaml` (ADR 001): Ukrainian and German side by side,
   cover block, post block (T11 rules), following `docs/product.md` §4 and `bible/`.
 - F3.2 In the morning the bot sends it: Ukrainian text, German text, cover idea, post text.
+  The same script also goes as a file to `~/Desktop/temp/` (created if missing, every time).
 - F3.3 He answers with edits in Ukrainian (text or voice). The factory updates the Ukrainian,
   re-adapts the German and shows the changed German words marked.
 - F3.4 Silence is approval: the script is accepted on the morning of the day before release.
@@ -78,6 +83,13 @@ Each project does its own job. postpilot publishes under R1-R4, which it has shi
 - F5.3 Failure: retry, then a Telegram alert to him in plain words. Never a second release of
   the same episode after publishing started.
 
+### F7. The temp folder
+- F7.1 `~/Desktop/temp/` receives the scripts for approval (F3.2). If the folder is missing,
+  the factory creates it before every write.
+- F7.2 The folder is emptied every Monday morning (07:00 Berlin). It does not depend on the
+  laptop's state or on the factory process: if the laptop was off or asleep, the cleaning
+  runs at the first start after that.
+
 ### F6. Statistics (after the MVP)
 - F6.1 Monthly overview in Telegram, plus on request. Source of the numbers: decided in the
   architecture (postpilot does not track factory items yet).
@@ -97,6 +109,8 @@ Each project does its own job. postpilot publishes under R1-R4, which it has shi
 F1, F2 (without the reserves rule F2.5 if time is short), F3, F4, F5 for one episode (003),
 end to end with no manual step on the factory side. Done when 003 is published by postpilot
 from a factory handoff, verified live.
+
+F7 is part of the MVP.
 
 Later: F2.5 reserves, F6 statistics, monthly overview, scene library, music.
 
