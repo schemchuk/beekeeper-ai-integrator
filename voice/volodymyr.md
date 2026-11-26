@@ -98,3 +98,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   reserves (store-room of ideas).
 - Teases the norm with a question: "ми чимось файніші чи мудріші?" ("файний" = fine,
   Western-Ukrainian). He marks his own wisdom with "(мудрість)".
+- When I forget what is already done, he is sharp: "бовтаєшся як патик в галоші" (dangling
+  like a stick in a galosh), "я вже понадіявся що тобі не потрібно носа підтирати".
+  Lesson: re-read the repo's own records before a summary; never reopen settled things.
+- Division of labour, bluntly: "кожен виконує свою роботу і нема чого заглядати [...]
+  другим" (do not meddle in the other project's work).
