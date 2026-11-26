@@ -12,3 +12,4 @@ voice/inbox/*.ogg
 voice/inbox/*.mp3
 
 uv.lock
+.env
