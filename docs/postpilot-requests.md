@@ -1,20 +1,55 @@
-# Requests to postpilot
+# postpilot and this project
 
-postpilot (`~/VS_Code_projects/postpilot`) distributes the reels and is the Telegram
-control channel. It has its own process (interview, spec, tasks), so requests are listed
-here and handed over to a postpilot session; nothing is coded there from this repo.
-A copy lives in postpilot's Claude memory (`project-beekeeper-requests`).
+postpilot (`~/VS_Code_projects/postpilot`) is a separate project with its own process and its
+own problems. On 2026-11-26 Volodymyr took back everything that belongs to the cartoons:
+postpilot is only the **publisher** of a finished reel. Everything before that (ideas,
+scripts, plan, approval, talk with Volodymyr) is this project's job. The final split is
+decided in the interview and spec, not here.
+
+## What postpilot does for us today (checked 2026-11-26)
+
+Reel 002 (DE) went through it and was published on 2026-11-25 on LinkedIn DE, Threads,
+Instagram Reels and Facebook Reels (postpilot `docs/STATUS.md`, ADR 019, 021-023).
+
+| It gives | Facts |
+|----------|-------|
+| Working accounts and tokens | LinkedIn (Videos API), Threads, Instagram and Facebook Reels, with renewal reminders |
+| Video handling | takes a Telegram `file_id`, no file host; fits non-9:16 video with ffmpeg; Reels need 3-90 s; max 20 MB |
+| AI label | `KI-generiertes Video / AI-generated video` line, Instagram `is_ai_generated` |
+| Reliability | idempotent publishing, Retry/Skip button on failure, readable error lines (ADR 022) |
+| Intake | guided `/work` in its bot: Original/AI-generated, video, then description or none (ADR 023) |
+
+## Where it does not fit us
+
+| Gap | Effect on us |
+|-----|--------------|
+| The description is rewritten: `Done` runs Claude plus the humanizer on our text | our approved post (hook, question, offer, BRIEF rules) is not posted as written |
+| `No description` goes to Reels only | the only verbatim path skips LinkedIn, our main channel |
+| No thumbnail upload (`uploadThumbnail: False`) | the cover rule (T21) does not reach LinkedIn; 002's dark frame got 25 impressions |
+| Publishes right after Approve, no release time | Tue/Thu 08:00 needs Volodymyr's tap at that hour |
+| Manual intake only | 7 steps per reel in the postpilot bot (`/work`, kind, video, description, text, Done, Approve) |
+| The first run needed hotfixes and manual DB steps | it works now, but is young |
+
+## Taken back into this project (no longer requests)
+
+These were filed with postpilot on 2026-11-25 and are this project's own scope now:
+
+- Telegram control channel: ideas and tall tales in, chat with Volodymyr.
+- Scripts and the monthly plan: review, edit, silent approval (`docs/product.md` §5).
+- Ukrainian edits flowing to the German production text.
+- Statistics for the cartoons.
+- The handoff contract (ADR 005, `factory-intake`): to be revisited in the architecture.
+
+## Still asked of postpilot (publishing only)
 
 | Date | Request | Status |
 |------|---------|--------|
-| 2026-11-25 | Focus on German: German audience first, Ukrainian only as a 2029 fallback. | partly done: UA LinkedIn posts paused (postpilot ADR 020, T22, 2026-11-25) |
 | 2026-11-25 | Keep the cross-network reach (LinkedIn, Threads, Instagram, Facebook Reels). | as is |
-| 2026-11-25 | Telegram bot as the factory's control channel: ideas and tall tales in, scripts and monthly plan for review/edit/approval, chat with Volodymyr. | open |
-| 2026-11-25 | He edits Ukrainian; edits must flow to the German production text (postpilot follow-up 4: Edit on own_video preview only edits DE). | open |
-| 2026-11-25 | Silent approval in Telegram: monthly plan (20th sent, 24th warning, 25th morning accepted) and scripts (3 days before release, accepted the morning before, no warning). See `docs/product.md`. | open |
-| 2026-11-25 | Statistics for the cartoons roughly like postpilot's. | open |
-| 2026-11-25 | Manual intake stays: AI-generated (`/work ai`) and original content added by hand, as in the live run 2026-11-24. | as is |
-| 2026-11-25 | The factory hands its reels to postpilot automatically; postpilot then distributes them by its own rules. Proposed mechanism: `docs/adr/005-handoff-to-postpilot.md` (Telegram `file_id` + `workflow_dispatch` of a new `factory-intake` workflow); postpilot decides in its own ADR. ADR 005 accepted 2026-11-25; no Stop button before release. | open |
-| 2026-11-25 | Rework the manual intake in the bot (AI and original videos alike): a clear command set, a hint at every step saying what to do next, the shortest possible path, and visible feedback on every button press. Live-run findings and the stuck 002 reel: `docs/runs/2026-11-25-002-first-reel.md`. | open |
-| 2026-11-26 | LinkedIn thumbnails: accept a `cover.png` with a reel and upload it as the video thumbnail where the network allows (LinkedIn does). 002's dark first frame got 25 impressions, the trial reel with a visible character 70. | open |
-| 2026-11-26 | Friday GitHub post (weekly rubric about his real work): today text only on LinkedIn, the avatar video goes only to Reels. Put the avatar video in the LinkedIn post too, or at least a picture with a monitor showing the real commit/PR; text-only posts lose in the feed. | open |
+| 2026-11-25 | Manual intake stays (`/work`, AI and original videos). | as is |
+| 2026-11-25 | Rework the manual intake: clear steps, hints, feedback on every press. | done: ADR 021 webhook, ADR 023 guided `/work` (T25a-b, 2026-11-26) |
+| 2026-11-25 | German first; Ukrainian LinkedIn paused. | done: postpilot ADR 020 |
+| 2026-11-26 | Upload `cover.png` as the LinkedIn video thumbnail. | open |
+| 2026-11-26 | Post a given description as written (no rewrite) on all channels. | not filed yet: wait for the spec |
+
+The Friday GitHub post request (2026-11-26) is about postpilot's own rubric, not the
+cartoons; it stays with postpilot.
