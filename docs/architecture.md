@@ -82,6 +82,14 @@ Before a slot is `planned`: at T-5d with an empty queue the bot asks for an idea
 the MVP). The idea is bound to the slot when the script is written; until then the queue
 order decides.
 
+Rules fixed in code (T23, `factory/queue.py`, `factory/slots.py`):
+- A slot is open for a new idea until its send deadline (T-3d 07:00); after that the next
+  open slot is used, so he always gets the script at least two days before release.
+- When the script is written the idea leaves the queue and is copied into the slot.
+- A stopped slot stays used up (no surprise script for it); its idea goes back to the head
+  of the queue and gets the next open slot.
+- Idea ids are never reused.
+
 ## 4. Flows
 
 **Idea in (F1).** Message -> router. Voice: download, whisper to Ukrainian text, show the
