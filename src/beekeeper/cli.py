@@ -52,6 +52,7 @@ def build_parser() -> argparse.ArgumentParser:
     build = sub.add_parser("build", help="voices -> timing -> render -> post -> check")
     _episode_args(build)
     build.add_argument("--force", action="store_true", help="render even if nothing changed")
+    sub.add_parser("factory", help="run the factory bot (systemd user service, docs/factory.md)")
     return parser
 
 
@@ -236,6 +237,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         return cmd_post(args.episode, args.cast, args.lang, args.out)
     if args.command == "build":
         return cmd_build(args.episode, args.cast, args.lang, args.out, args.force)
+    if args.command == "factory":
+        from beekeeper.factory.service import main as factory_main
+
+        return factory_main()
     parser.print_help()
     return 0
 
