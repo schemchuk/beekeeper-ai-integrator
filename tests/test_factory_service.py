@@ -177,3 +177,16 @@ def test_main_keeps_the_token_out_of_the_log(monkeypatch):
     )
     assert service.main() == 1
     assert logging.getLogger("httpx").getEffectiveLevel() >= logging.WARNING
+
+
+def test_logged_out_claude_is_said_plainly(tmp_path):
+    from beekeeper.factory.brain import AUTH_MESSAGE, BrainAuthError
+
+    bot = FakeBot()
+    factory = make(tmp_path, bot)
+
+    def logged_out():
+        raise BrainAuthError()
+
+    factory.run_job(Job("script 003", logged_out))
+    assert bot.sent == [AUTH_MESSAGE]

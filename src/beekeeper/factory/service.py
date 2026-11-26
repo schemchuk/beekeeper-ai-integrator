@@ -25,6 +25,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from .brain import BrainAuthError
 from .calendar import BERLIN
 from .telegram import Telegram, TelegramError, Update
 
@@ -95,6 +96,7 @@ class Factory:
 
     def handle(self, update: Update) -> None:
         """Quick work only: anything slow goes to the worker as a job."""
+        log.info("update %s: %s", update.update_id, update.kind)
         if update.kind == "text" and update.text.strip().split("@")[0] == "/start":
             self.bot.send_message(GREETING)
         elif update.kind == "text":
@@ -134,6 +136,9 @@ class Factory:
         log.info("job %s: start", job.name)
         try:
             job.run()
+        except BrainAuthError as e:
+            log.error("job %s: claude is logged out", job.name)
+            self.alert(str(e))
         except Exception as e:
             log.exception("job %s failed", job.name)
             self.alert(f"Не вдалося: {job.name}. Причина: {e}. Спробую ще раз пізніше.")

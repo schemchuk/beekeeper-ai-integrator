@@ -114,6 +114,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - When I wait idle after he has done his part: "чого завис як грушка на вербі" (marked
   "мудрість"; a pear that cannot grow on a willow: hanging where nothing will happen).
   Lesson: once he says it is done, act at once, no waiting for a second nudge.
+- Slowness: "чому так довго працюєш ніби їжака родиш" (a slow, prickly labour).
+  Lesson: small text notes are batched into one PR at session end, no CI wait per phrase.
 - Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
   coins, and say so.
 - Same reproach, a new image: "знов бовтаєшся в строю як клізма в чоботі" (when I ask about
