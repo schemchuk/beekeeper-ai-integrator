@@ -9,14 +9,19 @@ from beekeeper.episode import load_episode
 from beekeeper.voices import clip_key, segments, voice_episode
 from beekeeper.voices.cast import CastError, Voice, load_voices
 from beekeeper.voices.engines import Piper
+from blocks import COVER_POST
 
 ROOT = Path(__file__).resolve().parents[1]
 needs_ffmpeg = pytest.mark.skipif(not shutil.which("ffmpeg"), reason="ffmpeg not installed")
 
-EPISODE = """\
+EPISODE = (
+    """\
 id: "900"
 slug: test
 title: {ua: "Тест", de: "Test"}
+"""
+    + COVER_POST
+    + """\
 lines:
   - onscreen: {ua: "03:12", de: "03:12"}
   - who: pylyp
@@ -26,6 +31,7 @@ lines:
     ua: "Автоматизуй."
     de: "Automatisier das."
 """
+)
 CAST = """\
 pylyp:
   ua: {engine: holos, voice: clone, ref: ref.wav}

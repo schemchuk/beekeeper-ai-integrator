@@ -90,6 +90,21 @@ def check_reel(path: Path) -> tuple[list[str], dict]:
     return [f"{path}: {p}" for p in problems(info)], info
 
 
+def check_cover(path: Path) -> list[str]:
+    """The cover still (thumbnail) must exist and match the reel's 1080x1920."""
+    if not path.is_file():
+        return [f"{path}: not found, every reel needs its cover (BRIEF cover rule)"]
+    try:
+        info = probe(path)
+    except ValueError as e:
+        return [f"{path}: {e}"]
+    videos = [s for s in info.get("streams", []) if s.get("codec_type") == "video"]
+    size = (videos[0].get("width"), videos[0].get("height")) if videos else None
+    if size != (WIDTH, HEIGHT):
+        return [f"{path}: size {size}, want {WIDTH}x{HEIGHT}"]
+    return []
+
+
 def summary(info: dict) -> str:
     fmt = info.get("format", {})
     return f"{float(fmt.get('duration', 0)):.1f} s, {int(fmt.get('size', 0)) / 1024 / 1024:.1f} MB"

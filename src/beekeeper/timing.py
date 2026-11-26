@@ -25,6 +25,7 @@ READ_CPS = 17.0  # reading speed for on-screen text, characters per second (subt
 MIN_HOLD = 1.5  # shortest time any on-screen text stays up, seconds
 STAGGER = 0.6  # delay between items of an on-screen list ("ложечку", "пів ложечки", ...)
 END_CARD_MIN = 3.0
+COVER_SECONDS = 0.5  # frame 0 is the cover (thumbnail), held this long before the hook
 SFX_COUNT = re.compile(r"^(?P<name>.+?)\s+x(?P<n>\d+)$")  # "phone-buzz x3"
 MOUTH_OPEN = 0.18  # frame loudness (share of the clip's loud level) that opens the mouth
 MOUTH_WIDE = 0.85  # ... and that opens it wide
@@ -150,7 +151,16 @@ def build_timeline(
     With `voices_dir`, every speech also gets `mouth` (see `mouth_levels`) for the lip flaps.
     With `sfx_audio` (name -> wav path, see `beekeeper.sfx`), every sfx event gets `audio`.
     """
-    cursor = 0
+    cover = None
+    if episode.cover:
+        cover = {
+            "title": episode.title[lang],
+            "monitor": episode.cover.monitor[lang],
+            "who": episode.cover.who,
+            "start": 0,
+            "end": frames(COVER_SECONDS),
+        }
+    cursor = cover["end"] if cover else 0
     lines = []
     for i, line in enumerate(episode.lines):
         entry = _line(i, line, clips.get(i), lang, cursor, audio_prefix)
@@ -182,6 +192,7 @@ def build_timeline(
         "duration": cursor,
         "title": episode.title[lang],
         "scenes": episode.scenes,
+        "cover": cover,
         "lines": lines,
         "end_card": end_card,
     }

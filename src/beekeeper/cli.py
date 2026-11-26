@@ -47,7 +47,9 @@ def build_parser() -> argparse.ArgumentParser:
     render.add_argument("--force", action="store_true", help="render even if nothing changed")
     check = sub.add_parser("check", help="check reel_<lang>.mp4 against the output contract")
     _episode_args(check)
-    build = sub.add_parser("build", help="voices -> timing -> render -> check")
+    post = sub.add_parser("post", help="feed text from the post block: post_<lang>.txt")
+    _episode_args(post)
+    build = sub.add_parser("build", help="voices -> timing -> render -> post -> check")
     _episode_args(build)
     build.add_argument("--force", action="store_true", help="render even if nothing changed")
     return parser
@@ -77,24 +79,39 @@ def _episode_dir(episode: Path, cast: Path, out: Path) -> Path | None:
 def cmd_render(
     episode: Path, cast: Path, langs: list[str] | None, out: Path, force: bool = False
 ) -> int:
-    from beekeeper.render import RenderError, render
+    from beekeeper.render import RenderError, render, render_cover
 
     ep_dir = _episode_dir(episode, cast, out)
     if ep_dir is None:
         return 1
     for lang in langs or ["de", "ua"]:
-        try:
-            reel, rendered = render(ep_dir, lang, force=force)
-        except RenderError as e:
-            print(e, file=sys.stderr)
-            return 1
-        print(f"ok: {lang} {'rendered' if rendered else 'unchanged'} -> {reel}")
+        for step in (render, render_cover):
+            try:
+                path, rendered = step(ep_dir, lang, force=force)
+            except RenderError as e:
+                print(e, file=sys.stderr)
+                return 1
+            print(f"ok: {lang} {'rendered' if rendered else 'unchanged'} -> {path}")
+    return 0
+
+
+def cmd_post(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> int:
+    from beekeeper.post import write_post
+
+    try:
+        ep = load_episode(episode, load_cast(cast))
+    except EpisodeError as e:
+        print("\n".join(e.problems), file=sys.stderr)
+        return 1
+    for lang in langs or ["de", "ua"]:
+        path = write_post(ep, out / f"{ep.id}-{ep.slug}", lang)
+        print(f"ok: {lang} post -> {path}")
     return 0
 
 
 def cmd_check(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> int:
-    from beekeeper.check import check_reel, summary
-    from beekeeper.render import reel_path
+    from beekeeper.check import check_cover, check_reel, summary
+    from beekeeper.render import cover_path, reel_path
 
     ep_dir = _episode_dir(episode, cast, out)
     if ep_dir is None:
@@ -103,6 +120,7 @@ def cmd_check(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> 
     for lang in langs or ["de", "ua"]:
         reel = reel_path(ep_dir, lang)
         found, info = check_reel(reel)
+        found += check_cover(cover_path(ep_dir, lang))
         if found:
             print("\n".join(found), file=sys.stderr)
             status = 1
@@ -118,6 +136,7 @@ def cmd_build(
         lambda: cmd_voices(episode, cast, langs, out),
         lambda: cmd_timing(episode, cast, langs, out),
         lambda: cmd_render(episode, cast, langs, out, force),
+        lambda: cmd_post(episode, cast, langs, out),
         lambda: cmd_check(episode, cast, langs, out),
     )
     for step in steps:
@@ -213,6 +232,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return cmd_render(args.episode, args.cast, args.lang, args.out, args.force)
     if args.command == "check":
         return cmd_check(args.episode, args.cast, args.lang, args.out)
+    if args.command == "post":
+        return cmd_post(args.episode, args.cast, args.lang, args.out)
     if args.command == "build":
         return cmd_build(args.episode, args.cast, args.lang, args.out, args.force)
     parser.print_help()

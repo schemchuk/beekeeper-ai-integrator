@@ -8,6 +8,29 @@ title:
   ua: "Медунко в сплячці"
   de: "Medunko im Winterschlaf"
 
+# Cover and post (reach rules, 2026-11-26) added after 002 was published, as the example for
+# 003 on; the published 002 reel stays as it is. Draft text, waits for Volodymyr's edits.
+cover:
+  who: [pylyp, medunko]
+  monitor:
+    ua: "Ваш запит\nзбережено."
+    de: "Ihre Anfrage wurde\ngespeichert."
+
+post:
+  hook:
+    ua: "03:12, і він знову пише. Скільки однакових листів ви відповідаєте вручну щотижня?"
+    de: "03:12 Uhr, er schreibt schon wieder. Wie viele gleiche Anfragen beantworten Sie jede Woche von Hand?"
+  grain:
+    ua: "Бот, який чемно відповідає на однаковий запит і зберігає його на потім, це кілька десятків рядків Python. Решта ночі ваша."
+    de: "Ein Bot, der dieselbe Anfrage freundlich beantwortet und für später speichert, sind ein paar Dutzend Zeilen Python. Der Rest der Nacht gehört Ihnen."
+  question:
+    ua: "Яку рутину ви першою віддали б ботові?"
+    de: "Welche Routine würden Sie zuerst einem Bot geben?"
+  offer:
+    ua: "Повторювані задачі в команді? Напишіть мені, я подивлюсь."
+    de: "Wiederkehrende Aufgaben im Team? Schreiben Sie mir, ich schaue es mir an."
+  hashtags: [Automatisierung, KI, Python, Mittelstand]
+
 # Shots are hints for the animation; the voice lines drive the timing.
 scenes:
   hut: "Pylyp's hut at night, snow outside the window, laptop glowing, phone on the table"

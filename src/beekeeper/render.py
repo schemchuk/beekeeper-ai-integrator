@@ -1,4 +1,5 @@
-"""Render step (ADR 002 §3, ADR 004): Remotion turns `timeline-<lang>.json` into `reel_<lang>.mp4`.
+"""Render step (ADR 002 §3, ADR 004): Remotion turns `timeline-<lang>.json` into `reel_<lang>.mp4`
+and the cover still `cover_<lang>.png` (the thumbnail, BRIEF cover rule).
 
 Python calls the Remotion CLI in `animation/` as a subprocess, with the episode's out folder
 as the public dir (the audio paths in the timeline are relative to it). A render is slow on
@@ -14,6 +15,7 @@ from pathlib import Path
 
 ANIMATION = Path("animation")
 COMPOSITION = "Reel"
+COVER_COMPOSITION = "Cover"
 # Inputs of the animation project besides `src/`: a dependency bump changes the picture too.
 ANIMATION_FILES = ("package-lock.json", "remotion.config.ts")
 
@@ -24,6 +26,10 @@ class RenderError(Exception):
 
 def reel_path(ep_dir: Path, lang: str) -> Path:
     return ep_dir / f"reel_{lang}.mp4"
+
+
+def cover_path(ep_dir: Path, lang: str) -> Path:
+    return ep_dir / f"cover_{lang}.png"
 
 
 def fingerprint(timeline_path: Path, ep_dir: Path, animation: Path) -> str:
@@ -78,25 +84,50 @@ def command(timeline_path: Path, ep_dir: Path, reel: Path) -> list[str]:
     ]
 
 
+def cover_command(timeline_path: Path, ep_dir: Path, cover: Path) -> list[str]:
+    return [
+        "npx",
+        "--no-install",
+        "remotion",
+        "still",
+        COVER_COMPOSITION,
+        str(cover.resolve()),
+        f"--props={timeline_path.resolve()}",
+        f"--public-dir={ep_dir.resolve()}",
+        "--image-format=png",
+    ]
+
+
 def render(
     ep_dir: Path, lang: str, animation: Path = ANIMATION, force: bool = False
 ) -> tuple[Path, bool]:
     """Render one language; returns the reel path and whether it was rendered (not cached)."""
+    return _render(ep_dir, lang, animation, force, reel_path(ep_dir, lang), command, "render")
+
+
+def render_cover(
+    ep_dir: Path, lang: str, animation: Path = ANIMATION, force: bool = False
+) -> tuple[Path, bool]:
+    """Render the cover still of one language, cached like the reel."""
+    out = cover_path(ep_dir, lang)
+    return _render(ep_dir, lang, animation, force, out, cover_command, "still")
+
+
+def _render(ep_dir, lang, animation, force, out, make_command, what) -> tuple[Path, bool]:
     timeline_path = ep_dir / f"timeline-{lang}.json"
     if not timeline_path.is_file():
         raise RenderError(f"{timeline_path}: not found, run `beekeeper timing` first")
     if not (animation / "node_modules").is_dir():
         raise RenderError(f"{animation}/node_modules missing, run `npm ci` in {animation}")
-    reel = reel_path(ep_dir, lang)
-    stamp = reel.with_suffix(".mp4.hash")
+    stamp = out.with_suffix(out.suffix + ".hash")
     digest = fingerprint(timeline_path, ep_dir, animation)
-    if not force and reel.is_file() and stamp.is_file() and stamp.read_text().strip() == digest:
-        return reel, False
+    if not force and out.is_file() and stamp.is_file() and stamp.read_text().strip() == digest:
+        return out, False
 
     stamp.unlink(missing_ok=True)
     sys.stdout.flush()  # our earlier lines first, then Remotion's progress
-    result = subprocess.run(command(timeline_path, ep_dir, reel), cwd=animation)
-    if result.returncode != 0 or not reel.is_file():
-        raise RenderError(f"remotion render failed for {lang} (exit {result.returncode})")
+    result = subprocess.run(make_command(timeline_path, ep_dir, out), cwd=animation)
+    if result.returncode != 0 or not out.is_file():
+        raise RenderError(f"remotion {what} failed for {lang} (exit {result.returncode})")
     stamp.write_text(digest + "\n")
-    return reel, True
+    return out, True

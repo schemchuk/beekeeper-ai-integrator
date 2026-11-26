@@ -12,12 +12,15 @@ import {
 import { Stage } from "../characters/Stage";
 import { Camera, ShotLayer } from "../scenes";
 import { PhoneCloseUp } from "../scenes/Phone";
+import { Cover } from "./Cover";
 import { fontFamily } from "./fonts";
 import { Span, framing, spans } from "./shots";
 import { DEFAULT_BG, SAFE_X, SPEAKER } from "./theme";
 import type { OnscreenItem, Speech, Timeline, TimelineLine } from "./types";
 
-export const calculateReelMetadata: CalculateMetadataFunction<Timeline> = ({ props }) => ({
+export const calculateReelMetadata: CalculateMetadataFunction<Timeline> = ({
+  props,
+}) => ({
   durationInFrames: Math.max(1, props.duration),
   fps: props.fps,
   defaultOutName: `reel_${props.lang}`,
@@ -27,16 +30,33 @@ export const Reel: React.FC<Timeline> = (timeline) => {
   const { lang } = timeline;
   const all = spans(timeline);
   const seq = (span: Span, key: string, child: React.ReactNode) => (
-    <Sequence key={key} from={span.from} durationInFrames={span.to - span.from} name={key}>
+    <Sequence
+      key={key}
+      from={span.from}
+      durationInFrames={span.to - span.from}
+      name={key}
+    >
       {child}
     </Sequence>
   );
   return (
     <AbsoluteFill style={{ fontFamily, backgroundColor: DEFAULT_BG[0] }}>
       <Camera timeline={timeline}>
-        {all.map((span) => seq(span, `scene ${span.line.index}`, <ShotLayer span={span} layer="back" />))}
+        {all.map((span) =>
+          seq(
+            span,
+            `scene ${span.line.index}`,
+            <ShotLayer span={span} layer="back" />,
+          ),
+        )}
         <Stage timeline={timeline} />
-        {all.map((span) => seq(span, `front ${span.line.index}`, <ShotLayer span={span} layer="front" />))}
+        {all.map((span) =>
+          seq(
+            span,
+            `front ${span.line.index}`,
+            <ShotLayer span={span} layer="front" />,
+          ),
+        )}
       </Camera>
       {all
         .filter(({ line }) => line.onscreen.length > 0)
@@ -44,11 +64,18 @@ export const Reel: React.FC<Timeline> = (timeline) => {
           seq(
             span,
             `onscreen ${span.line.index}`,
-            framing(span.line) === "phone" ? <PhoneCloseUp line={span.line} /> : <Messages line={span.line} />,
+            framing(span.line) === "phone" ? (
+              <PhoneCloseUp line={span.line} />
+            ) : (
+              <Messages line={span.line} />
+            ),
           ),
         )}
       {timeline.lines
-        .filter((line): line is TimelineLine & { speech: Speech } => line.speech !== null)
+        .filter(
+          (line): line is TimelineLine & { speech: Speech } =>
+            line.speech !== null,
+        )
         .map(({ index, who, speech }) => (
           <Sequence
             key={`speech-${index}`}
@@ -64,11 +91,25 @@ export const Reel: React.FC<Timeline> = (timeline) => {
         line.sfx
           .filter((event) => event.audio)
           .map((event, k) => (
-            <Sequence key={`sfx-${line.index}-${k}`} from={event.start} name={`sfx ${event.name}`} layout="none">
+            <Sequence
+              key={`sfx-${line.index}-${k}`}
+              from={event.start}
+              name={`sfx ${event.name}`}
+              layout="none"
+            >
               <Audio src={staticFile(event.audio!)} />
             </Sequence>
           )),
       )}
+      {timeline.cover ? (
+        <Sequence
+          from={timeline.cover.start}
+          durationInFrames={timeline.cover.end - timeline.cover.start}
+          name="cover"
+        >
+          <Cover cover={timeline.cover} />
+        </Sequence>
+      ) : null}
       {timeline.end_card ? (
         <Sequence
           from={timeline.end_card.start}
@@ -94,11 +135,21 @@ const withBleeps = (text: string) =>
     ),
   );
 
-const Subtitle: React.FC<{ who: string; text: string; lang: "de" | "ua" }> = ({ who, text, lang }) => {
+const Subtitle: React.FC<{ who: string; text: string; lang: "de" | "ua" }> = ({
+  who,
+  text,
+  lang,
+}) => {
   const frame = useCurrentFrame();
   const speaker = SPEAKER[who];
   return (
-    <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: 460 }}>
+    <AbsoluteFill
+      style={{
+        justifyContent: "flex-end",
+        alignItems: "center",
+        paddingBottom: 460,
+      }}
+    >
       <div
         style={{
           margin: `0 ${SAFE_X}px`,
@@ -106,13 +157,29 @@ const Subtitle: React.FC<{ who: string; text: string; lang: "de" | "ua" }> = ({ 
           borderRadius: 32,
           backgroundColor: "rgba(0, 0, 0, 0.62)",
           textAlign: "center",
-          opacity: interpolate(frame, [0, 4], [0, 1], { extrapolateRight: "clamp" }),
+          opacity: interpolate(frame, [0, 4], [0, 1], {
+            extrapolateRight: "clamp",
+          }),
         }}
       >
-        <div style={{ color: speaker?.color ?? "#fff", fontSize: 40, fontWeight: 800, marginBottom: 8 }}>
+        <div
+          style={{
+            color: speaker?.color ?? "#fff",
+            fontSize: 40,
+            fontWeight: 800,
+            marginBottom: 8,
+          }}
+        >
           {speaker?.name[lang] ?? who}
         </div>
-        <div style={{ color: "#fff", fontSize: 58, fontWeight: 700, lineHeight: 1.25 }}>
+        <div
+          style={{
+            color: "#fff",
+            fontSize: 58,
+            fontWeight: 700,
+            lineHeight: 1.25,
+          }}
+        >
           {withBleeps(text)}
         </div>
       </div>
@@ -122,7 +189,12 @@ const Subtitle: React.FC<{ who: string; text: string; lang: "de" | "ua" }> = ({ 
 
 const Messages: React.FC<{ line: TimelineLine }> = ({ line }) => (
   <AbsoluteFill
-    style={{ justifyContent: "center", alignItems: "center", gap: 28, padding: `0 ${SAFE_X}px` }}
+    style={{
+      justifyContent: "center",
+      alignItems: "center",
+      gap: 28,
+      padding: `0 ${SAFE_X}px`,
+    }}
   >
     {line.onscreen.map((item, k) => (
       <Sequence key={k} from={item.start - line.start} layout="none">
@@ -153,7 +225,9 @@ const Bubble: React.FC<{ item: OnscreenItem }> = ({ item }) => {
           easing: Easing.spring({ damping: 12 }),
           output: "perceptual-scale",
         }),
-        opacity: interpolate(frame, [0, 3], [0, 1], { extrapolateRight: "clamp" }),
+        opacity: interpolate(frame, [0, 3], [0, 1], {
+          extrapolateRight: "clamp",
+        }),
       }}
     >
       {item.text}
@@ -180,7 +254,9 @@ const EndCard: React.FC<{ text: string }> = ({ text }) => {
           fontWeight: 800,
           lineHeight: 1.3,
           textAlign: "center",
-          opacity: interpolate(frame, [0, 0.5 * fps], [0, 1], { extrapolateRight: "clamp" }),
+          opacity: interpolate(frame, [0, 0.5 * fps], [0, 1], {
+            extrapolateRight: "clamp",
+          }),
         }}
       >
         {text}
