@@ -30,10 +30,35 @@ systemctl --user disable --now beekeeper-factory   # switch it off
 ## What it does now
 
 - `/start` -> a greeting.
-- Any text or voice note -> saved verbatim to `voice/inbox/` (text as `.md`, voice as
-  `.ogg`) and confirmed in the chat. The next Claude session sorts it (CLAUDE.md). From T27
-  the bot sorts ideas itself.
+- Any text -> saved verbatim to `voice/inbox/` first ("Записав, розбираю."), then the
+  intake brain job (T27, `prompts/intake.md`) decides: story, command, both, or unsure.
+  - story: the factory writes it word for word to `bible/stories/<date>-telegram-<id>.md`,
+    the brain adds the seed to `bible/ideas.md` (and new facts to the calendar or
+    characters), the idea goes to the end of `factory/queue.yaml`; the reply says its
+    place and release date;
+  - command: show the queue, put an idea first, up, to a place, rename, delete;
+  - unsure: one short question; his next message is read together with the first.
+  Then the inbox file is removed and the factory commits `content: ...` (only `bible/` and
+  `factory/`) and pushes. If sorting fails, the message stays in `voice/inbox/` for the
+  next Claude session.
+- Voice notes -> saved to `voice/inbox/` as `.ogg` until T28 transcribes them.
 - The clock ticks every 15 minutes and right after a wake-up; deadline jobs hook in with
   T30-T33.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
   answer old messages again.
+
+## The factory commits to `main`
+
+The service runs from this folder and commits content to `main` by itself (A3). It commits
+only while the folder is on `main`: on another branch its changes wait in the working tree
+and go in with the next sync. So code work happens in a separate worktree, and this folder
+stays on `main`:
+
+```zsh
+git worktree add ../bk-<task> -b feat/<task>    # work there, PR, merge
+git worktree remove ../bk-<task>
+git pull && systemctl --user restart beekeeper-factory   # here, after the merge
+```
+
+A rejected push is rebased on `origin/main` once and pushed again; whatever is still not
+pushed goes with the clock's next tick.
