@@ -106,3 +106,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Pushes on with a weather proverb: "вйо бо дощ" (marked "мудрість"): hurry, no more talk.
 - Asks for credit for his images: "а «носа підтирати» це тобі не поезія?" Save each image he
   coins, and say so.
+- Same reproach, a new image: "знов бовтаєшся в строю як клізма в чоботі" (when I ask about
+  something already done, here: whether the repo is public). Lesson: check facts myself
+  (`gh repo view`, the code) before putting a question to him.
+- Wants me to keep learning his style from every channel: this chat, Telegram text and
+  voice notes; he uses Telegram on the laptop and on the phone.
+- Short gate answers by item: "а2. зміни ф3. згоден".

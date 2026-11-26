@@ -1,6 +1,6 @@
 # 008. The brain: Claude Code headless, fixed prompts, narrow tools
 
-Status: PROPOSED (2026-11-26). Builds on interview round 4, question 2.
+Status: ACCEPTED (Volodymyr, 2026-11-26). Builds on interview round 4, question 2.
 
 ## Context
 

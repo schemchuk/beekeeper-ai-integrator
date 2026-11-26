@@ -1,6 +1,6 @@
 # 010. Voice notes transcribed locally with whisper
 
-Status: PROPOSED (2026-11-26).
+Status: ACCEPTED (Volodymyr, 2026-11-26).
 
 ## Context
 

@@ -1,8 +1,8 @@
 # Architecture: the cartoon factory
 
-Status: DRAFT for Volodymyr's approval (gate 3 of 4: interview -> spec -> **architecture**
+Status: ACCEPTED (Volodymyr, 2026-11-26; gate 3 of 4: interview -> spec -> **architecture**
 -> tasks). Date: 2026-11-26.
-Implements `docs/spec.md` (ACCEPTED 2026-11-26). New decisions: ADR 006-010 (PROPOSED).
+Implements `docs/spec.md` (ACCEPTED 2026-11-26). New decisions: ADR 006-010 (ACCEPTED 2026-11-26).
 ADR 005 is superseded by ADR 009. ADR 001-004 stay as they are (episode file, Python on CPU,
 voices, Remotion).
 
@@ -102,6 +102,16 @@ then an alert). At 07:00 the bot sends UA text, DE text, cover idea and post tex
 (text or voice) is a brain job "apply edit": UA changed as asked, DE re-adapted, changed
 German words marked in the reply. "погоджую" accepts at once; silence accepts at T-1d 07:00.
 
+**Temp folder (F7).** Every script sent for approval is also written to
+`~/Desktop/temp/<episode>-script.md` (UA, DE, cover idea, post); `mkdir -p` before every
+write. Cleaning is a separate systemd user timer `beekeeper-temp-clean.timer`
+(`OnCalendar=Mon 07:00 Europe/Berlin`, `Persistent=true`): if the laptop was off on Monday
+morning, it runs at the next start. It does not need the factory process to be alive.
+
+**His style (F1.4).** Every message from him (chat here, Telegram text, transcribed voice)
+can carry phrases. A brain job after each conversation day adds new ones to
+`voice/volodymyr.md`; all bot replies are written with that file in the prompt.
+
 **Production (F4).** On `accepted`: `beekeeper build`, then the DE reel is sent to the chat
 for a look. The UA reel stays in `out/` (archived, not sent).
 
@@ -115,9 +125,8 @@ deletes the release. After `release_at` a stop is refused with a plain explanati
   (`loginctl enable-linger` so it also runs without an open session).
 - Long polling needs no public address. Telegram keeps undelivered messages for 24 hours,
   so a sleeping laptop loses nothing short; the clock catches up all due deadlines on wake.
-- The lid: `HandleLidSwitch=suspend` today (default in `/etc/systemd/logind.conf`). For night
-  runs the laptop must stay awake on a closed lid, on mains power at least:
-  `HandleLidSwitchExternalPower=ignore`. This is a system setting; Volodymyr decides.
+- The lid: on mains power the laptop stays awake with the lid closed
+  (`HandleLidSwitchExternalPower=ignore`, decided A2).
 - Claude Code login: if `claude -p` fails with an auth error, the bot says so in plain words
   and waits; nothing else breaks.
 - Night jobs share the subscription limits with his daytime sessions; a script job is one
@@ -148,13 +157,12 @@ statistics only to approved apps. Options for that milestone: ask postpilot for 
 (its own process), or Volodymyr sends a screenshot and the factory reads it. Decided when
 F6 starts.
 
-## 9. Open points for Volodymyr
+## 9. Decided at the gate (2026-11-26)
 
-- A1. **The repo must be public before episode 003.** postpilot downloads the release
-  without a token (`sources/factory.py`), so a private repo means no handoff. BRIEF already
-  says "public with the first finished reel", and 002 is published. Proposed: make it
-  public now, after a check that no secret or private file is in the history.
-- A2. **The lid setting** (§5): proposed `HandleLidSwitchExternalPower=ignore`, so the
-  laptop on the charger stays awake with the lid closed.
-- A3. **The factory commits content to `main` by itself** (stories, queue, scripts), with
-  `content:` commits; code still comes through PRs with CI. Proposed: yes.
+- A1. The repo is already public (checked: `gh repo view` says PUBLIC). Nothing to do.
+- A2. Lid setting: `HandleLidSwitchExternalPower=ignore` in a drop-in
+  `/etc/systemd/logind.conf.d/lid.conf`; needs sudo, Volodymyr runs it once.
+- A3. The factory commits content (stories, queue, scripts) to `main` by itself; code goes
+  through PRs with CI.
+- Added: F1.4 (his style from all channels) and F7 (scripts also to `~/Desktop/temp/`,
+  emptied every Monday morning, independent of the laptop's state).
