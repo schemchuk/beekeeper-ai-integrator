@@ -16,6 +16,19 @@ systemctl --user enable --now beekeeper-factory
 loginctl enable-linger "$USER"        # runs without an open session, starts at boot
 ```
 
+The weekly temp clean (F7.2) is a separate timer, independent of the bot:
+
+```zsh
+ln -sf "$PWD/deploy/beekeeper-temp-clean.service" "$PWD/deploy/beekeeper-temp-clean.timer" \
+  ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now beekeeper-temp-clean.timer
+```
+
+It empties `~/Desktop/temp/` every Monday 07:00 Berlin; `Persistent=true` makes it run at
+the next start if the laptop was off. `beekeeper temp-clean --dry-run` lists what would go;
+`systemctl --user list-timers beekeeper-temp-clean` shows the next run.
+
 ## Everyday
 
 ```zsh

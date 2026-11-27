@@ -1,0 +1,9 @@
+# systemd user unit: empty ~/Desktop/temp (F7.2). Started by beekeeper-temp-clean.timer.
+# Install: see docs/factory.md. %h is the home folder.
+[Unit]
+Description=Beekeeper AI Integrator: empty ~/Desktop/temp
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/VS_Code_projects/beekeeper-ai-integrator
+ExecStart=%h/VS_Code_projects/beekeeper-ai-integrator/.venv/bin/beekeeper temp-clean
