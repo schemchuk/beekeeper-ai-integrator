@@ -37,6 +37,11 @@ the Jobcenter, "relevante Berufserfahrung in Deutschland", Kubernetes.
   Beekeepers and their friends always drink herbal tea: teapot, cups, a strainer, a bunch of
   dried herbs, honey with a honey dipper. No coffee anywhere on screen, not even steam from a
   mug. Who drinks coffee in this world is never shown or named, so nobody takes offence.
+- **Faith is never mocked** (Volodymyr, 2026-11-27): "Пасічники взагалі то віруючі люди,
+  айтішники теж мають свого Бога", explained for us, "ні в якому разі не обсмоктувати в
+  мультику". No jokes about God, priests or church, not even the saying "Який піп таке його
+  набоженьство". Pylyp's lofty "Слава Богу, все можна автоматизувати" stays: it is gratitude,
+  not mockery.
 - Medunko keeps his Ukrainian name in German too: Germans hear "Met" in it. Isegrim and
   Pieks are the German fable names (see the note above the looks).
 
