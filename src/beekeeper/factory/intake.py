@@ -65,6 +65,7 @@ class Intake:
         self.brain = brain
         self.root = root
         self.git = git or GitSync(root)
+        self.showed = False  # the last reply lists the queue: the factory adds its buttons
 
     # --- state ----------------------------------------------------------------------
 
@@ -111,6 +112,7 @@ class Intake:
 
     def process(self, text: str, uid: int, now: datetime) -> str:
         """Handle one message; the reply for the chat."""
+        self.showed = False
         pending = self.load_pending()
         source_uid = pending.uid if pending else uid
         story_file = STORIES / f"{now:%Y-%m-%d}-telegram-{source_uid}.md"
@@ -176,6 +178,7 @@ class Intake:
         """Apply one queue operation from the brain; the queue and what to say about it."""
         op = command["op"]
         if op == "show":
+            self.showed = True
             return queue, show_queue(queue, slots, now)
         idea_id = command.get("idea")
         if idea_id == 0 and new_idea:

@@ -240,6 +240,28 @@ class Telegram:
             ids.append(self._call("sendMessage", json=payload)["message_id"])
         return ids
 
+    def edit_message(self, message_id: int, text: str, buttons: Buttons | None = None) -> None:
+        """Replace the text and buttons of a message the bot sent (a live queue view).
+
+        Telegram refuses an edit that changes nothing; that is not an error here.
+        """
+        payload: dict = {
+            "chat_id": self.config.chat_id,
+            "message_id": message_id,
+            "text": split_text(text)[0],
+            "reply_markup": keyboard(buttons or []),
+        }
+        try:
+            self._call("editMessageText", json=payload)
+        except TelegramError as e:
+            if "message is not modified" not in str(e):
+                raise
+
+    def set_commands(self, commands: Sequence[tuple[str, str]]) -> None:
+        """The command menu next to his input field: (command, description) pairs."""
+        menu = [{"command": c, "description": d} for c, d in commands]
+        self._call("setMyCommands", json={"commands": menu})
+
     def send_video(self, path: Path, caption: str = "") -> int:
         return self._send_file("sendVideo", "video", path, caption)
 

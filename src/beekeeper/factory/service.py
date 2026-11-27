@@ -15,6 +15,9 @@ file stays for the next Claude session.
 
 A voice note (T28, ADR 010) is downloaded to `work/factory/voice/` (never committed),
 transcribed by local whisper, shown back ("Почув так: ...") and then handled like a text.
+
+The queue in the chat (T29): `/queue` or "черга" shows it with buttons, no brain; a button
+press edits that message; after "✏" his next message is the new title, not an idea.
 """
 
 from __future__ import annotations
@@ -33,6 +36,7 @@ from .brain import Brain, BrainAuthError, BrainError
 from .calendar import BERLIN
 from .gitsync import GitSync
 from .intake import Intake
+from .queuechat import QueueChat, View, is_show
 from .telegram import Telegram, TelegramError, Update
 from .transcribe import TranscribeError, Transcriber, Whisper
 
@@ -47,8 +51,9 @@ POLL_TIMEOUT = 25  # seconds; keeps a stop request (SIGTERM) answered quickly
 
 GREETING = (
     "Фабрика на місці. Пиши ідеї й побрехеньки: зберігаю дослівно, кладу в біблію і в "
-    "чергу. «Покажи чергу» теж розумію. Голосові теж слухаю."
+    "чергу. /queue або «черга» покаже чергу з кнопками. Голосові теж слухаю."
 )
+COMMANDS = (("queue", "Черга ідей"), ("start", "Що вміє фабрика"))
 SAVED = "Записав дослівно. Розберу в біблію на найближчому сеансі."
 TAKEN = "Записав, розбираю."
 NOT_SORTED = (
@@ -98,8 +103,10 @@ class Factory:
         wall: Callable[[], float] = time.time,
         intake: Intake | None = None,
         transcriber: Transcriber | None = None,
+        queue_chat: QueueChat | None = None,
     ) -> None:
         self.bot = bot
+        self.queue_chat = queue_chat
         self.intake = intake
         self.transcriber = transcriber
         self.root = root
@@ -118,6 +125,10 @@ class Factory:
         log.info("update %s: %s", update.update_id, update.kind)
         if update.kind == "text" and update.text.strip().split("@")[0] == "/start":
             self.bot.send_message(GREETING)
+        elif update.kind == "text" and self.queue_chat and is_show(update.text):
+            self.submit(Job("queue", self.show_queue))
+        elif update.kind == "text" and self.queue_chat and self.queue_chat.editing() is not None:
+            self.submit(Job("rename", lambda: self.rename(update.text)))
         elif update.kind == "text" and self.intake:
             path = self.save_text(update.text, update.update_id)
             self.bot.send_message(TAKEN)
@@ -135,6 +146,8 @@ class Factory:
             self.submit(Job(f"voice {update.update_id}", lambda: self.hear(update)))
         elif update.kind == "voice":
             self.submit(Job(f"voice {update.update_id}", lambda: self.save_voice(update)))
+        elif update.kind == "button" and self.queue_chat and update.data.startswith("q:"):
+            self.submit(Job(f"button {update.data}", lambda: self.press(update)))
         elif update.kind == "button":
             self.bot.answer_button(update.callback_id, "Ця кнопка ще не працює")
 
@@ -152,6 +165,10 @@ class Factory:
 
     def take_in(self, body: str, uid: int, path: Path) -> None:
         assert self.intake is not None
+        if self.queue_chat and self.queue_chat.editing() is not None:  # a voice note after "✏"
+            self.rename(body)
+            path.unlink(missing_ok=True)
+            return
         try:
             reply = self.intake.process(body, uid, self.clock())
         except BrainAuthError:
@@ -161,7 +178,41 @@ class Factory:
             self.alert(NOT_SORTED.format(error=e))
             return
         path.unlink(missing_ok=True)
-        self.bot.send_message(reply)
+        if self.queue_chat and getattr(self.intake, "showed", False):
+            self.show(View(reply, self.queue_chat.view(self.clock()).buttons))
+        else:
+            self.bot.send_message(reply)
+
+    # --- the queue in the chat (T29) --------------------------------------------------
+
+    def show(self, view: View) -> None:
+        self.bot.send_message(view.text, buttons=view.buttons or None)
+
+    def show_queue(self) -> None:
+        assert self.queue_chat is not None
+        self.show(self.queue_chat.view(self.clock()))
+
+    def rename(self, body: str) -> None:
+        assert self.queue_chat is not None
+        self.show(self.queue_chat.finish_edit(body, self.clock()))
+
+    def press(self, update: Update) -> None:
+        """A queue button: answer the spinner, then redraw the pressed message."""
+        assert self.queue_chat is not None
+        try:
+            view = self.queue_chat.press(update.data, self.clock())
+        except Exception:
+            self.bot.answer_button(update.callback_id, "Не вийшло")
+            raise
+        self.bot.answer_button(update.callback_id, view.toast)
+        if update.message_id is None:
+            self.show(view)
+            return
+        try:
+            self.bot.edit_message(update.message_id, view.text, view.buttons)
+        except TelegramError as e:  # too old to edit, deleted: a fresh message instead
+            log.warning("could not edit message %s: %s", update.message_id, e)
+            self.show(view)
 
     def save_voice(self, update: Update) -> Path:
         stamp = self.clock().strftime("%Y-%m-%d-%H%M")
@@ -305,8 +356,16 @@ def main() -> int:
     git = GitSync(root)
     with Telegram(config) as bot:
         factory = Factory(
-            bot, root=root, intake=Intake(Brain(root), root, git), transcriber=Whisper()
+            bot,
+            root=root,
+            intake=Intake(Brain(root), root, git),
+            transcriber=Whisper(),
+            queue_chat=QueueChat(root, git),
         )
+        try:
+            bot.set_commands(COMMANDS)
+        except TelegramError as e:
+            log.warning("command menu not set: %s", e)
         factory.tick_handlers.append(git.retry)
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
