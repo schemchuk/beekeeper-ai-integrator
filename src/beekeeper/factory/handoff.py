@@ -36,7 +36,7 @@ STAGING = Path("work/handoff")
 ID_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 AI_LABEL = "\n\nKI-generiertes Video / AI-generated video"  # added by postpilot, 43 chars
 CAPTION_CHARS = 2200
-THREADS_CHARS = 500
+THREADS_CHARS = 500  # the label counts here too
 LIMITS = {  # asset -> max bytes (contract, inclusive)
     "manifest.json": 16_000,
     "post_de.txt": 12_000,
@@ -127,7 +127,7 @@ def problems(
         found += _text_problems("post_de.txt", files["post_de.txt"].read_bytes(), budget)
     if "post_threads.txt" in files:
         data = files["post_threads.txt"].read_bytes()
-        found += _text_problems("post_threads.txt", data, THREADS_CHARS)
+        found += _text_problems("post_threads.txt", data, THREADS_CHARS - len(AI_LABEL))
     if "cover.png" in files:
         with files["cover.png"].open("rb") as f:
             if f.read(len(PNG_SIGNATURE)) != PNG_SIGNATURE:

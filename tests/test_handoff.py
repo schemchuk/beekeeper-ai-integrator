@@ -138,7 +138,7 @@ def test_github_failure_is_retried_then_alerts(tmp_path):
     [
         ("x" * 2158, None, 45.0, SLOT, "post_de.txt: 2158 characters, at most 2157"),
         ("  \n", None, 45.0, SLOT, "post_de.txt: empty"),
-        ("ok", "y" * 501, 45.0, SLOT, "post_threads.txt: 501 characters"),
+        ("ok", "y" * 458, 45.0, SLOT, "post_threads.txt: 458 characters"),
         ("ok", None, 95.0, SLOT, "video.mp4: 95.0 s"),
         ("ok", None, 45.0, NOW + timedelta(days=61), "want from 1 hour ago to 60 days ahead"),
         ("ok", None, 45.0, NOW - timedelta(hours=2), "want from 1 hour ago to 60 days ahead"),
@@ -182,6 +182,6 @@ def test_threads_text_only_when_the_post_is_long(tmp_path):
     assert write_threads(short, tmp_path / "out") is None
     long = _episode(tmp_path, "Lang. " * 100)
     text = threads_text(long)
-    assert len(text) <= 500
+    assert len(text) <= 457
     assert text.startswith("Wie viele Mails") and "#Automatisierung" in text
     assert write_threads(long, tmp_path / "out").read_text(encoding="utf-8") == text

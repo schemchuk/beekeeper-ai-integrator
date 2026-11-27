@@ -19,11 +19,13 @@ def post_text(episode: Episode, lang: str) -> str:
     return "\n\n".join(blocks) + "\n"
 
 
-THREADS_CHARS = 500  # postpilot's Threads limit (release contract v2)
+AI_LABEL_CHARS = 43  # "\n\nKI-generiertes Video / AI-generated video", added by postpilot
+THREADS_CHARS = 500 - AI_LABEL_CHARS  # Threads limit 500 counts the label (contract v2)
 
 
 def threads_text(episode: Episode) -> str | None:
-    """A short German text for Threads when the full post is over 500 characters.
+    """A short German text for Threads when the full post is over 457 characters
+    (500 minus the AI label postpilot adds).
 
     Hook, question and hashtags; the hook and hashtags alone if that is still too long.
     None when the full post fits (postpilot then uses `post_de.txt` on Threads too).
