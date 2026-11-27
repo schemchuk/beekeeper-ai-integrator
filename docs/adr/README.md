@@ -12,5 +12,6 @@ One file per decision. Status: PROPOSED until Volodymyr accepts it, then ACCEPTE
 | [006](006-factory-bot-on-laptop.md) | Factory bot: one long-polling process on the laptop | ACCEPTED |
 | [007](007-state-in-git.md) | Factory state in git (`factory/queue.yaml`, `slots.yaml`) | ACCEPTED |
 | [008](008-brain-claude-headless.md) | Brain: Claude Code headless, fixed prompts, narrow tools | ACCEPTED |
-| [009](009-handoff-by-github-release.md) | Handoff by GitHub release + `factory-intake` | ACCEPTED |
+| [009](009-handoff-by-github-release.md) | Handoff by GitHub release + `factory-intake` | SUPERSEDED by 011 |
 | [010](010-voice-notes-whisper.md) | Voice notes transcribed locally with whisper | ACCEPTED |
+| [011](011-handoff-release-contract-v2.md) | Handoff by postpilot release contract v2 | ACCEPTED |

@@ -74,12 +74,14 @@ Each project does its own job. postpilot publishes under R1-R4, which it has shi
   `beekeeper check` (output contract, cover as frame 0). This is today's `beekeeper build`.
 - F4.2 The UA reel is rendered and archived, not published.
 - F4.3 The bot sends him the finished DE reel for a look. A "стоп" before release stops the
-  handoff or withdraws it (deletes the release before `release_at`).
+  handoff or withdraws it (deletes the release; after intake postpilot asks Retry/Skip, ADR 011).
 
 ### F5. Handoff to postpilot (R4)
-- F5.1 The factory creates the GitHub release `reel/<episode>` with `reel_de.mp4`,
-  `cover_de.png`, `post_de.txt` (and `post_threads.txt` when needed).
-- F5.2 It dispatches postpilot's `factory-intake` with `{v: 1, episode, release_at, ai}`.
+- F5.1 The factory creates the GitHub release `reel/<episode>` by postpilot's release
+  contract v2 (ADR 011): `manifest.json` (`v: 2`, `kind`, `id`, `release_at` with offset,
+  `ai`), `video.mp4`, `cover.png`, `post_de.txt` (and `post_threads.txt` when needed).
+- F5.2 postpilot picks the release up by polling; the factory may ask for an earlier scan
+  (`project-intake.yml`). It never dispatches `factory-intake` (v1).
 - F5.3 Failure: retry, then a Telegram alert to him in plain words. Never a second release of
   the same episode after publishing started.
 

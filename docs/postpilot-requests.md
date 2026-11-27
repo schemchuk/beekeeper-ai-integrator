@@ -53,6 +53,15 @@ These were filed with postpilot on 2026-11-25 and are this project's own scope n
 The Friday GitHub post request (2026-11-26) is about postpilot's own rubric, not the
 cartoons; it stays with postpilot.
 
+## Release contract v2 (2026-11-27)
+
+postpilot replaced `factory-intake` (v1) with one
+[publishing contract](https://github.com/schemchuk/postpilot/blob/main/docs/publishing-contract.md)
+for all projects: it polls public releases `reel/<id>` with `manifest.json` (`v: 2`),
+`video.mp4`, `cover.png`, `post_de.txt` and optional `post_threads.txt`. This project is
+registered as `beekeeper` (reel; six channels; `auto`; 2 a day). Our side: ADR 011, T33.
+The review below is history (v1).
+
 ## Review of postpilot ADR 024 (2026-11-26)
 
 Read against R1-R4 in postpilot's code (`channels/factory.py`, `sources/factory.py`,
