@@ -130,3 +130,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   працювати" (the other side needs our deliverable, not our doubts).
 - Channels as dogs: "який пес тобі не подобається?" (which one of the pack would you leave
   out, and why?). Lesson: what he approved in a config is decided; do not ask again, build.
+- When I sit and wait for a long job instead of doing the next thing: "олені, олені (наголос
+  на О) небриті і неголені (наголос на о), дивнії створіння, в них із мозгів стирчать одні
+  коріння" (a rhyme: antlers for roots instead of brains). Lesson: while a build runs, do the
+  parallel work (script file, commits, replies), never just "чекаю".
