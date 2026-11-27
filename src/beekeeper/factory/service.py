@@ -11,7 +11,10 @@ Three loops in one process, so there is one writer of `factory/*.yaml` and no lo
 
 Every text he sends is first saved verbatim to `voice/inbox/`, so nothing he tells the bot
 is lost; then the intake job (T27) sorts it and the file is removed. If sorting fails, the
-file stays for the next Claude session. Voice notes are only saved until T28.
+file stays for the next Claude session.
+
+A voice note (T28, ADR 010) is downloaded to `work/factory/voice/` (never committed),
+transcribed by local whisper, shown back ("Почув так: ...") and then handled like a text.
 """
 
 from __future__ import annotations
@@ -31,18 +34,20 @@ from .calendar import BERLIN
 from .gitsync import GitSync
 from .intake import Intake
 from .telegram import Telegram, TelegramError, Update
+from .transcribe import TranscribeError, Transcriber, Whisper
 
 log = logging.getLogger("beekeeper.factory")
 
 WORK_DIR = Path("work/factory")
 INBOX = Path("voice/inbox")
+AUDIO = WORK_DIR / "voice"
 TICK_EVERY = 15 * 60  # seconds
 CLOCK_STEP = 30  # seconds between wall-clock checks; a wake-up is noticed within this
 POLL_TIMEOUT = 25  # seconds; keeps a stop request (SIGTERM) answered quickly
 
 GREETING = (
     "Фабрика на місці. Пиши ідеї й побрехеньки: зберігаю дослівно, кладу в біблію і в "
-    "чергу. «Покажи чергу» теж розумію. Голосові поки лише зберігаю."
+    "чергу. «Покажи чергу» теж розумію. Голосові теж слухаю."
 )
 SAVED = "Записав дослівно. Розберу в біблію на найближчому сеансі."
 TAKEN = "Записав, розбираю."
@@ -50,6 +55,9 @@ NOT_SORTED = (
     "Не зміг розібрати: {error}. Повідомлення лежить дослівно в voice/inbox/, нічого не пропало."
 )
 SAVED_VOICE = "Голосове зберіг. Розшифрую на найближчому сеансі."
+LISTENING = "Слухаю..."
+HEARD = "Почув так: {text}"
+NOT_HEARD = "Не розчув голосове: {error}. Запис лежить у work/factory/voice/, нічого не пропало."
 
 
 def now_berlin() -> datetime:
@@ -89,9 +97,11 @@ class Factory:
         clock: Callable[[], datetime] = now_berlin,
         wall: Callable[[], float] = time.time,
         intake: Intake | None = None,
+        transcriber: Transcriber | None = None,
     ) -> None:
         self.bot = bot
         self.intake = intake
+        self.transcriber = transcriber
         self.root = root
         self.clock = clock
         self.wall = wall
@@ -109,37 +119,45 @@ class Factory:
         if update.kind == "text" and update.text.strip().split("@")[0] == "/start":
             self.bot.send_message(GREETING)
         elif update.kind == "text" and self.intake:
-            path = self.save_text(update)
+            path = self.save_text(update.text, update.update_id)
             self.bot.send_message(TAKEN)
-            self.submit(Job(f"intake {update.update_id}", lambda: self.take_in(update, path)))
+            self.submit(
+                Job(
+                    f"intake {update.update_id}",
+                    lambda: self.take_in(update.text, update.update_id, path),
+                )
+            )
         elif update.kind == "text":
-            self.save_text(update)
+            self.save_text(update.text, update.update_id)
             self.bot.send_message(SAVED)
+        elif update.kind == "voice" and self.transcriber:
+            self.bot.send_message(LISTENING)
+            self.submit(Job(f"voice {update.update_id}", lambda: self.hear(update)))
         elif update.kind == "voice":
             self.submit(Job(f"voice {update.update_id}", lambda: self.save_voice(update)))
         elif update.kind == "button":
             self.bot.answer_button(update.callback_id, "Ця кнопка ще не працює")
 
-    def save_text(self, update: Update) -> Path:
+    def save_text(self, body: str, uid: int, source: str = "Verbatim") -> Path:
         stamp = self.clock().strftime("%Y-%m-%d-%H%M")
-        path = self.root / INBOX / f"{stamp}-telegram-{update.update_id}.md"
+        path = self.root / INBOX / f"{stamp}-telegram-{uid}.md"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(
             f"# Telegram, {self.clock().isoformat(timespec='minutes')}\n\n"
-            f"Verbatim from the factory bot (not sorted yet).\n\n{update.text}\n",
+            f"{source} from the factory bot (not sorted yet).\n\n{body}\n",
             encoding="utf-8",
         )
         log.info("saved text to %s", path)
         return path
 
-    def take_in(self, update: Update, path: Path) -> None:
+    def take_in(self, body: str, uid: int, path: Path) -> None:
         assert self.intake is not None
         try:
-            reply = self.intake.process(update.text, update.update_id, self.clock())
+            reply = self.intake.process(body, uid, self.clock())
         except BrainAuthError:
             raise
         except BrainError as e:
-            log.error("intake %s: %s", update.update_id, e)
+            log.error("intake %s: %s", uid, e)
             self.alert(NOT_SORTED.format(error=e))
             return
         path.unlink(missing_ok=True)
@@ -152,6 +170,27 @@ class Factory:
         log.info("saved voice note to %s", path)
         self.bot.send_message(SAVED_VOICE)
         return path
+
+    def hear(self, update: Update) -> None:
+        """Voice note -> whisper -> "Почув так: ..." -> the same way as a text."""
+        assert self.transcriber is not None
+        stamp = self.clock().strftime("%Y-%m-%d-%H%M")
+        audio = self.root / AUDIO / f"{stamp}-telegram-{update.update_id}.ogg"
+        self.bot.download(update.file_id, audio)
+        log.info("saved voice note to %s", audio)
+        try:
+            heard = self.transcriber.transcribe(audio, update.duration)
+        except TranscribeError as e:
+            log.error("voice %s: %s", update.update_id, e)
+            self.alert(NOT_HEARD.format(error=e))
+            return
+        body = f"{heard}\n\n{update.text.strip()}" if update.text.strip() else heard
+        self.bot.send_message(HEARD.format(text=body))
+        path = self.save_text(body, update.update_id, source=f"Whisper transcript of {audio.name}")
+        if self.intake:
+            self.take_in(body, update.update_id, path)
+        else:
+            self.bot.send_message(SAVED)
 
     # --- worker ---------------------------------------------------------------------
 
@@ -265,7 +304,9 @@ def main() -> int:
     root = Path(".")
     git = GitSync(root)
     with Telegram(config) as bot:
-        factory = Factory(bot, root=root, intake=Intake(Brain(root), root, git))
+        factory = Factory(
+            bot, root=root, intake=Intake(Brain(root), root, git), transcriber=Whisper()
+        )
         factory.tick_handlers.append(git.retry)
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)

@@ -41,7 +41,12 @@ systemctl --user disable --now beekeeper-factory   # switch it off
   Then the inbox file is removed and the factory commits `content: ...` (only `bible/` and
   `factory/`) and pushes. If sorting fails, the message stays in `voice/inbox/` for the
   next Claude session.
-- Voice notes -> saved to `voice/inbox/` as `.ogg` until T28 transcribes them.
+- Voice notes (T28, ADR 010) -> "Слухаю..." at once; the worker downloads the note to
+  `work/factory/voice/` (local, never committed), local whisper (`medium`, `uk`, CPU)
+  transcribes it, the bot shows "Почув так: ..." and then handles the text like a typed
+  one (inbox, intake). A caption goes with the text. If whisper fails or hears nothing,
+  the audio stays in `work/factory/voice/` and he gets a plain alert. `FACTORY_WHISPER_MODEL`
+  in the unit environment switches the model (e.g. `large-v3`).
 - The clock ticks every 15 minutes and right after a wake-up; deadline jobs hook in with
   T30-T33.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
