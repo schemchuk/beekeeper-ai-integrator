@@ -27,3 +27,26 @@ Notes:
   Short shows its first frame, which is our cover anyway (T21). For postpilot / him.
 - v1 (`factory-intake`) is now done for this project (ADR 011 §10); postpilot may start
   T27e2 (remove v1), which needs Volodymyr's OK on that PR.
+
+## First numbers (LinkedIn DE post, same day, about 2 h after publishing)
+
+Screenshot of the post analytics (activity `7532010812899643393`), 12:21 on 2026-11-27:
+
+- 54 impressions, 47 members reached; 11% inside his network, 89% outside.
+- 23 video views, 2 min 46 s in total, 7 s average on a 59.7 s reel: about 12% watched.
+- 0 profile views and 0 new followers from this post so far.
+
+Compared with 002 (14 h, see `2026-11-25-002-first-reel.md`):
+
+| | 002 (14 h) | 003 (~2 h) |
+|---|---|---|
+| Impressions | 34 | 54 |
+| Members reached | 8 | 47 |
+| Outside network | 24% | 89% |
+| Video views | 7 | 23 |
+| Average watch | 37 s of 55 s | 7 s of 59.7 s |
+
+Reading: the cover rule (T21) works, reach is up and mostly outside his network. The
+problem moved to the first seconds: most viewers scroll on after about 7 s. Next lever is
+the hook: a gag or a question in the first 2-3 s, a shorter cold open. Check again at 24 h
+before changing anything.
