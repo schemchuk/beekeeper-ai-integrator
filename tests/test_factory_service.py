@@ -230,3 +230,96 @@ def test_failed_sorting_keeps_the_message(tmp_path):
     assert "voice/inbox" in bot.sent[-1]
     (kept,) = (tmp_path / "voice/inbox").iterdir()
     assert "А було таке..." in kept.read_text(encoding="utf-8")
+
+
+class FakeEars:
+    def __init__(self, heard="А було таке: ведмідь заснув у вулику.", error=None):
+        self.heard = heard
+        self.error = error
+        self.seen = []
+
+    def transcribe(self, audio, duration=0):
+        self.seen.append((audio.read_bytes(), duration))
+        if self.error:
+            raise self.error
+        return self.heard
+
+
+def voice_note(uid=8, caption=""):
+    return Update(
+        update_id=uid, kind="voice", message_id=uid, file_id="F1", duration=5, text=caption
+    )
+
+
+def test_voice_note_is_heard_shown_back_and_taken_in(tmp_path):
+    from beekeeper.factory.service import LISTENING
+
+    ears, intake = FakeEars(), FakeIntake()
+    bot = FakeBot([[voice_note()]])
+    factory = Factory(
+        bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake, transcriber=ears
+    )
+    factory.poll_once(timeout=0)
+    assert bot.sent == [LISTENING]  # at once; whisper runs in the worker
+    drain(factory)
+    assert ears.seen == [(b"OGG F1", 5)]
+    assert bot.sent[1] == "Почув так: А було таке: ведмідь заснув у вулику."
+    assert intake.seen == [("А було таке: ведмідь заснув у вулику.", 8)]
+    assert bot.sent[2] == "У черзі №1."
+    assert (tmp_path / "work/factory/voice/2026-11-26-1230-telegram-8.ogg").exists()
+    assert list((tmp_path / "voice/inbox").iterdir()) == []  # sorted, so removed
+
+
+def test_voice_caption_goes_with_the_text(tmp_path):
+    intake = FakeIntake()
+    bot = FakeBot([[voice_note(caption="це на четвер")]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=intake,
+        transcriber=FakeEars("Медунко прокинувся."),
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert intake.seen == [("Медунко прокинувся.\n\nце на четвер", 8)]
+
+
+def test_voice_not_heard_keeps_the_audio(tmp_path):
+    from beekeeper.factory.transcribe import TranscribeError
+
+    intake = FakeIntake()
+    bot = FakeBot([[voice_note()]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=intake,
+        transcriber=FakeEars(error=TranscribeError("у голосовому нічого не розчув")),
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert "нічого не розчув" in bot.sent[-1] and "work/factory/voice" in bot.sent[-1]
+    assert intake.seen == []
+    assert (tmp_path / "work/factory/voice/2026-11-26-1230-telegram-8.ogg").exists()
+
+
+def test_voice_heard_but_not_sorted_stays_in_the_inbox(tmp_path):
+    from beekeeper.factory.brain import BrainError
+
+    bot = FakeBot([[voice_note()]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=FakeIntake(BrainError("off the schema")),
+        transcriber=FakeEars(),
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    (kept,) = (tmp_path / "voice/inbox").iterdir()
+    assert "ведмідь заснув" in kept.read_text(encoding="utf-8")
+    assert "Whisper transcript" in kept.read_text(encoding="utf-8")
