@@ -1,0 +1,96 @@
+# Episode 003: Вечір з Сірим / Abend mit Isegrim
+# Draft v1, 2026-11-27, from idea 4 (bible/ideas.md, story 2026-11-24-winter-apiary).
+# Season: early winter, the apiary is closed, time for the season's retrospective.
+# Slot: Tuesday 2026-12-01 08:00 Europe/Berlin. Waits for Volodymyr's edits.
+id: "003"
+slug: vechir-z-sirym
+season: winter
+target_length: 35-45 s
+release: "2026-12-01T08:00:00+01:00"
+title:
+  ua: "Вечір з Сірим"
+  de: "Abend mit Isegrim"
+
+cover:
+  who: [pylyp, siryi]
+  monitor:
+    ua: "7 таблиць.\nЖодна не сходиться."
+    de: "7 Tabellen.\nKeine stimmt."
+
+post:
+  hook:
+    ua: "Сім таблиць за сезон, і жодна не сходиться з іншою. А у вовка все сходиться на зарубках."
+    de: "Sieben Tabellen pro Saison, und keine passt zur anderen. Beim Wolf stimmt alles, mit Kerben in der Eiche."
+  grain:
+    ua: "Коли дані живуть у семи файлах, звіт щоразу збирають руками і щоразу інакше. Одне джерело і звіт, що збирається сам щоранку, це кілька десятків рядків Python."
+    de: "Wenn Daten in sieben Dateien leben, baut man den Bericht jedes Mal von Hand und jedes Mal anders. Eine Quelle und ein Bericht, der sich jeden Morgen selbst baut, sind ein paar Dutzend Zeilen Python."
+  question:
+    ua: "Скільки таблиць у вас треба звести, щоб отримати одну цифру?"
+    de: "Wie viele Tabellen müssen Sie zusammenführen, um eine einzige Zahl zu bekommen?"
+  offer:
+    ua: "Звіти, що з'їдають вечори? Напишіть мені, я подивлюсь."
+    de: "Berichte, die Ihre Abende fressen? Schreiben Sie mir, ich schaue es mir an."
+  hashtags: [Automatisierung, Reporting, Python, Mittelstand]
+
+scenes:
+  hut: "Pylyp's hut on a winter evening, snow outside, laptop with spreadsheets, a teapot on the table"
+
+lines:
+  - shot: {scene: hut, camera: monitor, at: hook}
+    onscreen: {ua: "Таблиця 1 … Таблиця 7  ❌ не сходиться", de: "Tabelle 1 … Tabelle 7  ❌ stimmt nicht"}
+    sfx: keyboard
+    action: "Seven spreadsheet tabs blink red one after another. Hook: works without sound."
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "rubs his eyes, monocle in hand"}
+    ua: "Сезон закрито. Сім таблиць, і жодна не сходиться з іншою."
+    de: "Saison abgeschlossen. Sieben Tabellen, und keine passt zur anderen."
+
+  - who: siryi
+    shot: {scene: hut, camera: medium, action: "leans in at the door, snow on his postman cap"}
+    ua: "Добрий вечір. Знову рахуєш? А я все зарубками на дубі веду."
+    de: "Guten Abend. Rechnest du schon wieder? Ich führe alles mit Kerben an der Eiche."
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "pours him herbal tea"}
+    ua: "І що в тебе виходить?"
+    de: "Und was kommt bei dir raus?"
+
+  - who: siryi
+    shot: {scene: hut, camera: close-up, action: "sly half-closed eye, taps a claw on the table"}
+    ua: "Скільки меду, скільки роїв, хто кому винен. Все сходиться до зарубки."
+    de: "Wie viel Honig, wie viele Schwärme, wer wem was schuldet. Alles stimmt, Kerbe für Kerbe."
+
+  - who: pylyp
+    shot: {scene: hut, camera: close-up, action: "deadpan to camera, ironic smile"}
+    ua: "Вовк із дубом точніший за мої сім таблиць. Провидіння натякає."
+    de: "Ein Wolf mit einer Eiche ist genauer als meine sieben Tabellen. Die Vorsehung gibt mir einen Wink."
+    note: "The situation itself calls for automation, never a bare \"I'll automate\" (2026-11-25)"
+
+  - who: bzynka
+    shot: {scene: hut, camera: monitor, action: "pops up on the laptop screen in her visor"}
+    ua: "Одне джерело. Автоматизуй."
+    de: "Eine Quelle. Automatisier das."
+
+  - who: pylyp
+    shot: {scene: hut, camera: over-the-shoulder, action: "fast typing montage, seven tabs fly into one, a green tick"}
+    ua: "Сім таблиць в одну. Звіт збирається сам, щоранку о сьомій."
+    de: "Sieben Tabellen in eine. Der Bericht baut sich selbst, jeden Morgen um sieben."
+    sfx: keyboard
+
+  - shot: {scene: hut, camera: monitor, action: "one clean report on the screen"}
+    onscreen: {ua: "Звіт за сезон  ✅ сходиться", de: "Saisonbericht  ✅ stimmt"}
+
+  - who: siryi
+    shot: {scene: hut, camera: medium, action: "sips the tea, unimpressed"}
+    ua: "Гарно. Але дуб не зависає."
+    de: "Schön. Aber eine Eiche stürzt nicht ab."
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "closes the laptop with one finger, raises his cup to the wolf"}
+    ua: "Зате дуб не шле звіт о сьомій. Рутину — ботові, вечір — гостям."
+    de: "Dafür schickt die Eiche keinen Bericht um sieben. Die Routine dem Bot, den Abend den Gästen."
+
+end_card:
+  ua: "Цей мультик зібрав мій власний пайплайн: Python · TTS · Remotion. Рутину беру на себе, вам лишаю квітуче поле."
+  de: "Diesen Cartoon hat meine eigene Pipeline gebaut: Python · TTS · Remotion. Die Routine übernehme ich, Ihnen bleibt das blühende Feld."
