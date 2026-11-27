@@ -222,6 +222,17 @@ class GitHub:
     def delete_asset(self, release: str, name: str) -> None:
         self._ok(["release", "delete-asset", release, name, "--repo", self.repo, "--yes"])
 
+    def delete_release(self, release: str) -> bool:
+        """Withdraw a release and its tag ("стоп", F4.3); False if there was none."""
+        done = self._call(
+            ["release", "delete", release, "--repo", self.repo, "--yes", "--cleanup-tag"]
+        )
+        if done.returncode != 0:
+            if "not found" in (done.stderr or "").lower():
+                return False
+            raise GhError((done.stderr or done.stdout).strip() or "gh release delete failed")
+        return True
+
     def scan(self, token: str) -> None:
         """Ask postpilot for an earlier scan of this project (optional, ADR 011 §5)."""
         self._ok(

@@ -76,6 +76,17 @@ systemctl --user disable --now beekeeper-factory   # switch it off
   new message is the one to reply to. A bare "погоджую" (also "згоден", "приймаю",
   `/approve`) accepts at once, no brain; silence: the clock accepts at T-1d 07:00 and says
   so in one line. Both commit `script accepted (...)` and the slot is `accepted`.
+- Production (T32, `factory/production.py`): on the first tick after `accepted` the worker
+  runs `beekeeper build episodes/<episode>` in a child process (both languages, up to
+  90 min), sends the DE reel to the chat for a look (the UA reel stays in `out/`) and the
+  slot is `built`; then the handoff (T33) creates `reel/<episode>` with `release_at` = the
+  slot and the slot is `handed_off`; after the release time it is `released`. A failed
+  build or handoff is an alert and is tried again on the next tick, 3 rounds per step
+  (`work/factory/production-rounds.yaml`). While the build runs, other messages wait in
+  the worker's line.
+- "Стоп" (also `stop`, `/stop`, "зупини"; typed or spoken, no brain) before the release
+  stops the next slot on its way out (`sent` to `handed_off`): an existing release is
+  deleted with its tag, the slot is `stopped`, the idea goes back to the head of the queue.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
   answer old messages again.
 

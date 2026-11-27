@@ -419,3 +419,50 @@ def test_a_spoken_edit_as_a_reply(tmp_path):
     drain(factory)
     assert review.routed == [(ears.heard, 501)]
     assert intake.seen == []
+
+
+# --- T32: "стоп" ------------------------------------------------------------------------
+
+
+class FakeProduction:
+    def __init__(self):
+        self.stops = 0
+
+    def stop(self, now):
+        self.stops += 1
+        return "Зупинив 004."
+
+
+def test_stop_needs_no_brain(tmp_path):
+    intake, production = FakeIntake(), FakeProduction()
+    bot = FakeBot([[text(13, "Стоп!")]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=intake,
+        production=production,
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert bot.sent == ["Зупинив 004."]
+    assert production.stops == 1 and intake.seen == []
+
+
+def test_a_spoken_stop(tmp_path):
+    intake, production = FakeIntake(), FakeProduction()
+    bot = FakeBot([[voice_note()]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=intake,
+        transcriber=FakeEars(heard="Стоп."),
+        production=production,
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert production.stops == 1 and intake.seen == []
+    assert bot.sent[-1] == "Зупинив 004."
