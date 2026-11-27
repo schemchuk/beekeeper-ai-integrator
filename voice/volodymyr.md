@@ -124,3 +124,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Wants me to keep learning his style from every channel: this chat, Telegram text and
   voice notes; he uses Telegram on the laptop and on the phone.
 - Short gate answers by item: "а2. зміни ф3. згоден".
+- When I stop at questions instead of building: "тебе лінь заїла, чи чому ти шукаєш клюшки.
+  чи штани тобі мішають працювати" (looking for excuses: "клюшки" = pretexts; trousers in the
+  way = any made-up obstacle). Then the point: "постпілот має отримати відповідь щоб
+  працювати" (the other side needs our deliverable, not our doubts).
+- Channels as dogs: "який пес тобі не подобається?" (which one of the pack would you leave
+  out, and why?). Lesson: what he approved in a config is decided; do not ask again, build.
