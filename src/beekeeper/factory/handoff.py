@@ -12,6 +12,7 @@ postpilot refuses that once a channel has published.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -187,15 +188,22 @@ class GitHub:
     run: Run = run_gh
     repo: str = REPO
 
-    def _ok(self, args: Sequence[str], env: dict | None = None) -> str:
+    def _call(self, args: Sequence[str], env: dict | None = None) -> subprocess.CompletedProcess:
+        log.debug("gh %s", " ".join(args))
         done = self.run(args, env)
+        log.debug("gh exit %s; stdout: %s; stderr: %s", done.returncode,
+                  (done.stdout or "").strip(), (done.stderr or "").strip())  # fmt: skip
+        return done
+
+    def _ok(self, args: Sequence[str], env: dict | None = None) -> str:
+        done = self._call(args, env)
         if done.returncode != 0:
             raise GhError((done.stderr or done.stdout).strip() or f"gh {args[0]} failed")
         return done.stdout
 
     def assets(self, release: str) -> list[str] | None:
         """Asset names of the release, or None if there is no such release."""
-        done = self.run(["release", "view", release, "--repo", self.repo, "--json", "assets"], None)
+        done = self._call(["release", "view", release, "--repo", self.repo, "--json", "assets"])
         if done.returncode != 0:
             if "not found" in (done.stderr or "").lower():
                 return None
@@ -243,7 +251,13 @@ def hand_off(
     gh = gh or GitHub()
     episode = ep_dir.name
     files = stage(ep_dir, release_at, staging / episode)
+    for name, path in sorted(files.items()):
+        data = path.read_bytes()
+        log.info("asset %s: %d bytes, sha256 %s", name, len(data), hashlib.sha256(data).hexdigest())
+    log.info("manifest: %s", files["manifest.json"].read_text().strip())
     found = problems(episode, files, release_at, now, duration)
+    for problem in found:
+        log.error("intake would reject: %s", problem)
     if found:
         raise HandoffError(found)
     release = tag(episode)

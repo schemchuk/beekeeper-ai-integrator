@@ -62,7 +62,7 @@ def build_parser() -> argparse.ArgumentParser:
     handoff.add_argument(
         "--release-at",
         required=True,
-        help="ISO 8601 with offset, e.g. 2026-12-01T08:00:00+01:00 (Berlin)",
+        help="ISO 8601 with offset, e.g. 2026-12-01T08:00:00+01:00 (Berlin), or now",
     )
     sub.add_parser("factory", help="run the factory bot (systemd user service, docs/factory.md)")
     return parser
@@ -137,13 +137,24 @@ def cmd_handoff(episode: Path, cast: Path, out: Path, release_at: str) -> int:
     if ep_dir is None:
         return 1
     try:
-        when = datetime.fromisoformat(release_at)
+        now = datetime.now(BERLIN).replace(microsecond=0)
+        when = now if release_at == "now" else datetime.fromisoformat(release_at)
     except ValueError:
         print(f"--release-at {release_at!r}: not an ISO 8601 datetime", file=sys.stderr)
         return 1
+    import logging
+
+    log_file = Path("work/handoff") / f"{ep_dir.name}.log"
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+        handlers=[logging.StreamHandler(), logging.FileHandler(log_file, encoding="utf-8")],
+    )
+    print(f"log: {log_file}")
     token = os.environ.get("POSTPILOT_DISPATCH_TOKEN") or load_env().get("POSTPILOT_DISPATCH_TOKEN")
     try:
-        outcome = hand_off(ep_dir, when, datetime.now(BERLIN), token=token)
+        outcome = hand_off(ep_dir, when, now, token=token)
     except HandoffError as e:
         print("\n".join(e.problems), file=sys.stderr)
         return 1
