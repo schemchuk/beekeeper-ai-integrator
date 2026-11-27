@@ -1,6 +1,7 @@
 """Command line entry point: `beekeeper`."""
 
 import argparse
+import os
 import sys
 from collections.abc import Sequence
 from pathlib import Path
@@ -52,6 +53,17 @@ def build_parser() -> argparse.ArgumentParser:
     build = sub.add_parser("build", help="voices -> timing -> render -> post -> check")
     _episode_args(build)
     build.add_argument("--force", action="store_true", help="render even if nothing changed")
+    handoff = sub.add_parser(
+        "handoff", help="give the DE reel to postpilot: release reel/<episode> (contract v2)"
+    )
+    handoff.add_argument("episode", type=Path)
+    handoff.add_argument("--cast", type=Path, default=DEFAULT_CAST)
+    handoff.add_argument("--out", type=Path, default=DEFAULT_OUT)
+    handoff.add_argument(
+        "--release-at",
+        required=True,
+        help="ISO 8601 with offset, e.g. 2026-12-01T08:00:00+01:00 (Berlin)",
+    )
     sub.add_parser("factory", help="run the factory bot (systemd user service, docs/factory.md)")
     return parser
 
@@ -97,7 +109,7 @@ def cmd_render(
 
 
 def cmd_post(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> int:
-    from beekeeper.post import write_post
+    from beekeeper.post import write_post, write_threads
 
     try:
         ep = load_episode(episode, load_cast(cast))
@@ -107,6 +119,35 @@ def cmd_post(episode: Path, cast: Path, langs: list[str] | None, out: Path) -> i
     for lang in langs or ["de", "ua"]:
         path = write_post(ep, out / f"{ep.id}-{ep.slug}", lang)
         print(f"ok: {lang} post -> {path}")
+        if lang == "de":
+            threads = write_threads(ep, out / f"{ep.id}-{ep.slug}")
+            if threads:
+                print(f"ok: de threads post -> {threads}")
+    return 0
+
+
+def cmd_handoff(episode: Path, cast: Path, out: Path, release_at: str) -> int:
+    from datetime import datetime
+
+    from beekeeper.factory.calendar import BERLIN
+    from beekeeper.factory.handoff import HandoffError, hand_off, tag
+    from beekeeper.factory.telegram import load_env
+
+    ep_dir = _episode_dir(episode, cast, out)
+    if ep_dir is None:
+        return 1
+    try:
+        when = datetime.fromisoformat(release_at)
+    except ValueError:
+        print(f"--release-at {release_at!r}: not an ISO 8601 datetime", file=sys.stderr)
+        return 1
+    token = os.environ.get("POSTPILOT_DISPATCH_TOKEN") or load_env().get("POSTPILOT_DISPATCH_TOKEN")
+    try:
+        outcome = hand_off(ep_dir, when, datetime.now(BERLIN), token=token)
+    except HandoffError as e:
+        print("\n".join(e.problems), file=sys.stderr)
+        return 1
+    print(f"ok: {tag(ep_dir.name)} {outcome}, release_at {when.isoformat()}")
     return 0
 
 
@@ -237,6 +278,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return cmd_post(args.episode, args.cast, args.lang, args.out)
     if args.command == "build":
         return cmd_build(args.episode, args.cast, args.lang, args.out, args.force)
+    if args.command == "handoff":
+        return cmd_handoff(args.episode, args.cast, args.out, args.release_at)
     if args.command == "factory":
         from beekeeper.factory.service import main as factory_main
 
