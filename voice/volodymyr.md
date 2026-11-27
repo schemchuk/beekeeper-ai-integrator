@@ -134,3 +134,52 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   на О) небриті і неголені (наголос на о), дивнії створіння, в них із мозгів стирчать одні
   коріння" (a rhyme: antlers for roots instead of brains). Lesson: while a build runs, do the
   parallel work (script file, commits, replies), never just "чекаю".
+
+## Session 2026-11-27 (Hivewood)
+
+- Opens a new project with a boast: "прийшов час поставити Голівуд на коліна" (his cartoon
+  studio Hivewood vs. Hollywood). Same family as "давай зробимо бомбу".
+- Reminds me, short and dry: "запамятай: ти маєш вчитися також із діалогів в чатах [...]
+  і ти вже повинен був записати". Lesson: every chat message is speech material; save a
+  phrase the moment he says it, without waiting for the session end.
+- Viral content is "віруси": "спочатку шукатимемо віруси і підлаштовуватися під них".
+- Hyperbole for a hit series: characters "перед якими глядач готовий переписати на мене
+  свою нерухомість" (same family as "впісялись від змилування").
+- Admits the fog at the start: "поки що ми плаваємо як муха в окропі" (we have no data yet,
+  so follow the data).
+- His dream role in an autonomous studio: "я лише п'ю трав'яний чай з друзяками і дивлюсь
+  звіт".
+- Delegates boldly: "я тут також сподіваюся на тебе" (you propose, I pick).
+- Platform rules in a village image: "ми не будемо пісяти проти алгоритмів" (do not fight
+  the algorithm, play by its rules).
+- Hyperbole for an audience in awe: make the gawkers "розкрити писки так, що там ворони
+  гнізда почнуть робити"; viewers are "зіваки за екранами".
+- Leadership: "я буду командувати парадом, щоб вівці не порозбрідалися" ("командувати
+  парадом" is Ostap Bender's line from Ilf & Petrov).
+- His picture of wealth: "ходити в батистових портянках і їсти крем «Марго» кожного дня"
+  (luxury in soldier's footcloths, a Soviet-era chocolate-cream treat; ironic, not a number).
+- Research as a treasure hunt: "найти золоту голку в калюжі багна".
+- Authenticity, in his words: secured by "копіюючи мій стиль розмови та звороти мови".
+- Mock-tyrant joke about his "ministers" (the planning chat): "мені перечити не будуть:
+  вони мене бояться".
+- His project as a church flock: "я приділяю своїй пастві годину в день" (sheep, parade,
+  flock: he keeps returning to the shepherd image).
+- Money in his words: "не менше тисячі тугриків з європи на бочці щомісяця" ("тугрики" for
+  any currency, "на бочку" = cash on the barrel).
+- Fairy-tale dream list, deadpan: "гарем красунь, табун породистих коней і безплатна миска
+  рису щодня. ну і особняк на мальдівах" (the bowl of rice keeps it humble).
+- Accepts a rule he cannot change: "проти вітру не попісяєш" (same family as "не будемо
+  пісяти проти алгоритмів").
+- Satire in folk form: the enemy's leader is drawn "схожою мордою", as a чорт (the village
+  devil of Ukrainian folklore, Gogol's "Вечори на хуторі" kind).
+- Asks for my sources with a wink: "де це ти шукаєш натхнення в степах України" (show your
+  method, not just the result).
+- Asks for the whole plan in one word: "висвітли повністю" (lay it all out).
+- His names for a village cast: кум Опанас, кума Одарка, дід Гнат Якович, кінь Гнідко,
+  село Плітківці (from "плітки", gossip). He names things with folk sound and a hidden joke.
+- His line on swearing in scripts: Ukrainian folk words "на грані фолу" are fine ("срака",
+  "пісяти", "цицьки", "дупа"); that is authentic, not mat.
+- Reviving an old thing: "причешемо і вперед" (tidy it up and go).
+- Corrects me when I give a menu path instead of a link: "ти маєш давати прямі посилання".
+- Drops a detour without regret: "кинемо цю затію. зробим нові"; narrows the plan:
+  "не будемо лізти в рілси".
