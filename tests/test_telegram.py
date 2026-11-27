@@ -257,3 +257,38 @@ def test_network_error_has_no_token():
         with pytest.raises(TelegramError, match="ConnectError") as e:
             bot.send_message("hi")
     assert "SECRET" not in str(e.value)
+
+
+def test_edit_message(bot, fake):
+    bot.edit_message(77, "Черга:\n1. Пошта", buttons=[[("✏ 1", "q:edit:1")]])
+    ((method, body),) = fake.calls
+    assert method == "editMessageText"
+    assert body["chat_id"] == CHAT
+    assert body["message_id"] == 77
+    assert body["reply_markup"] == {
+        "inline_keyboard": [[{"text": "✏ 1", "callback_data": "q:edit:1"}]]
+    }
+
+
+def test_edit_that_changes_nothing_is_fine(bot, fake):
+    fake.answer(
+        "editMessageText",
+        (400, {"ok": False, "description": "Bad Request: message is not modified"}),
+    )
+    bot.edit_message(77, "Черга порожня.")
+
+
+def test_edit_of_a_gone_message_fails(bot, fake):
+    fake.answer(
+        "editMessageText",
+        (400, {"ok": False, "description": "Bad Request: message to edit not found"}),
+    )
+    with pytest.raises(TelegramError, match="not found"):
+        bot.edit_message(77, "Черга порожня.")
+
+
+def test_set_commands(bot, fake):
+    bot.set_commands([("queue", "Черга ідей")])
+    assert fake.calls == [
+        ("setMyCommands", {"commands": [{"command": "queue", "description": "Черга ідей"}]})
+    ]

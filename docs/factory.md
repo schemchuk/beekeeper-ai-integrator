@@ -47,6 +47,13 @@ systemctl --user disable --now beekeeper-factory   # switch it off
   one (inbox, intake). A caption goes with the text. If whisper fails or hears nothing,
   the audio stays in `work/factory/voice/` and he gets a plain alert. `FACTORY_WHISPER_MODEL`
   in the unit environment switches the model (e.g. `large-v3`).
+- `/queue` (in the bot's command menu) or "черга" / "покажи чергу" (T29) -> the queue at
+  once, no brain: position, title, release date, and per idea the buttons ⬆ (up), ⏫
+  (first), ✏ (new title) and 🗑 (delete, asks once more). A press redraws the same message.
+  After ✏ his next message, typed or spoken, is the new title (not an idea); "відміна"
+  keeps the old one; the pending edit lives in `work/factory/edit.yaml`. Every change is
+  committed (`content: queue: ...`). A queue shown after a worded request gets the buttons
+  too.
 - The clock ticks every 15 minutes and right after a wake-up; deadline jobs hook in with
   T30-T33.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
