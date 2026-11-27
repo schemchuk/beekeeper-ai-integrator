@@ -104,7 +104,8 @@ which answers with a queue operation; the queue code applies it, so the brain ne
 `queue.yaml` itself.
 
 **Script (F3).** T-3d 02:00: brain job "write episode" with the idea, `bible/`,
-`docs/product.md` §4 and the T11 post rules; it writes `episode.yaml`. Then
+`docs/product.md` §4 and the T11 post rules; it answers `episode.yaml` as text and the
+factory writes it (T30: the brain gets no write tools for this job). Then
 `beekeeper validate`; on failure the brain gets the errors and tries again (up to 3 times,
 then an alert). At 07:00 the bot sends UA text, DE text, cover idea and post text. An edit
 (text or voice) is a brain job "apply edit": UA changed as asked, DE re-adapted, changed

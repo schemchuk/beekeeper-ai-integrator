@@ -54,8 +54,18 @@ systemctl --user disable --now beekeeper-factory   # switch it off
   keeps the old one; the pending edit lives in `work/factory/edit.yaml`. Every change is
   committed (`content: queue: ...`). A queue shown after a worded request gets the buttons
   too.
-- The clock ticks every 15 minutes and right after a wake-up; deadline jobs hook in with
-  T30-T33.
+- The clock ticks every 15 minutes and right after a wake-up and runs the deadline jobs.
+- Script (T30, `factory/script.py`, `prompts/script.md`): at T-3d 02:00 (or the first
+  tick after it, while the slot is open) the head of the queue gets its release slot and
+  the brain writes `episode.yaml`. The brain answers the YAML as text; the factory writes
+  `episodes/<nnn>-<slug>/episode.yaml`, runs the `beekeeper validate` checks plus its own
+  (id, slug, release, drawn scenes `hut`/`den`, known sfx) and gives a failing script back
+  with its problems, up to 3 tries. A failed round is an alert; the next tick tries again,
+  at most 3 rounds per slot (`work/factory/script-rounds.yaml`), then the idea stays in
+  the queue and a Claude session is needed. A passing script binds the idea to the slot
+  (`scripted`) and is committed with `episodes/`. At T-3d 07:00 (or the first tick after)
+  the bot sends UA, DE, cover idea and the DE post, writes the same to
+  `~/Desktop/temp/<episode>-script.md` (`mkdir -p` every time) and the slot is `sent`.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
   answer old messages again.
 

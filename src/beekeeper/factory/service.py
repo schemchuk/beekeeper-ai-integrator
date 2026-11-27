@@ -37,6 +37,7 @@ from .calendar import BERLIN
 from .gitsync import GitSync
 from .intake import Intake
 from .queuechat import QueueChat, View, is_show
+from .script import Scripts
 from .telegram import Telegram, TelegramError, Update
 from .transcribe import TranscribeError, Transcriber, Whisper
 
@@ -366,7 +367,10 @@ def main() -> int:
             bot.set_commands(COMMANDS)
         except TelegramError as e:
             log.warning("command menu not set: %s", e)
-        factory.tick_handlers.append(git.retry)
+        scripts = Scripts(
+            Brain(root), send=bot.send_message, alert=factory.alert, root=root, git=git
+        )
+        factory.tick_handlers += [git.retry, scripts.tick]
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
         factory.run()
