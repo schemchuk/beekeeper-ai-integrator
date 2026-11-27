@@ -22,6 +22,9 @@ press edits that message; after "✏" his next message is the new title, not an 
 Edits and approval (T31): a bare "погоджую" accepts the waiting script at once, a "Reply"
 to the script message is an edit of that script; anything else goes to the intake, whose
 brain may still call it an edit or an approval. The clock accepts in silence at T-1d 07:00.
+
+Production (T32): the clock builds an accepted slot, sends the DE reel and hands it off to
+postpilot; "стоп" (typed or spoken) before the release stops it, no brain.
 """
 
 from __future__ import annotations
@@ -40,6 +43,7 @@ from .brain import Brain, BrainAuthError, BrainError
 from .calendar import BERLIN
 from .gitsync import GitSync
 from .intake import Intake
+from .production import Production, is_stop
 from .queuechat import QueueChat, View, is_show
 from .review import NOTHING_OPEN, Review, is_approve
 from .script import Scripts
@@ -111,9 +115,11 @@ class Factory:
         transcriber: Transcriber | None = None,
         queue_chat: QueueChat | None = None,
         review: Review | None = None,
+        production: Production | None = None,
     ) -> None:
         self.bot = bot
         self.review = review
+        self.production = production
         self.queue_chat = queue_chat
         self.intake = intake
         self.transcriber = transcriber
@@ -137,6 +143,8 @@ class Factory:
             self.submit(Job("queue", self.show_queue))
         elif update.kind == "text" and self.queue_chat and self.queue_chat.editing() is not None:
             self.submit(Job("rename", lambda: self.rename(update.text)))
+        elif update.kind == "text" and self.production and is_stop(update.text):
+            self.submit(Job("stop", self.stop_slot))
         elif update.kind == "text" and self.review and is_approve(update.text):
             self.submit(Job("approve", lambda: self.approve(update.text, update.reply_to)))
         elif update.kind == "text" and self.intake:
@@ -179,6 +187,10 @@ class Factory:
             self.rename(body)
             path.unlink(missing_ok=True)
             return
+        if self.production and is_stop(body):  # a spoken "стоп"
+            path.unlink(missing_ok=True)
+            self.stop_slot()
+            return
         try:
             reply = self.review.route(body, reply_to, self.clock()) if self.review else None
             if reply is None:
@@ -195,7 +207,11 @@ class Factory:
         elif reply:  # an edit sends the new script itself
             self.bot.send_message(reply)
 
-    # --- the script waiting for approval (T31) ----------------------------------------
+    # --- the script waiting for approval (T31), "стоп" (T32) ---------------------------
+
+    def stop_slot(self) -> None:
+        assert self.production is not None
+        self.bot.send_message(self.production.stop(self.clock()))
 
     def approve(self, body: str, reply_to: int | None) -> None:
         assert self.review is not None
@@ -383,6 +399,8 @@ def main() -> int:
             queue_chat=QueueChat(root, git),
             review=review,
         )
+        production = Production(bot.send_video, alert=factory.alert, root=root, git=git)
+        factory.production = production
         try:
             bot.set_commands(COMMANDS)
         except TelegramError as e:
@@ -390,7 +408,7 @@ def main() -> int:
         scripts = Scripts(
             Brain(root), send=bot.send_message, alert=factory.alert, root=root, git=git
         )
-        factory.tick_handlers += [git.retry, scripts.tick, review.tick]
+        factory.tick_handlers += [git.retry, scripts.tick, review.tick, production.tick]
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
         factory.run()
