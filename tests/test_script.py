@@ -54,8 +54,8 @@ class FakeGit:
         return True
 
 
-@pytest.fixture
-def root(tmp_path):
+def make_root(tmp_path):
+    """A repo with the cast, three old episodes and two ideas in the queue."""
     (tmp_path / "characters").mkdir()
     shutil.copy(REPO / "characters/cast.yaml", tmp_path / "characters/cast.yaml")
     for old in ("001-nichnyi-kod", "002-medunko-v-splyachtsi", "003-vechir-z-sirym"):
@@ -64,6 +64,11 @@ def root(tmp_path):
     queue, _ = queue.add("Друга ідея", "chat", NIGHT)
     save_queue(queue, tmp_path / "factory/queue.yaml")
     return tmp_path
+
+
+@pytest.fixture
+def root(tmp_path):
+    return make_root(tmp_path)
 
 
 def make(root, *answers):

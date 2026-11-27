@@ -323,3 +323,99 @@ def test_voice_heard_but_not_sorted_stays_in_the_inbox(tmp_path):
     (kept,) = (tmp_path / "voice/inbox").iterdir()
     assert "ведмідь заснув" in kept.read_text(encoding="utf-8")
     assert "Whisper transcript" in kept.read_text(encoding="utf-8")
+
+
+# --- T31: the script waiting for approval -----------------------------------------------
+
+
+class FakeReview:
+    def __init__(self, waiting=True):
+        self.routed = []
+        self.waiting_now = waiting
+
+    def route(self, body, reply_to, now):
+        self.routed.append((body, reply_to))
+        if body.strip().lower().rstrip(".!") == "погоджую":
+            return "Прийняв 004." if self.waiting_now else None
+        if reply_to == 501:
+            return ""  # an edit: the review sends the new script itself
+        return None
+
+
+def test_pogodzhuyu_needs_no_brain_and_no_inbox(tmp_path):
+    intake, review = FakeIntake(), FakeReview()
+    bot = FakeBot([[text(9, "Погоджую!")]])
+    factory = Factory(
+        bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake, review=review
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert bot.sent == ["Прийняв 004."]
+    assert intake.seen == []
+    assert not (tmp_path / "voice/inbox").exists()
+
+
+def test_pogodzhuyu_with_nothing_waiting(tmp_path):
+    from beekeeper.factory.review import NOTHING_OPEN
+
+    bot = FakeBot([[text(9, "погоджую")]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=FakeIntake(),
+        review=FakeReview(waiting=False),
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert bot.sent == [NOTHING_OPEN]
+
+
+def test_a_reply_to_the_script_is_an_edit(tmp_path):
+    from beekeeper.factory.service import TAKEN
+
+    intake, review = FakeIntake(), FakeReview()
+    edit = Update(update_id=10, kind="text", message_id=10, text="Заміни фінал.", reply_to=501)
+    bot = FakeBot([[edit]])
+    factory = Factory(
+        bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake, review=review
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert review.routed == [("Заміни фінал.", 501)]
+    assert intake.seen == []
+    assert bot.sent == [TAKEN]  # nothing more: the new script came from the review
+    assert list((tmp_path / "voice/inbox").iterdir()) == []
+
+
+def test_other_text_still_goes_to_the_intake(tmp_path):
+    intake, review = FakeIntake(), FakeReview()
+    bot = FakeBot([[text(11, "А було таке...")]])
+    factory = Factory(
+        bot, root=tmp_path, clock=lambda: NOW, wall=FakeWall(), intake=intake, review=review
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert review.routed == [("А було таке...", None)]
+    assert intake.seen == [("А було таке...", 11)]
+
+
+def test_a_spoken_edit_as_a_reply(tmp_path):
+    intake, review = FakeIntake(), FakeReview()
+    ears = FakeEars()
+    note = Update(update_id=12, kind="voice", message_id=12, file_id="F1", duration=5, reply_to=501)
+    bot = FakeBot([[note]])
+    factory = Factory(
+        bot,
+        root=tmp_path,
+        clock=lambda: NOW,
+        wall=FakeWall(),
+        intake=intake,
+        transcriber=ears,
+        review=review,
+    )
+    factory.poll_once(timeout=0)
+    drain(factory)
+    assert review.routed == [(ears.heard, 501)]
+    assert intake.seen == []

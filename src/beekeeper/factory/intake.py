@@ -4,6 +4,8 @@ One brain job per message decides: story, command, both, or unsure. The factory 
 writes the story verbatim to `bible/stories/` (the brain only sorts facts and the seed into
 the rest of `bible/`), adds it to the queue, applies the queue command, then commits and
 pushes. Unsure: one short question back; his next message is read together with the first.
+While a script waits for approval (T31), the brain may also say `edit` or `approve`; the
+review (`factory/review.py`) then does the work.
 """
 
 from __future__ import annotations
@@ -12,12 +14,16 @@ import logging
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from .brain import Brain, BrainError, Job
 from .gitsync import GitSync
 from .queue import QUEUE_FILE, Idea, Queue, load_queue, save_queue
 from .slots import SLOTS_FILE, Slots, load_slots, release_dates
 from .store import StateError, read_yaml, write_yaml
+
+if TYPE_CHECKING:
+    from .review import Review
 
 log = logging.getLogger("beekeeper.factory.intake")
 
@@ -61,10 +67,17 @@ def place(queue: Queue, slots: Slots, idea_id: int, now: datetime) -> str:
 
 
 class Intake:
-    def __init__(self, brain: Brain, root: Path = Path("."), git: GitSync | None = None) -> None:
+    def __init__(
+        self,
+        brain: Brain,
+        root: Path = Path("."),
+        git: GitSync | None = None,
+        review: Review | None = None,
+    ) -> None:
         self.brain = brain
         self.root = root
         self.git = git or GitSync(root)
+        self.review = review
         self.showed = False  # the last reply lists the queue: the factory adds its buttons
 
     # --- state ----------------------------------------------------------------------
@@ -105,6 +118,9 @@ class Intake:
         lines += [f"  #{idea.id} at {n}: {idea.title} ({at:%Y-%m-%d})" for n, idea, at in rows]
         if not rows:
             lines.append("  (empty)")
+        waiting = self.review.describe() if self.review else []
+        if waiting:
+            lines += ["", "Scripts waiting for his approval (folder: title, release):", *waiting]
         if pending:
             lines += ["", f'Earlier message (you asked: "{pending.question}"):', pending.text]
         lines += ["", "His message:", text]
@@ -127,6 +143,15 @@ class Intake:
             first = pending.text if pending else text
             self.save_pending(Pending(first, question, source_uid))
             return question
+        if kind in ("edit", "approve"):
+            if self.review is None or not self.review.waiting():
+                raise BrainError(f"intake: {kind} but no script waits for approval")
+            self.save_pending(None)
+            episode = answer.get("episode") or None
+            if kind == "approve":
+                return self.review.approve(now, episode)
+            words = f"{pending.text}\n\n{text}" if pending else text
+            return self.review.edit(words, now, episode)
 
         replies = [answer["reply"].strip()]
         new_idea: Idea | None = None

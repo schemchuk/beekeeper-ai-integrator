@@ -18,6 +18,10 @@ transcribed by local whisper, shown back ("Почув так: ...") and then han
 
 The queue in the chat (T29): `/queue` or "черга" shows it with buttons, no brain; a button
 press edits that message; after "✏" his next message is the new title, not an idea.
+
+Edits and approval (T31): a bare "погоджую" accepts the waiting script at once, a "Reply"
+to the script message is an edit of that script; anything else goes to the intake, whose
+brain may still call it an edit or an approval. The clock accepts in silence at T-1d 07:00.
 """
 
 from __future__ import annotations
@@ -37,6 +41,7 @@ from .calendar import BERLIN
 from .gitsync import GitSync
 from .intake import Intake
 from .queuechat import QueueChat, View, is_show
+from .review import NOTHING_OPEN, Review, is_approve
 from .script import Scripts
 from .telegram import Telegram, TelegramError, Update
 from .transcribe import TranscribeError, Transcriber, Whisper
@@ -105,8 +110,10 @@ class Factory:
         intake: Intake | None = None,
         transcriber: Transcriber | None = None,
         queue_chat: QueueChat | None = None,
+        review: Review | None = None,
     ) -> None:
         self.bot = bot
+        self.review = review
         self.queue_chat = queue_chat
         self.intake = intake
         self.transcriber = transcriber
@@ -130,13 +137,15 @@ class Factory:
             self.submit(Job("queue", self.show_queue))
         elif update.kind == "text" and self.queue_chat and self.queue_chat.editing() is not None:
             self.submit(Job("rename", lambda: self.rename(update.text)))
+        elif update.kind == "text" and self.review and is_approve(update.text):
+            self.submit(Job("approve", lambda: self.approve(update.text, update.reply_to)))
         elif update.kind == "text" and self.intake:
             path = self.save_text(update.text, update.update_id)
             self.bot.send_message(TAKEN)
             self.submit(
                 Job(
                     f"intake {update.update_id}",
-                    lambda: self.take_in(update.text, update.update_id, path),
+                    lambda: self.take_in(update.text, update.update_id, path, update.reply_to),
                 )
             )
         elif update.kind == "text":
@@ -164,14 +173,16 @@ class Factory:
         log.info("saved text to %s", path)
         return path
 
-    def take_in(self, body: str, uid: int, path: Path) -> None:
+    def take_in(self, body: str, uid: int, path: Path, reply_to: int | None = None) -> None:
         assert self.intake is not None
         if self.queue_chat and self.queue_chat.editing() is not None:  # a voice note after "✏"
             self.rename(body)
             path.unlink(missing_ok=True)
             return
         try:
-            reply = self.intake.process(body, uid, self.clock())
+            reply = self.review.route(body, reply_to, self.clock()) if self.review else None
+            if reply is None:
+                reply = self.intake.process(body, uid, self.clock())
         except BrainAuthError:
             raise
         except BrainError as e:
@@ -181,8 +192,15 @@ class Factory:
         path.unlink(missing_ok=True)
         if self.queue_chat and getattr(self.intake, "showed", False):
             self.show(View(reply, self.queue_chat.view(self.clock()).buttons))
-        else:
+        elif reply:  # an edit sends the new script itself
             self.bot.send_message(reply)
+
+    # --- the script waiting for approval (T31) ----------------------------------------
+
+    def approve(self, body: str, reply_to: int | None) -> None:
+        assert self.review is not None
+        reply = self.review.route(body, reply_to, self.clock())
+        self.bot.send_message(reply or NOTHING_OPEN)
 
     # --- the queue in the chat (T29) --------------------------------------------------
 
@@ -240,7 +258,7 @@ class Factory:
         self.bot.send_message(HEARD.format(text=body))
         path = self.save_text(body, update.update_id, source=f"Whisper transcript of {audio.name}")
         if self.intake:
-            self.take_in(body, update.update_id, path)
+            self.take_in(body, update.update_id, path, update.reply_to)
         else:
             self.bot.send_message(SAVED)
 
@@ -356,12 +374,14 @@ def main() -> int:
     root = Path(".")
     git = GitSync(root)
     with Telegram(config) as bot:
+        review = Review(Brain(root), send=bot.send_message, root=root, git=git)
         factory = Factory(
             bot,
             root=root,
-            intake=Intake(Brain(root), root, git),
+            intake=Intake(Brain(root), root, git, review=review),
             transcriber=Whisper(),
             queue_chat=QueueChat(root, git),
+            review=review,
         )
         try:
             bot.set_commands(COMMANDS)
@@ -370,7 +390,7 @@ def main() -> int:
         scripts = Scripts(
             Brain(root), send=bot.send_message, alert=factory.alert, root=root, git=git
         )
-        factory.tick_handlers += [git.retry, scripts.tick]
+        factory.tick_handlers += [git.retry, scripts.tick, review.tick]
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
         factory.run()

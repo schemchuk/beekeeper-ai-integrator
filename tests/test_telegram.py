@@ -119,6 +119,16 @@ def test_parse_text_voice_and_button():
     )
 
 
+def test_parse_reply_to():
+    answer = parse_update(msg(4, text="заміни фінал", reply_to_message={"message_id": 501}), CHAT)
+    assert answer.reply_to == 501
+    spoken = parse_update(
+        msg(5, voice={"file_id": "F"}, reply_to_message={"message_id": 502}), CHAT
+    )
+    assert spoken.reply_to == 502
+    assert parse_update(msg(6, text="просто так"), CHAT).reply_to is None
+
+
 def test_parse_drops_strangers_and_unknown_kinds():
     assert parse_update(msg(1, chat=STRANGER, text="hi"), CHAT) is None
     assert parse_update(msg(2, sticker={"file_id": "S"}), CHAT) is None

@@ -84,6 +84,7 @@ class Update:
     duration: int = 0  # voice notes, seconds
     callback_id: str = ""  # button presses: answer it with answer_button()
     data: str = ""  # button presses: the callback data
+    reply_to: int | None = None  # text and voice: the message he answered with "Reply"
 
 
 def parse_update(raw: dict, chat_id: int) -> Update | None:
@@ -117,6 +118,7 @@ def parse_update(raw: dict, chat_id: int) -> Update | None:
             text=message.get("caption", ""),
             file_id=voice["file_id"],
             duration=int(voice.get("duration", 0)),
+            reply_to=_reply_to(message),
         )
     if isinstance(message.get("text"), str):
         return Update(
@@ -124,7 +126,15 @@ def parse_update(raw: dict, chat_id: int) -> Update | None:
             kind="text",
             message_id=message.get("message_id"),
             text=message["text"],
+            reply_to=_reply_to(message),
         )
+    return None
+
+
+def _reply_to(message: dict) -> int | None:
+    answered = message.get("reply_to_message")
+    if isinstance(answered, dict) and isinstance(answered.get("message_id"), int):
+        return answered["message_id"]
     return None
 
 

@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "yaml": {"type": "string", "minLength": 200, "maxLength": 30000},
+    "reply": {"type": "string", "maxLength": 300},
+    "commit": {"type": "string", "minLength": 1, "maxLength": 100}
+  },
+  "required": ["yaml", "reply", "commit"],
+  "additionalProperties": false
+}

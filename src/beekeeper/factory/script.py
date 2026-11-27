@@ -152,15 +152,24 @@ def cover_idea(episode: Episode) -> str:
     return f"{who}; на моніторі: «{monitor}»"
 
 
-def message(episode: Episode, slot: Slot) -> str:
+def message(
+    episode: Episode,
+    slot: Slot,
+    de_lines: list[str] | None = None,
+    edited: bool = False,
+) -> str:
+    """The script for the chat; `de_lines` replaces the German text (marked after an edit)."""
     accept = deadlines(slot.release).accept
+    head = "Новий сценарій" if edited else "Сценарій"
+    de = script_lines(episode, "de") if de_lines is None else de_lines
     parts = [
-        f"Сценарій {episode.id} «{episode.title.get('ua', '')}» на {when(slot.release)} о 08:00.",
+        f"{head} {episode.id} «{episode.title.get('ua', '')}» на {when(slot.release)} о 08:00.",
         "🇺🇦 Українською\n" + "\n".join(script_lines(episode, "ua")),
-        f"🇩🇪 Deutsch: «{episode.title.get('de', '')}»\n" + "\n".join(script_lines(episode, "de")),
+        f"🇩🇪 Deutsch: «{episode.title.get('de', '')}»\n" + "\n".join(de),
         f"Обкладинка: {cover_idea(episode)}",
         "Пост (DE):\n" + post_text(episode, "de").strip(),
-        "Правки пиши сюди, текстом або голосом. «Погоджую» приймає одразу; "
+        "Правки пиши відповіддю на це повідомлення, текстом або голосом. «Погоджую» приймає "
+        "одразу; "
         f"якщо мовчатимеш, приймаю {when(accept)} о 07:00.",
     ]
     return "\n\n".join(parts)
@@ -335,12 +344,16 @@ class Scripts:
         return sent
 
     def to_temp(self, episode: Episode, slot: Slot) -> str:
-        """Write the script to the temp folder; a note for the chat if that failed."""
-        try:
-            self.temp.mkdir(parents=True, exist_ok=True)  # every time: he cleans the folder
-            path = self.temp / f"{slot.episode}-script.md"
-            path.write_text(markdown(episode, slot), encoding="utf-8")
-        except OSError as e:
-            log.warning("temp copy failed: %s", e)
-            return f"(Копію в {self.temp} не записав: {e.strerror or e}.)"
-        return ""
+        return to_temp(self.temp, episode, slot)
+
+
+def to_temp(temp: Path, episode: Episode, slot: Slot) -> str:
+    """Write the script to the temp folder; a note for the chat if that failed."""
+    try:
+        temp.mkdir(parents=True, exist_ok=True)  # every time: he cleans the folder
+        path = temp / f"{slot.episode}-script.md"
+        path.write_text(markdown(episode, slot), encoding="utf-8")
+    except OSError as e:
+        log.warning("temp copy failed: %s", e)
+        return f"(Копію в {temp} не записав: {e.strerror or e}.)"
+    return ""

@@ -66,6 +66,16 @@ systemctl --user disable --now beekeeper-factory   # switch it off
   (`scripted`) and is committed with `episodes/`. At T-3d 07:00 (or the first tick after)
   the bot sends UA, DE, cover idea and the DE post, writes the same to
   `~/Desktop/temp/<episode>-script.md` (`mkdir -p` every time) and the slot is `sent`.
+- Edits and approval (T31, `factory/review.py`, `prompts/edit.md`): while a script is
+  `sent`, a "Reply" to the script message (typed or spoken) is an edit of it; any other
+  message goes to the intake, whose brain may call it `edit` or `approve` (a new tale stays
+  a story). An edit: the brain rewrites `episode.yaml` (UA as he says, DE re-adapted), the
+  factory runs the night-script checks (up to 3 tries; a failure keeps the old script and
+  says so), sends the new script with the changed German words marked `*like this*`,
+  updates `~/Desktop/temp/<episode>-script.md` and commits; the slot stays `sent` and the
+  new message is the one to reply to. A bare "погоджую" (also "згоден", "приймаю",
+  `/approve`) accepts at once, no brain; silence: the clock accepts at T-1d 07:00 and says
+  so in one line. Both commit `script accepted (...)` and the slot is `accepted`.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
   answer old messages again.
 

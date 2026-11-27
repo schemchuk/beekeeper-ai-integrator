@@ -14,7 +14,6 @@ No shell, network, MCP or git.
 | Job | Task | Writes |
 |-----|------|--------|
 | `hello` | smoke test: `python -m beekeeper.factory.brain` | nothing |
-| `intake` | his message: story, command, both or unsure; sort a story into `bible/` (T27) | `bible/` (not `bible/stories/`) |
-
-The jobs of T30 (script) and T31 (edits) add
-their files here.
+| `intake` | his message: story, command, both, unsure, or (while a script waits) edit / approve; sort a story into `bible/` (T27, T31) | `bible/` (not `bible/stories/`) |
+| `script` | the night script: `episode.yaml` as text (T30) | nothing (the factory writes) |
+| `edit` | his edit of a sent script: the new `episode.yaml`, UA as he says, DE re-adapted (T31) | nothing (the factory writes) |
