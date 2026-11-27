@@ -28,21 +28,23 @@ Notes:
 - v1 (`factory-intake`) is now done for this project (ADR 011 §10); postpilot may start
   T27e2 (remove v1), which needs Volodymyr's OK on that PR.
 
-## First numbers (LinkedIn DE post, same day, about 2 h after publishing)
+## First numbers (LinkedIn DE post, about 1 h after publishing)
 
 Screenshot of the post analytics (activity `7532010812899643393`), 12:21 on 2026-11-27:
 
 - 54 impressions, 47 members reached; 11% inside his network, 89% outside.
 - 23 video views, 2 min 46 s in total, 7 s average on a 59.7 s reel: about 12% watched.
 - 0 profile views and 0 new followers from this post so far.
+- 12:23, LinkedIn says "1 h": 57 impressions, 47 members reached, 16% inside his network,
+  84% outside; video still 23 views, 2 min 46 s.
 
 Compared with 002 (14 h, see `2026-11-25-002-first-reel.md`):
 
-| | 002 (14 h) | 003 (~2 h) |
+| | 002 (14 h) | 003 (~1 h) |
 |---|---|---|
-| Impressions | 34 | 54 |
+| Impressions | 34 | 57 |
 | Members reached | 8 | 47 |
-| Outside network | 24% | 89% |
+| Outside network | 24% | 84% |
 | Video views | 7 | 23 |
 | Average watch | 37 s of 55 s | 7 s of 59.7 s |
 
