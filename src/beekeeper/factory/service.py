@@ -25,6 +25,9 @@ brain may still call it an edit or an approval. The clock accepts in silence at 
 
 Production (T32): the clock builds an accepted slot, sends the DE reel and hands it off to
 postpilot; "стоп" (typed or spoken) before the release stops it, no brain.
+
+His style (T35): every text and transcript also goes to the day log; from 07:00 the clock
+adds the new phrases of finished days to `voice/volodymyr.md`.
 """
 
 from __future__ import annotations
@@ -47,6 +50,7 @@ from .production import Production, is_stop
 from .queuechat import QueueChat, View, is_show
 from .review import NOTHING_OPEN, Review, is_approve
 from .script import Scripts
+from .style import Style
 from .telegram import Telegram, TelegramError, Update
 from .transcribe import TranscribeError, Transcriber, Whisper
 
@@ -116,8 +120,10 @@ class Factory:
         queue_chat: QueueChat | None = None,
         review: Review | None = None,
         production: Production | None = None,
+        style: Style | None = None,
     ) -> None:
         self.bot = bot
+        self.style = style
         self.review = review
         self.production = production
         self.queue_chat = queue_chat
@@ -137,6 +143,8 @@ class Factory:
     def handle(self, update: Update) -> None:
         """Quick work only: anything slow goes to the worker as a job."""
         log.info("update %s: %s", update.update_id, update.kind)
+        if update.kind == "text" and self.style:
+            self.learn_from(update.text)
         if update.kind == "text" and update.text.strip().split("@")[0] == "/start":
             self.bot.send_message(GREETING)
         elif update.kind == "text" and self.queue_chat and is_show(update.text):
@@ -168,6 +176,14 @@ class Factory:
             self.submit(Job(f"button {update.data}", lambda: self.press(update)))
         elif update.kind == "button":
             self.bot.answer_button(update.callback_id, "Ця кнопка ще не працює")
+
+    def learn_from(self, text: str, source: str = "text") -> None:
+        """His words to the day log (T35); a failed write never stops the message."""
+        assert self.style is not None
+        try:
+            self.style.record(text, self.clock(), source)
+        except OSError:
+            log.exception("could not write the day log")
 
     def save_text(self, body: str, uid: int, source: str = "Verbatim") -> Path:
         stamp = self.clock().strftime("%Y-%m-%d-%H%M")
@@ -272,6 +288,8 @@ class Factory:
             return
         body = f"{heard}\n\n{update.text.strip()}" if update.text.strip() else heard
         self.bot.send_message(HEARD.format(text=body))
+        if self.style:
+            self.learn_from(body, source="voice")
         path = self.save_text(body, update.update_id, source=f"Whisper transcript of {audio.name}")
         if self.intake:
             self.take_in(body, update.update_id, path, update.reply_to)
@@ -391,6 +409,7 @@ def main() -> int:
     git = GitSync(root)
     with Telegram(config) as bot:
         review = Review(Brain(root), send=bot.send_message, root=root, git=git)
+        style = Style(Brain(root), send=bot.send_message, root=root, git=git)
         factory = Factory(
             bot,
             root=root,
@@ -398,6 +417,7 @@ def main() -> int:
             transcriber=Whisper(),
             queue_chat=QueueChat(root, git),
             review=review,
+            style=style,
         )
         production = Production(bot.send_video, alert=factory.alert, root=root, git=git)
         factory.production = production
@@ -408,7 +428,8 @@ def main() -> int:
         scripts = Scripts(
             Brain(root), send=bot.send_message, alert=factory.alert, root=root, git=git
         )
-        factory.tick_handlers += [git.retry, scripts.tick, review.tick, production.tick]
+        handlers = [git.retry, scripts.tick, review.tick, production.tick, style.tick]
+        factory.tick_handlers += handlers
         signal.signal(signal.SIGTERM, factory.stop)
         signal.signal(signal.SIGINT, factory.stop)
         factory.run()

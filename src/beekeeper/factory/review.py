@@ -34,7 +34,7 @@ from .slots import SLOTS_FILE, Slot, State, load_slots, save_slots
 
 log = logging.getLogger("beekeeper.factory.review")
 
-JOB = Job("edit", timeout=10 * 60)
+JOB = Job("edit", timeout=10 * 60, voice=True)
 APPROVE_WORDS = {
     "погоджую",
     "погоджено",

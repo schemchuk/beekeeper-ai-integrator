@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 PROMPTS = Path("prompts")
+VOICE = Path("voice/volodymyr.md")  # his way of speaking (F1.4), sent with `Job.voice`
 READ_TOOLS = ("Read", "Glob", "Grep")
 DEFAULT_TIMEOUT = 15 * 60  # seconds; a script job is a few minutes (architecture §5)
 
@@ -87,6 +88,7 @@ class Job:
     writes: tuple[str, ...] = ()  # repo-relative folders, e.g. ("bible",)
     timeout: int = DEFAULT_TIMEOUT
     model: str | None = None  # None: Claude Code's default
+    voice: bool = False  # send voice/volodymyr.md with the prompt: the job writes to him
 
 
 class Brain:
@@ -108,6 +110,12 @@ class Brain:
             return json.loads(self._read(f"{job.name}.schema.json"))
         except json.JSONDecodeError as e:
             raise BrainError(f"prompts/{job.name}.schema.json is not JSON: {e}") from None
+
+    def voice(self) -> str:
+        """His style notes as a block for the prompt; a note if the file is missing."""
+        path = self.root / VOICE
+        body = path.read_text(encoding="utf-8").strip() if path.is_file() else "(missing)"
+        return f"How Volodymyr speaks ({VOICE}); write to him in this manner:\n\n{body}"
 
     def _read(self, name: str) -> str:
         path = self.root / PROMPTS / name
@@ -148,7 +156,10 @@ class Brain:
     def ask(self, job: Job, task: str) -> dict:
         """Run the job with `task` (his words, the idea, the edit ...); the checked answer."""
         schema = self.schema(job)
-        stdin = f"{self.prompt(job).rstrip()}\n\n---\n\n{task.strip()}\n"
+        stdin = f"{self.prompt(job).rstrip()}\n\n---\n\n"
+        if job.voice:
+            stdin += f"{self.voice()}\n\n---\n\n"
+        stdin += f"{task.strip()}\n"
         run = self.runner(self.args(job, schema), stdin, self.root, job.timeout)
         answer = parse_result(run, job.name)
         problems = check(answer, schema)

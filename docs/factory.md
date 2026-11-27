@@ -100,6 +100,13 @@ systemctl --user disable --now beekeeper-factory   # switch it off
 - "Стоп" (also `stop`, `/stop`, "зупини"; typed or spoken, no brain) before the release
   stops the next slot on its way out (`sent` to `handed_off`): an existing release is
   deleted with its tag, the slot is `stopped`, the idea goes back to the head of the queue.
+- His style (T35, `factory/style.py`, `prompts/style.md`): every text and transcribed voice
+  note is appended to the day log `work/factory/said/<date>.md` (local, never committed).
+  From 07:00 Berlin the clock gives each finished day to the `style` brain job; only quotes
+  found word for word in that day and not yet in `voice/volodymyr.md` are appended there
+  (section "From Telegram"), committed, and listed to him ("Записав у твій словничок").
+  A failed job keeps the log for the next tick. The intake, script and edit jobs get
+  `voice/volodymyr.md` in the prompt.
 - The Telegram offset is kept in `work/factory/offset` (local), so a restart does not
   answer old messages again.
 

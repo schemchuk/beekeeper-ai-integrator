@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 
 log = logging.getLogger("beekeeper.factory.intake")
 
-JOB = Job("intake", writes=("bible",), timeout=5 * 60)
+JOB = Job("intake", writes=("bible",), timeout=5 * 60, voice=True)
 STORIES = Path("bible/stories")
 PENDING_FILE = Path("work/factory/pending.yaml")
 DEFAULT_QUESTION = "Це побрехенька для черги чи команда?"

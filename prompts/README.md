@@ -17,3 +17,7 @@ No shell, network, MCP or git.
 | `intake` | his message: story, command, both, unsure, or (while a script waits) edit / approve; sort a story into `bible/` (T27, T31) | `bible/` (not `bible/stories/`) |
 | `script` | the night script: `episode.yaml` as text (T30) | nothing (the factory writes) |
 | `edit` | his edit of a sent script: the new `episode.yaml`, UA as he says, DE re-adapted (T31) | nothing (the factory writes) |
+| `style` | a finished day of his Telegram messages: new phrases for `voice/volodymyr.md` (T35) | nothing (the factory appends) |
+
+Jobs that write to him (`intake`, `script`, `edit`, `style`) get `voice/volodymyr.md` in
+the prompt, between the instructions and the input (`Job.voice`).
