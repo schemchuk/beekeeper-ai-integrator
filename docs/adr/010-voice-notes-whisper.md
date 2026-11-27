@@ -16,5 +16,5 @@ files stay in `work/factory/` and are not committed.
 
 ## Consequences
 
-- A one-minute note takes about a minute on the Ryzen 7; the bot replies "слухаю" at once.
+- A one-minute note took about 9 minutes with medium on the busy laptop (measured in T28); the bot replies "слухаю" at once.
 - If `medium` proves weak on his dialect, try `large-v3` (slower) before anything paid.

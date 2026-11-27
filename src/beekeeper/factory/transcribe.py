@@ -22,8 +22,8 @@ log = logging.getLogger("beekeeper.factory.transcribe")
 
 MODEL = "medium"
 LANGUAGE = "uk"
-MIN_TIMEOUT = 10 * 60  # seconds; the model alone takes a while to load
-PER_SECOND = 6  # seconds of CPU time allowed per second of audio
+MIN_TIMEOUT = 15 * 60  # seconds; the model alone takes a while to load
+PER_SECOND = 20  # seconds allowed per second of audio; medium ran ~9x on a busy laptop
 
 
 class TranscribeError(Exception):
