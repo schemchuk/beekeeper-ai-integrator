@@ -1,6 +1,6 @@
 # 009. Handoff to postpilot by GitHub release and `factory-intake`
 
-Status: ACCEPTED (Volodymyr, 2026-11-26). Supersedes ADR 005. Matches postpilot ADR 024 (shipped
+Status: SUPERSEDED by ADR 011 (release contract v2, 2026-11-27). Was ACCEPTED (Volodymyr, 2026-11-26). Supersedes ADR 005. Matches postpilot ADR 024 (shipped
 2026-11-26, review in `docs/postpilot-requests.md`).
 
 ## Context

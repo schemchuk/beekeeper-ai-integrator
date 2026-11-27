@@ -3,7 +3,7 @@
 Status: ACCEPTED (Volodymyr, 2026-11-26; gate 3 of 4: interview -> spec -> **architecture**
 -> tasks). Date: 2026-11-26.
 Implements `docs/spec.md` (ACCEPTED 2026-11-26). New decisions: ADR 006-010 (ACCEPTED 2026-11-26).
-ADR 005 is superseded by ADR 009. ADR 001-004 stay as they are (episode file, Python on CPU,
+ADR 005 is superseded by ADR 009, ADR 009 by ADR 011 (release contract v2). ADR 001-004 stay as they are (episode file, Python on CPU,
 voices, Remotion).
 
 ## 1. Overview
@@ -18,10 +18,10 @@ voices, Remotion).
                             │   ├─ whisper (voice -> text, ADR 010)      │
                             │   ├─ claude -p (sort, script, edits, 008)  │
                             │   ├─ beekeeper build (voices..check, 002)  │  release reel/<ep>
-                            │   └─ handoff (ADR 009) ────────────────────┼──────────────▶ beekeeper-ai-
+                            │   └─ handoff (ADR 011) ────────────────────┼──────────────▶ beekeeper-ai-
                             │  git: bible/, factory/, episodes/ -> push  │                integrator
                             └────────────────────────────────────────────┘  dispatch       (public)
-                                                                             factory-intake    │
+                                                                             polls v2 release  │
                                                                            ─────────────▶ postpilot ─▶ LinkedIn,
                                                                                          (reads the   Threads,
                                                                                           release)    IG, FB
@@ -42,7 +42,7 @@ the existing pipeline, and GitHub.
 | Clock | every 15 minutes and on wake: compares deadlines with the state, queues what is due | `factory/clock.py` |
 | Worker | runs jobs one by one (whisper, Claude, build, handoff), reports to the chat | `factory/worker.py` |
 | Brain | `claude -p` with a fixed prompt per job, limited tools, JSON answer | `factory/brain.py`, `prompts/*.md` |
-| Handoff | GitHub release + `factory-intake` dispatch, stop = delete release | `factory/handoff.py` |
+| Handoff | GitHub release by contract v2 (`manifest.json`, `video.mp4`, `cover.png`, texts), optional `project-intake` dispatch, stop = delete release | `factory/handoff.py` |
 | Git sync | commit and push the factory's content changes | `factory/gitsync.py` |
 | Pipeline | today's `beekeeper build` (voices, timing, render, post, check), unchanged | `src/beekeeper/*` |
 
@@ -123,8 +123,10 @@ can carry phrases. A brain job after each conversation day adds new ones to
 **Production (F4).** On `accepted`: `beekeeper build`, then the DE reel is sent to the chat
 for a look. The UA reel stays in `out/` (archived, not sent).
 
-**Handoff (F5, ADR 009).** Right after the reel is sent: release `reel/<episode>` with four
-assets, then the `factory-intake` dispatch with `release_at`. "стоп" before `release_at`
+**Handoff (F5, ADR 011).** Once the slot is accepted: release `reel/<episode>` with
+`manifest.json` (`v: 2`, `release_at` with the Berlin offset, `ai: true`), `video.mp4`,
+`cover.png`, `post_de.txt` (+ `post_threads.txt`); postpilot polls it, an optional
+`project-intake` dispatch asks for an earlier scan. "стоп" before `release_at`
 deletes the release. After `release_at` a stop is refused with a plain explanation.
 
 ## 5. Running on the laptop (ADR 006)
@@ -146,7 +148,7 @@ deletes the release. After `release_at` a stop is refused with a plain explanati
 |------|-----|
 | `FACTORY_BOT_TOKEN` | the factory's own bot (made with BotFather, free) |
 | `FACTORY_CHAT_ID` | the only chat the bot serves |
-| `POSTPILOT_DISPATCH_TOKEN` | fine-grained PAT: `schemchuk/postpilot`, Actions write |
+| `POSTPILOT_DISPATCH_TOKEN` | fine-grained PAT: `schemchuk/postpilot`, Actions write; only for the optional `project-intake` scan |
 
 Releases on this repo use the `gh` login that already exists on the laptop.
 
