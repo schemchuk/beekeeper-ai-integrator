@@ -1,0 +1,11 @@
+# systemd user timer: every Monday 07:00 Berlin (F7.2). Persistent=true: if the laptop was
+# off or asleep then, the clean runs at the next start. Independent of the factory.
+[Unit]
+Description=Beekeeper AI Integrator: weekly temp clean
+
+[Timer]
+OnCalendar=Mon *-*-* 07:00:00 Europe/Berlin
+Persistent=true
+
+[Install]
+WantedBy=timers.target

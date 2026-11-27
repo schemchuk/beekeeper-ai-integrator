@@ -65,6 +65,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="ISO 8601 with offset, e.g. 2026-12-01T08:00:00+01:00 (Berlin), or now",
     )
     sub.add_parser("factory", help="run the factory bot (systemd user service, docs/factory.md)")
+    clean = sub.add_parser("temp-clean", help="empty ~/Desktop/temp (weekly timer, F7.2)")
+    clean.add_argument("--dir", type=Path, default=None, help="folder to empty")
+    clean.add_argument("--dry-run", action="store_true", help="only list what would go")
     return parser
 
 
@@ -272,6 +275,18 @@ def cmd_validate(episode: Path, cast: Path) -> int:
     return 0
 
 
+def cmd_temp_clean(folder: Path | None, dry_run: bool) -> int:
+    from beekeeper.tempclean import TEMP, clean
+
+    folder = folder or TEMP
+    gone = clean(folder, dry_run=dry_run)
+    verb = "would delete" if dry_run else "deleted"
+    for path in gone:
+        print(f"{verb}: {path}")
+    print(f"{folder}: {verb} {len(gone)} item(s)")
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -295,6 +310,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         from beekeeper.factory.service import main as factory_main
 
         return factory_main()
+    if args.command == "temp-clean":
+        return cmd_temp_clean(args.dir, args.dry_run)
     parser.print_help()
     return 0
 
