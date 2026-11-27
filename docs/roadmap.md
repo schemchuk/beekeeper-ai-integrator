@@ -87,7 +87,7 @@ and Claude behind interfaces with fakes, so CI never calls them.
 | T34 ✅ | Temp cleaning (`beekeeper temp-clean`, `deploy/beekeeper-temp-clean.*`) (F7.2): `beekeeper-temp-clean.timer`, `OnCalendar=Mon 07:00 Europe/Berlin`, `Persistent=true`, independent of the factory | timer installed, a dry run lists what it would delete |
 | T35 ✅ | His style (`factory/style.py`, `prompts/style.md`) (F1.4): a daily brain job adds new phrases from all channels to `voice/volodymyr.md`; all bot replies use that file | a sample day adds a phrase; replies carry the file in the prompt |
 | T36 ✅ | README (N6): `README.md` in English and a short `README.de.md`; link the cartoons, show the factory -> postpilot contract (R1-R4) | both READMEs in `main` |
-| T37 | MVP run: episode 003 end to end, live, published by postpilot from a factory handoff | 003 is on LinkedIn on its slot |
+| T37 | MVP run: episode 004 end to end, live: idea in the bot, 02:00 script, edits or silence, build, handoff, postpilot release on the slot. 003 went out by hand on 2026-11-27 (`docs/runs/2026-11-27-003-first-v2-release.md`), so the factory run moves to 004, slot Tue 2026-12-01 08:00 Berlin | 004 is on LinkedIn on its slot, with no manual step on the factory side |
 
 Order: T22-T26 (base), then T27-T29 (ideas), T30-T33 (one slot from script to handoff),
 T34-T36 any time, T37 last. Before T24 Volodymyr makes the bot with BotFather (token into `.env`).
