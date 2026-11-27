@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "kind": {"type": "string", "enum": ["story", "command", "both", "unsure"]},
+    "kind": {"type": "string", "enum": ["story", "command", "both", "unsure", "edit", "approve"]},
     "reply": {"type": "string", "maxLength": 600},
     "question": {"type": ["string", "null"], "maxLength": 300},
     "story": {
@@ -23,6 +23,7 @@
       "required": ["op", "idea", "position", "title"],
       "additionalProperties": false
     },
+    "episode": {"type": ["string", "null"], "maxLength": 80},
     "commit": {"type": "string", "minLength": 1, "maxLength": 100}
   },
   "required": ["kind", "reply", "question", "story", "command", "commit"],
