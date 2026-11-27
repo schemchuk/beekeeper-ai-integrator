@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "phrases": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "properties": {
+          "quote": {"type": "string", "minLength": 1, "maxLength": 300},
+          "note": {"type": "string", "minLength": 1, "maxLength": 200}
+        },
+        "required": ["quote", "note"],
+        "additionalProperties": false
+      }
+    },
+    "commit": {"type": "string", "minLength": 1, "maxLength": 100}
+  },
+  "required": ["phrases", "commit"],
+  "additionalProperties": false
+}

@@ -41,7 +41,7 @@ from .store import read_yaml, write_yaml
 
 log = logging.getLogger("beekeeper.factory.script")
 
-JOB = Job("script", timeout=15 * 60)
+JOB = Job("script", timeout=15 * 60, voice=True)
 TRIES = 3  # brain tries per round
 ROUNDS = 3  # rounds per slot, one per clock tick
 EPISODES = Path("episodes")
