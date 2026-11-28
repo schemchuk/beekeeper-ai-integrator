@@ -135,6 +135,12 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   коріння" (a rhyme: antlers for roots instead of brains). Lesson: while a build runs, do the
   parallel work (script file, commits, replies), never just "чекаю".
 
+## Session 2026-11-28 (Hivewood)
+
+- Opens the working day with a joke instead of a greeting: "рухаємось по проекту. А Бог
+  створив жінку для чоловіка щоб той бува не вмер від повного щастя." (gentle irony about
+  married life; fits Опанас and Одарка in Hivewood).
+
 ## From Telegram (added by the factory)
 
 - "Який піп таке його набоженьство" (Proverb: like priest, like his service. The work shows what the master is like.; Telegram, 2026-11-27)
