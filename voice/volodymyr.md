@@ -193,3 +193,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Word choices: "друзяки" (the two pals), "в якості сатисфакції" (bookish word put in a
   village frame, for the small revenge trick), "амплуа третейського судді", "амплуа ябеди".
 - Answers by item, then gives free hand: "з голосами попрацюєш, дотримуйся своїх ідей".
+- Men's world as a list: "рибалка, мисливство, горілка, футбол і спорт в основному
+  подивитися"; inventors "нових і давно забутих старих ідей"; "фонтанують різними ідеями на
+  грані фантастики" (ideas gush like a fountain).
+- Correction by item, flat: "в 11. я не згоден", then the right picture at once.
