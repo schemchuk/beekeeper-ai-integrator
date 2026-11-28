@@ -140,6 +140,10 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Opens the working day with a joke instead of a greeting: "рухаємось по проекту. А Бог
   створив жінку для чоловіка щоб той бува не вмер від повного щастя." (gentle irony about
   married life; fits Опанас and Одарка in Hivewood).
+- On truth in his stories: "Ми формуємо новий світ, де самі встановлюємо що є правда." His
+  fables and sentences need no fact check: told stories are canon, real or invented.
+- Wants to learn while building: work by the rules "які зараз прийняті в айті компаніях,
+  заодно познайомлюся з новинками".
 
 ## From Telegram (added by the factory)
 
