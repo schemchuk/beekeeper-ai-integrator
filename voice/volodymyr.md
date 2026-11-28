@@ -134,3 +134,8 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   на О) небриті і неголені (наголос на о), дивнії створіння, в них із мозгів стирчать одні
   коріння" (a rhyme: antlers for roots instead of brains). Lesson: while a build runs, do the
   parallel work (script file, commits, replies), never just "чекаю".
+
+## From Telegram (added by the factory)
+
+- "Який піп таке його набоженьство" (Proverb: like priest, like his service. The work shows what the master is like.; Telegram, 2026-11-27)
+- "А то кеба люля відгребу" (Slang for 'or I'll get a beating'. A joking warning that marks a line not to cross, here that faith is never mocked.; Telegram, 2026-11-27)
