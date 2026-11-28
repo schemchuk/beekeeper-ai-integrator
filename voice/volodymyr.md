@@ -183,3 +183,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
 - Corrects me when I give a menu path instead of a link: "ти маєш давати прямі посилання".
 - Drops a detour without regret: "кинемо цю затію. зробим нові"; narrows the plan:
   "не будемо лізти в рілси".
+- Friendship of two schemers: "друзі не-розлий вода, і в них безліч бешкетуватих ідей, які з
+  натхненням зразу ж починають перетворюватися в життя" ("бешкетуваті" = mischievous, prankish;
+  ideas turn into life at once, no pause to think).
+- Someone who spoils the plan: "в плани завжди встрягає Одарка" ("встрягати" = to butt in).
