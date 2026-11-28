@@ -187,3 +187,9 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   натхненням зразу ж починають перетворюватися в життя" ("бешкетуваті" = mischievous, prankish;
   ideas turn into life at once, no pause to think).
 - Someone who spoils the plan: "в плани завжди встрягає Одарка" ("встрягати" = to butt in).
+- A deal where both sides keep face: "і вовк ситий і вівці цілі" (used for the friends who
+  seem to give in to the wife, then get their way anyway).
+- Village men's rule, said with a wink: "послухай бабу і зроби навпаки".
+- Word choices: "друзяки" (the two pals), "в якості сатисфакції" (bookish word put in a
+  village frame, for the small revenge trick), "амплуа третейського судді", "амплуа ябеди".
+- Answers by item, then gives free hand: "з голосами попрацюєш, дотримуйся своїх ідей".
