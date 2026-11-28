@@ -1,6 +1,6 @@
 slots:
 - release: '2026-12-01T08:00:00+01:00'
-  state: scripted
+  state: sent
   idea:
     id: 1
     title: Ходить Пилип по городу
@@ -10,3 +10,6 @@ slots:
   times:
     planned: '2026-11-28T02:11:27.001482+01:00'
     scripted: '2026-11-28T02:11:27.001482+01:00'
+    sent: '2026-11-28T07:11:27.101183+01:00'
+  messages:
+    script: 25
