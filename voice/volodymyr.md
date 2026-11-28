@@ -197,3 +197,7 @@ a polite chatbot. Grows after every session. Quotes are verbatim (Ukrainian), no
   подивитися"; inventors "нових і давно забутих старих ідей"; "фонтанують різними ідеями на
   грані фантастики" (ideas gush like a fountain).
 - Correction by item, flat: "в 11. я не згоден", then the right picture at once.
+- Envy in village words: "її беруть заздрощі", "його взяли завидки"; incited by the devil:
+  "чорт його наштрополив" ("наштрополити" = to egg on, to wind up).
+- Explains a character through a made-up folk tale ("байка"), told half in earnest, with a
+  wink: "Ось з цієї байки ми можемо зрозуміти характер Одарки".
