@@ -1,0 +1,12 @@
+slots:
+- release: '2026-12-01T08:00:00+01:00'
+  state: scripted
+  idea:
+    id: 1
+    title: Ходить Пилип по городу
+    source: bible/stories/2026-11-27-telegram-810669362.md
+    added: '2026-11-27T13:58:33.912817+01:00'
+  episode: 004-khodyt-pylyp-po-horodu
+  times:
+    planned: '2026-11-28T02:11:27.001482+01:00'
+    scripted: '2026-11-28T02:11:27.001482+01:00'

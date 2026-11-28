@@ -1,0 +1,106 @@
+# Episode 004: Ходить Пилип по городу / Philipp geht durch den Garten
+# Draft v2, 2026-11-28, from idea 13 (bible/ideas.md, story 2026-11-27-telegram-810669362).
+# A play on the folk song "Ходить гарбуз по городу": Pylyp asks his kin whether all are
+# alive and well; the kin read and keep silent, only the bees answer (Wi-Fi hives).
+# IT pain: chasing status by asking ("Wie ist der Stand?") instead of systems reporting themselves.
+# Season: early winter, the hive is closed, contact "по вай-фаю"; Isegrim visits in the evening.
+# Slot: Tuesday 2026-12-01 08:00 Europe/Berlin. Waits for Volodymyr's edits.
+id: "004"
+slug: khodyt-pylyp-po-horodu
+season: winter
+target_length: 40-50 s
+release: "2026-12-01T08:00:00+01:00"
+title:
+  ua: "Ходить Пилип по городу"
+  de: "Philipp geht durch den Garten"
+seed: "Idea 13 (bible/ideas.md): Pylyp asks his kin if all are alive and well, only his bees answer; source bible/stories/2026-11-27-telegram-810669362.md"
+
+cover:
+  who: [pylyp, bzynka]
+  monitor:
+    ua: "«Який статус?»\nПрочитано. Тиша."
+    de: "„Wie ist der Stand?“\nGelesen. Stille."
+
+post:
+  hook:
+    ua: "«Який статус?» Прочитали дванадцятеро, не відповів ніхто. А бджоли у зимовому вулику звітують самі."
+    de: "„Wie ist der Stand?“ Zwölf haben es gelesen, keiner antwortet. Die Bienen im Winterstock melden sich von selbst."
+  grain:
+    ua: "Не збирайте статус питаннями. Хай кожна система чи задача сама шле короткий сигнал: працює, готово, застрягло. Дашборд покаже тишу раніше, ніж ви встигнете спитати."
+    de: "Status nicht per Nachfrage einsammeln. Jedes System und jede Aufgabe meldet selbst ein kurzes Signal: läuft, fertig, hängt. Das Dashboard zeigt die Stille, bevor Sie fragen müssen."
+  question:
+    ua: "Скільки разів на тиждень ви пишете «Який статус», а відповіді так і не дочікуєтесь?"
+    de: "Wie oft pro Woche schreiben Sie „Wie ist der Stand“ und warten dann vergeblich?"
+  offer:
+    ua: "Статус-запити, що з'їдають тиждень? Напишіть мені, я подивлюсь."
+    de: "Statusabfragen, die Ihre Woche fressen? Schreiben Sie mir, ich schaue es mir an."
+  hashtags: [Automatisierung, Monitoring, Python, Mittelstand]
+
+# Shots are hints for the animation; the voice lines drive the timing.
+scenes:
+  hut: "Pylyp's hut on a winter evening, snow outside, the snowy apiary seen through the window, laptop with a chat and a hive dashboard, a teapot with herbal tea on the table"
+
+lines:
+  - shot: {scene: hut, camera: monitor, at: hook}
+    onscreen:
+      ua: "Чат «Рід»: «Чи всі живі-здорові?»\nПрочитано: 12 · Відповідей: 0"
+      de: "Familienchat: „Alle gesund?“\nGelesen: 12 · Antworten: 0"
+    sfx: keyboard
+    action: "Read ticks turn blue one by one, no reply comes. Hook: works without sound."
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "walks around the table with a cup of herbal tea, humming like a folk song"}
+    ua: "Ходить Пилип по городу, питає Пилип свого роду: чи живі, чи здорові всі родичі Пилипові?"
+    de: "Philipp geht im Garten rund und fragt: Ist meine Sippe gesund?"
+    note: "Volodymyr's play on the folk song \"Ходить гарбуз по городу\"; DE gets its own little rhyme instead of a translation"
+
+  - who: pylyp
+    shot: {scene: hut, camera: close-up, action: "deadpan to camera, ironic smile"}
+    ua: "Прочитали дванадцятеро. Не відповів ніхто. Значить, живі."
+    de: "Zwölf haben es gelesen. Keiner antwortet. Also leben alle."
+
+  - who: bzynka
+    shot: {scene: hut, camera: monitor, action: "pops up on the laptop screen in her visor"}
+    ua: "А вулики вже відповіли. Самі."
+    de: "Die Bienenstöcke haben schon geantwortet. Von selbst."
+
+  - shot: {scene: hut, camera: monitor, action: "hive dashboard: green ticks pop up one after another"}
+    onscreen:
+      ua: "Пасіка: усі вулики ✅ гудуть · +33 °C у клубі"
+      de: "Bienenstand: alle Völker ✅ summen · 33 °C in der Traube"
+
+  - who: bzynka
+    shot: {scene: hut, camera: monitor, action: "taps her headset mic, proud"}
+    ua: "Ми не чекаємо питання. Самі шлемо: живі, тепло, гудемо."
+    de: "Wir warten nicht auf die Frage. Wir melden uns selbst: am Leben, warm, wir summen."
+
+  - who: pylyp
+    shot: {scene: hut, camera: close-up, action: "raises one brow, remembers the office"}
+    ua: "А в офісі щопонеділка: «Який статус?» І тиша, як у цьому чаті."
+    de: "Und im Büro jeden Montag: „Wie ist der Stand?“ Und Stille, wie in diesem Chat."
+
+  - who: pylyp
+    shot: {scene: hut, camera: over-the-shoulder, action: "fast typing montage, every system gets a small heartbeat, lines of code fly, a green tick"}
+    ua: "Не питати, а слухати. Хай кожен сам подає голос. Слава Богу, все можна автоматизувати."
+    de: "Nicht fragen, zuhören. Jeder meldet sich selbst. Gott sei Dank lässt sich alles automatisieren."
+    note: "The situation itself calls for automation, never a bare \"I'll automate\" (2026-11-25); \"Слава Богу\" is gratitude, not mockery (house rule 2026-11-27)"
+    sfx: keyboard
+
+  - shot: {scene: hut, camera: monitor, action: "one calm dashboard, all green, no question sent"}
+    onscreen:
+      ua: "Усі системи ✅ живі · питати не треба"
+      de: "Alle Systeme ✅ laufen · keiner muss fragen"
+
+  - who: siryi
+    shot: {scene: hut, camera: medium, action: "leans in at the door, snow on his postman cap, holds out a paper letter"}
+    ua: "Добрий вечір. Тобі лист від рідні: «Живі-здорові. А чого питаєш?»"
+    de: "Guten Abend. Ein Brief von der Verwandtschaft: „Alle gesund. Warum fragst du?“"
+
+  - who: pylyp
+    shot: {scene: hut, camera: medium, action: "takes the letter, pours the wolf herbal tea, raises his cup"}
+    ua: "Бджоли відповіли за секунду, рідня — листом за тиждень. Хто питає — той чекає. Хто автоматизує — той п'є чай."
+    de: "Die Bienen in einer Sekunde, die Verwandtschaft per Brief in einer Woche. Wer fragt, der wartet. Wer automatisiert, trinkt Tee."
+
+end_card:
+  ua: "Цей мультик зібрав мій власний пайплайн: Python · TTS · Remotion. Рутину беру на себе, вам лишаю квітуче поле."
+  de: "Diesen Cartoon hat meine eigene Pipeline gebaut: Python · TTS · Remotion. Die Routine übernehme ich, Ihnen bleibt das blühende Feld."
