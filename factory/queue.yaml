@@ -1,2 +1,6 @@
-next_id: 2
-items: []
+next_id: 3
+items:
+- id: 2
+  title: Баба з воза — кобилі легше
+  source: bible/stories/2026-11-28-telegram-810669369.md
+  added: '2026-11-28T07:32:07.934171+01:00'
